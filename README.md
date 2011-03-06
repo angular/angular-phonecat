@@ -1,54 +1,137 @@
-# angular-seed — the seed for AngularJS apps
+# AngularJS Phone Catalog Tutorial Application
 
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
-You can use it to quickly bootstrap your angular webapp projects and dev environment for these
-projects.
+## Overview
 
-The seed contains AngularJS libraries, test libraries and a bunch of scripts all preconfigured for
-instant web development gratification. Just clone the repo (or download the zip/tarball), start up
-our (or yours) webserver and you are ready to develop and test your application.
-
-The seed app doesn't do much, just shows how to wire two controllers and views together. You can
-check it out by opening app/index.html in your browser (might not work file `file://` scheme in
-certain browsers, see note below).
-
-_Note: While angular is client-side-only technology and it's possible to create angular webapps that
-don't require a backend server at all, we recommend hosting the project files using a local
-webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`._
+This application takes the developer through the process of building a web-application using
+angular. The application is loosely based on
+[Google phone gallery](http://www.google.com/phone/). Each commit is a separate lesson
+teaching a single aspect of angular.
 
 
-## How to use angular-seed
+## Prerequisites
 
-Clone the angular-seed repository and start hacking...
+### Git
+- A good place to learn about setting up git is [here][git-github]
+- Git [home][git-home] (download, documentation)
 
+### Node.js
+- Generic [installation instructions][node-generic].
+- Mac DMG [here][node-mac]
+- Windows download from [here][node-windows]. (You will also need [7 Zip] to unzip the node archive)
+  (and don't forget to add `node.exe` to  your executable path)
+
+## Workings of the application
+
+- The application filesystem layout structure is based on the [angular-seed] project.
+- There is no backend (no server) for this application. Instead we fake the XHRs by fetching
+  static json files.
+- Read the Development section at the end to familiarize yourself with running and developing
+  an angular application.
+
+## Commits / Tutorial Outline
+
+You can check out any point of the tutorial using
+    git checkout step-?
+
+To see the changes which between any two lessons use the git diff command.
+    git diff step-?..step-?
+
+### step-0
+
+- Initial [angular-seed] project layout
+
+
+### step-1
+
+- We have converted the seed application by removing all of the boiler-plate code.
+- We have added single static HTML file which shows a static list of phones. (we will convert this
+  static page into dynamic one with the help of angular)
+
+
+### step-2
+
+- Converted static page into dynamic one by:
+  - create a root controller for the application
+  - extracting the data from HTML into a the controller as a mock dataset
+  - convert the static document into a template with the use of `ng:` [directive] (iterate over
+    mock data using [ng:repeat] and render it into a view)
+- Added unit test, which mostly shows how one goes about writing a unit test, rather then test
+  something of value on our mock dataset.
+
+
+### step-3
+
+- added a search box to demonstrate how:
+  - the data-binding works on input fields
+  - to use [$filter] function
+  - [ng:repeat] automatically shrinks and grows the number of phones in the view
+- added an end-to-end test to:
+  - show how end-to-end tests are written and used
+  - to prove that the search box and the repeater are correctly wired together
+
+
+### step-4
+
+- replaced the mock data with data loaded from the server (in our case the JSON return is just a
+  static file)
+  - The JSON is loaded using the [$xhr] service
+- Demonstrate the use of [services][service] and [dependency injection][DI]
+  - The [$xhr] is injected into the controller through [dependency injection][DI]
+
+
+### step-5
+
+- adding phone image and links to phone pages
+- css to style the page just a notch
+
+
+### step-6
+
+- making the order predicate for catalog dynamic
+  - adding 'predicates' section to the view with links that control the order
+  - ordering defaults to 'age' property
+- css sugar
+
+
+### step-7
+
+- Introduce the [$route] service which allows binding URLs for deep-linking with views
+  - Replace content of root controller PhonesCtrl with [$route] configuration
+  - Map `/phones' to PhoneListCtrl and partails/phones-list.html
+  - Map `/phones/phone-id' to PhoneDetailCtrl and partails/phones-detail.html
+  - Copy deep linking parameters to root controller `params` property for access in sub controllers
+  - Replace content of index.html with [ng:view]
+- Create PhoneListCtrl view
+  - Move code which fetches phones data into PhoneListCtrl
+  - Move existing HTML from index.html to partials/phone-list.html
+- Create PhoneDetailsCtrl view
+  - Wire [$route] service to map `/phanes/phone-id` to map to this controller.
+  - Empty PhoneDetailsCtrl
+  - Place holder partials/phane-details.html
+
+### step-8
+
+- Fetch data for and render phone detail view
+  - [$xhr] to fetch details for a specific phone
+  - template for the phone detailed view
+- CSS to make it look pretty
+- Detail data for phones in JSON format
+
+### step-9
+
+- replace [$xhr] with [$resource]
+  - demonstrate how a resource can be created using a [service]
+
+## Development with angular-seed
+
+The following docs apply to all angular-seed projects and since the phonecat tutorial is a project
+based on angular-seed, the instructions apply to it as well.
 
 ### Running the app during development
 
-You can pick one of these options:
-
-* serve this repository with your webserver
-* install node.js and run `scripts/web-server.js`
-
-Then navigate your browser to `http://localhost:<port>/app/index.html` to see the app running in
-your browser.
-
-
-### Running the app in production
-
-This really depends on how complex is your app and the overall infrastructure of your system, but
-the general rule is that all you need in production are all the files under the `app/` directory.
-Everything else should be omitted.
-
-Angular apps are really just a bunch of static html, css and js files that just need to be hosted
-somewhere, where they can be accessed by browsers.
-
-If your Angular app is talking to the backend server via xhr or other means, you need to figure
-out what is the best way to host the static files to comply with the same origin policy if
-applicable. Usually this is done by hosting the files by the backend server or through
-reverse-proxying the backend server(s) and a webserver(s).
-
+1. run `./scripts/web-server.js`
+2. navigate your browser to `http://localhost:8000/app/index.html` to see the app running in your
+   browser.
 
 ### Running unit tests
 
@@ -56,7 +139,7 @@ We recommend using [jasmine](http://pivotal.github.com/jasmine/) and
 [Karma](http://karma-runner.github.io) for your unit tests/specs, but you are free
 to use whatever works for you.
 
-Requires [node.js](http://nodejs.org/), Karma (`sudo npm install -g karma`) and a local
+Requires [node.js](http://nodejs.org/), Karma (`sudo npm install -g karma karma-jasmine karma-chrome-launcher`) and a local
 or remote browser.
 
 * start `scripts/test.sh` (on windows: `scripts\test.bat`)
@@ -75,6 +158,7 @@ Check out the
 [end-to-end runner's documentation](http://docs.angularjs.org/guide/dev_guide.e2e-testing) for more
 info.
 
+* Install the Karma ng-scenario adapter with `npm install -g karma-ng-scenario`
 * create your end-to-end tests in `test/e2e/scenarios.js`
 * serve your project directory with your http/backend server or node.js + `scripts/web-server.js`
 * to run do one of:
@@ -82,22 +166,8 @@ info.
   * run the tests from console with [Karma](http://karma-runner.github.io) via
     `scripts/e2e-test.sh` or `script/e2e-test.bat`
 
-### Continuous Integration
 
-CloudBees have provided a CI/deployment setup:
-
-<a href="https://grandcentral.cloudbees.com/?CB_clickstart=https://raw.github.com/CloudBees-community/angular-js-clickstart/master/clickstart.json"><img src="https://d3ko533tu1ozfq.cloudfront.net/clickstart/deployInstantly.png"/></a>
-
-If you run this, you will get a cloned version of this repo to start working on in a private git repo, 
-along with a CI service (in Jenkins) hosted that will run unit and end to end tests in both Firefox and Chrome.
-
-### Receiving updates from upstream
-
-When we upgrade angular-seed's repo with newer angular or testing library code, you can just
-fetch the changes and merge them into your project with git.
-
-
-## Directory Layout
+## Application Directory Layout
 
     app/                --> all of the files to be used in production
       css/              --> css files
@@ -149,3 +219,21 @@ fetch the changes and merge them into your project with git.
 ## Contact
 
 For more information on AngularJS please check out http://angularjs.org/
+
+[7 Zip]: http://www.7-zip.org/
+[angular-seed]: https://github.com/angular/angular-seed
+[DI]: http://docs.angularjs.org/#!guide.di
+[directive]: http://docs.angularjs.org/#!angular.directive
+[$filter]: http://docs.angularjs.org/#!angular.Array.filter
+[git-home]: http://git-scm.com
+[git-github]: http://help.github.com/set-up-git-redirect
+[ng:repeat]: http://docs.angularjs.org/#!angular.widget.@ng:repeat
+[ng:view]: http://docs.angularjs.org/#!angular.widget.ng:view
+[node-mac]: http://code.google.com/p/rudix/downloads/detail?name=node-0.4.0-0.dmg&can=2&q=
+[node-windows]: http://node-js.prcn.co.cc/
+[node-generic]: https://github.com/joyent/node/wiki/Installation
+[java]: http://www.java.com
+[$resource]: http://docs.angularjs.org/#!angular.service.$resource
+[$rouet]: http://docs.angularjs.org/#!angular.service.$route
+[service]: http://docs.angularjs.org/#!angular.service
+[$xhr]: http://docs.angularjs.org/#!angular.service.$xhr
