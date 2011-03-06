@@ -5,22 +5,13 @@
   <title>Google Phone Gallery</title>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body style="display:none" ng:show="true">
+<body style="display:none" ng:show="true" ng:controller="PhoneListCtrl">
 
 
   <ul>
-    <li>
-      <span>Nexus S<span>
-      <p>
-        Fast just got faster with Nexus S. A pure Google experience, Nexus S is the first phone to
-        run Gingerbread (Android 2.3), the fastest version of Android yet.
-      </p>
-    </li>
-    <li>
-      <span>DROID™ 2 Global by Motorola<span>
-      <p>
-        The first smartphone with a 1.2 GHz processor and global capabilities.
-      </p>
+    <li ng:repeat="phone in phones">
+      {{phone.name}}
+      <p>{{phone.snippet}}</p>
     </li>
   </ul>
 
