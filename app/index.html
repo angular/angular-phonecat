@@ -23,7 +23,8 @@
 
   <ul class="phones">
     <li ng:repeat="phone in phones.$filter(query).$orderBy(orderProp)">
-      {{phone.name}}
+      <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+      <a href="#/phones/{{phone.id}}" class="thumb"><img ng:src="{{phone.imageUrl}}"></a>
       <p>{{phone.snippet}}</p>
     </li>
   </ul>
