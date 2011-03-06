@@ -1,1 +1,29 @@
 /* app css stylesheet */
+
+a {
+  color: blue;
+}
+
+.query {
+  position: absolute;
+  width: 150px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.phones {
+  margin: 0;
+  margin-left: 160px;
+  list-style: none;
+  padding: 0;
+}
+
+.phones .thumb img {
+  float: left;
+  margin-bottom: 1em;
+}
+
+.phones li {
+  clear: both;
+}
