@@ -7,10 +7,22 @@
 </head>
 <body ng:controller="PhoneListCtrl">
 
-  Fulltext Search: <input name="query"/>
+  <ul class="controls">
+    <li>
+      Search: <input type="text" name="query"/>
+    </li>
+    <li>
+      Sort by:
+      <select name="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+    </li>
+  </ul>
+
 
   <ul class="phones">
-    <li ng:repeat="phone in phones.$filter(query)">
+    <li ng:repeat="phone in phones.$filter(query).$orderBy(orderProp)">
       {{phone.name}}
       <p>{{phone.snippet}}</p>
     </li>
