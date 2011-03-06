@@ -6,21 +6,14 @@
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="lib/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
 </head>
-<body>
+<body ng-controller="PhoneListCtrl">
 
   <ul>
-    <li>
-      <span>Nexus S<span>
-      <p>
-        Fast just got faster with Nexus S.
-      </p>
-    </li>
-    <li>
-      <span>Motorola XOOM™ with Wi-Fi<span>
-      <p>
-        The Next, Next Generation tablet.
-      </p>
+    <li ng-repeat="phone in phones">
+      {{phone.name}}
+      <p>{{phone.snippet}}</p>
     </li>
   </ul>
 
