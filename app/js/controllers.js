@@ -3,9 +3,11 @@
 function PhoneListCtrl($xhr) {
   var self = this;
 
+  self.orderProp = 'age';
+
   $xhr('GET', 'phones/phones.json', function(code, response) {
     self.phones = response;
   });
 }
 
-//PhonesCtrl.$inject = ['$xhr'];
+//PhoneListCtrl.$inject = ['$xhr'];

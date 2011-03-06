@@ -27,3 +27,11 @@ a {
 .phones li {
   clear: both;
 }
+
+.predicates {
+  position: absolute;
+  width: 150px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
