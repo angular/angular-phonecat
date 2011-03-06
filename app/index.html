@@ -7,8 +7,10 @@
 </head>
 <body ng:controller="PhoneListCtrl">
 
-  <ul>
-    <li ng:repeat="phone in phones">
+  Fulltext Search: <input name="query"/>
+
+  <ul class="phones">
+    <li ng:repeat="phone in phones.$filter(query)">
       {{phone.name}}
       <p>{{phone.snippet}}</p>
     </li>
