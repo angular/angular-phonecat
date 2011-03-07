@@ -1,6 +1,15 @@
 /* jasmine specs for controllers go here */
 describe('PhoneCat controllers', function() {
 
+  beforeEach(function(){
+    this.addMatchers({
+      toEqualData: function(expected) {
+        return angular.equals(this.actual, expected);
+      }
+    });
+  });
+
+
   describe('PhoneListCtrl', function(){
     var scope, $browser, ctrl;
 
@@ -15,11 +24,11 @@ describe('PhoneCat controllers', function() {
 
 
     it('should create "phones" model with 2 phones fetched from xhr', function() {
-      expect(ctrl.phones).toBeUndefined();
+      expect(ctrl.phones).toEqual([]);
       $browser.xhr.flush();
 
-      expect(ctrl.phones).toEqual([{name: 'Nexus S'},
-                                   {name: 'Motorola DROID'}]);
+      expect(ctrl.phones).toEqualData([{name: 'Nexus S'},
+                                       {name: 'Motorola DROID'}]);
     });
 
 
@@ -30,6 +39,12 @@ describe('PhoneCat controllers', function() {
 
 
   describe('PhoneDetailCtrl', function(){
+    var scope, $browser, ctrl;
+
+    beforeEach(function() {
+      scope = angular.scope();
+      $browser = scope.$service('$browser');
+    });
 
     beforeEach(function() {
       scope = angular.scope();
@@ -42,10 +57,10 @@ describe('PhoneCat controllers', function() {
       $browser.xhr.expectGET('phones/xyz.json').respond({name:'phone xyz'});
       ctrl = scope.$new(PhoneDetailCtrl);
 
-      expect(ctrl.phone).toBeUndefined();
+      expect(ctrl.phone).toEqualData({});
       $browser.xhr.flush();
 
-      expect(ctrl.phone).toEqual({name:'phone xyz'});
+      expect(ctrl.phone).toEqualData({name:'phone xyz'});
     });
   });
 });

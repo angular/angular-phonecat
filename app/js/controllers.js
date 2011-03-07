@@ -19,25 +19,19 @@ function PhoneCatCtrl($route) {
 //PhoneCatCtrl.$inject = ['$route'];
 
 
-function PhoneListCtrl($xhr) {
-  var self = this;
-
-  $xhr('GET', 'phones/phones.json', function(code, response) {
-    self.phones = response;
-  });
-
-  self.orderProp = 'age';
+function PhoneListCtrl(Phone_) {
+  this.orderProp = 'age';
+  this.phones = Phone_.query();
 }
 
-//PhoneListCtrl.$inject = ['$xhr'];
+//PhoneListCtrl.$inject = ['Phone'];
 
 
-function PhoneDetailCtrl($xhr) {
+function PhoneDetailCtrl(Phone_) {
   var self = this;
 
-  $xhr('GET', 'phones/' + self.params.phoneId + '.json', function(code, response) {
-    self.phone = response;
-    self.mainImageUrl = response.images[0];
+  self.phone = Phone_.get({phoneId: self.params.phoneId}, function(phone) {
+    self.mainImageUrl = phone.images[0];
   });
 
   self.setImage = function(imageUrl) {
@@ -45,4 +39,4 @@ function PhoneDetailCtrl($xhr) {
   }
 }
 
-//PhoneDetailCtrl.$inject = ['$xhr'];
+//PhoneDetailCtrl.$inject = ['Phone'];
