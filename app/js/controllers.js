@@ -11,3 +11,10 @@ function PhoneListCtrl($scope, $http) {
 }
 
 //PhoneListCtrl.$inject = ['$scope', '$http'];
+
+
+function PhoneDetailCtrl($scope, $routeParams) {
+  $scope.phoneId = $routeParams.phoneId;
+}
+
+//PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];
