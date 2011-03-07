@@ -5,30 +5,9 @@
   <title>Google Phone Gallery</title>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body ng:controller="PhoneListCtrl">
+<body ng:controller="PhoneCatCtrl">
 
-  <ul class="controls">
-    <li>
-      Search: <input type="text" name="query"/>
-    </li>
-    <li>
-      Sort by:
-      <select name="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="age">Newest</option>
-      </select>
-    </li>
-  </ul>
-
-
-  <ul class="phones">
-    <li ng:repeat="phone in phones.$filter(query).$orderBy(orderProp)">
-      <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
-      <a href="#/phones/{{phone.id}}" class="thumb"><img ng:src="{{phone.imageUrl}}"></a>
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
-
+  <ng:view></ng:view>
 
   <script src="lib/angular/angular.js" ng:autobind></script>
   <script src="js/controllers.js"></script>
