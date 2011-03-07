@@ -29,4 +29,8 @@ describe('PhoneCat controllers', function() {
       expect(scope.orderProp).toBe('age');
     });
   });
+
+
+  describe('PhoneDetailCtrl', function(){
+  });
 });
