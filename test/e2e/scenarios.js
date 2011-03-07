@@ -55,8 +55,8 @@ describe('PhoneCat App', function() {
     });
 
 
-    it('should display placeholder page with phoneId', function() {
-      expect(binding('params.phoneId')).toBe('nexus-s');
+    it('should display nexus-s page', function() {
+      expect(binding('phone.name')).toBe('Nexus S');
     });
   });
 });
