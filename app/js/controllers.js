@@ -19,25 +19,16 @@ function PhonesCtrl($route) {
 //PhonesCtrl.$inject = ['$route'];
 
 
-function PhoneListCtrl($xhr) {
-  var self = this;
-
-  self.orderProp = 'age';
-
-  $xhr('GET', 'phones/phones.json', function(code, response) {
-    self.phones = response;
-  });
+function PhoneListCtrl(Phone_) {
+  this.orderProp = 'age';
+  this.phones = Phone_.query();
 }
 
-//PhoneListCtrl.$inject = ['$xhr'];
+//PhoneListCtrl.$inject = ['Phone'];
 
 
-function PhoneDetailCtrl($xhr) {
-  var self = this;
-
-  $xhr('GET', 'phones/' + this.params.phoneId + '.json', function(code, response) {
-    self.phone = response;
-  });
+function PhoneDetailCtrl(Phone_) {
+  this.phone = Phone_.get({phoneId:this.params.phoneId});
 }
 
-//PhoneDetailCtrl.$inject = ['$xhr'];
+//PhoneDetailCtrl.$inject = ['Phone'];
