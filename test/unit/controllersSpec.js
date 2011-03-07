@@ -30,6 +30,7 @@ describe('controllers', function(){
 
     it('should respond to /phones/abc', function(){
       $browser.setUrl('http://myserver.com/#/phones/abc');
+      $browser.xhr.expectGET('phones/abc.json').respond([]);
       ctrl = scope.$new(PhonesCtrl);
       ctrl.$root.$eval();
       expect(scope.$service('$route').current.controller).toEqual(PhoneDetailCtrl);
@@ -63,6 +64,15 @@ describe('controllers', function(){
 
 
   describe('PhoneDetailCtrl', function(){
+
+    it('should fetch phone detail', function(){
+      scope.params = {phoneId:'xyz'};
+      $browser.xhr.expectGET('phones/xyz.json').respond({name:'phone xyz'});
+      ctrl = scope.$new(PhoneDetailCtrl);
+      expect(ctrl.phone).toBeUndefined();
+      $browser.xhr.flush();
+      expect(ctrl.phone).toEqual({name:'phone xyz'});
+    });
 
   });
 
