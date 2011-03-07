@@ -32,4 +32,12 @@ function PhoneListCtrl($xhr) {
 //PhoneListCtrl.$inject = ['$xhr'];
 
 
-function PhoneDetailCtrl() {}
+function PhoneDetailCtrl($xhr) {
+  var self = this;
+
+  $xhr('GET', 'phones/' + self.params.phoneId + '.json', function(code, response) {
+    self.phone = response;
+  });
+}
+
+//PhoneDetailCtrl.$inject = ['$xhr'];

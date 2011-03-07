@@ -30,5 +30,22 @@ describe('PhoneCat controllers', function() {
 
 
   describe('PhoneDetailCtrl', function(){
+
+    beforeEach(function() {
+      scope = angular.scope();
+      $browser = scope.$service('$browser');
+    });
+
+
+    it('should fetch phone detail', function(){
+      scope.params = {phoneId:'xyz'};
+      $browser.xhr.expectGET('phones/xyz.json').respond({name:'phone xyz'});
+      ctrl = scope.$new(PhoneDetailCtrl);
+
+      expect(ctrl.phone).toBeUndefined();
+      $browser.xhr.flush();
+
+      expect(ctrl.phone).toEqual({name:'phone xyz'});
+    });
   });
 });
