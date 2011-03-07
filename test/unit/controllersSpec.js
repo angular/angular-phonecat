@@ -3,6 +3,18 @@
 /* jasmine specs for controllers go here */
 describe('PhoneCat controllers', function() {
 
+  beforeEach(function(){
+    this.addMatchers({
+      toEqualData: function(expected) {
+        return angular.equals(this.actual, expected);
+      }
+    });
+  });
+
+
+  beforeEach(module('phonecatServices'));
+
+
   describe('PhoneListCtrl', function(){
     var scope, ctrl, $httpBackend;
 
@@ -17,11 +29,11 @@ describe('PhoneCat controllers', function() {
 
 
     it('should create "phones" model with 2 phones fetched from xhr', function() {
-      expect(scope.phones).toBeUndefined();
+      expect(scope.phones).toEqual([]);
       $httpBackend.flush();
 
-      expect(scope.phones).toEqual([{name: 'Nexus S'},
-                                   {name: 'Motorola DROID'}]);
+      expect(scope.phones).toEqualData(
+          [{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
     });
 
 
@@ -52,10 +64,10 @@ describe('PhoneCat controllers', function() {
 
 
     it('should fetch phone detail', function() {
-      expect(scope.phone).toBeUndefined();
+      expect(scope.phone).toEqualData({});
       $httpBackend.flush();
 
-      expect(scope.phone).toEqual(xyzPhoneData());
+      expect(scope.phone).toEqualData(xyzPhoneData());
     });
   });
 });
