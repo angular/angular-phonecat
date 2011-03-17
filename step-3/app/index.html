@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org/">
+<head>
+  <meta charset="utf-8">
+  <title>Google Phone Gallery</title>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body ng:controller="PhoneListCtrl">
+
+  Fulltext Search: <input name="query"/>
+
+  <ul class="phones">
+    <li ng:repeat="phone in phones.$filter(query)">
+      {{phone.name}}
+      <p>{{phone.snippet}}</p>
+    </li>
+  </ul>
+
+
+  <script src="lib/angular/angular.js" ng:autobind></script>
+  <script src="js/controllers.js"></script>
+</body>
+</html>
