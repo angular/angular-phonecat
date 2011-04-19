@@ -1,17 +1,9 @@
 /* jasmine specs for filters go here */
 
-describe('filter', function() {
-  beforeEach(module('myApp.filters'));
+describe('checkmark filter', function() {
 
-
-  describe('interpolate', function() {
-    beforeEach(module(function($provide) {
-      $provide.value('version', 'TEST_VER');
-    }));
-
-
-    it('should replace VERSION', inject(function(interpolateFilter) {
-      expect(interpolateFilter('before %VERSION% after')).toEqual('before TEST_VER after');
-    }));
+  it('should convert boolean values to unicode checkmark or cross', function() {
+    expect(angular.filter.checkmark(true)).toBe('\u2713');
+    expect(angular.filter.checkmark(false)).toBe('\u2718');
   });
-});
+})
