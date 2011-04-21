@@ -37,7 +37,12 @@ function PhoneDetailCtrl($xhr) {
 
   $xhr('GET', 'phones/' + self.params.phoneId + '.json', function(code, response) {
     self.phone = response;
+    self.mainImageUrl = response.images[0];
   });
+
+  self.setImage = function(imageUrl) {
+    self.mainImageUrl = imageUrl;
+  }
 }
 
 //PhoneDetailCtrl.$inject = ['$xhr'];
