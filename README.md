@@ -2,7 +2,7 @@
 
 # Overview
 
-This application takes the developer thought the process of building a web-application using
+This application takes the developer through the process of building a web-application using
 angular. The application is loosely based on
 [Google phone gallery](http://www.google.com/phone/). Each commit is a separate lesson
 teaching a single aspect of angular.
@@ -100,16 +100,16 @@ To see the changes which between any two lessons use the git diff command.
 
 - Introduce the [$route] service which allows binding URLs for deep-linking with views
   - Replace content of root controller PhonesCtrl with [$route] configuration
-  - Map `/phones' to PhoneListCtrl and partails/phones-list.html
-  - Map `/phones/phone-id' to PhoneDetailCtrl and partails/phones-detail.html
+  - Map `/phones' to PhoneListCtrl and partials/phones-list.html
+  - Map `/phones/phone-id' to PhoneDetailCtrl and partials/phones-detail.html
   - Copy deep linking parameters to root controller `params` property for access in sub controllers
   - Replace content of index.html with [ng:view]
 - Create PhoneListCtrl view
   - Move code which fetches phones data into PhoneListCtrl
   - Move existing HTML from index.html to partials/phone-list.html
-- Create PhoneDetailsCtrl view
+- Create PhoneDetailCtrl view
   - Wire [$route] service to map `/phanes/phone-id` to map to this controller.
-  - Empty PhoneDetailsCtrl
+  - Empty PhoneDetailCtrl
   - Place holder partials/phane-details.html
 
 ## step-8
@@ -237,6 +237,6 @@ For more information on angular please check out http://angularjs.org/
 [node-generic]: https://github.com/joyent/node/wiki/Installation
 [java]: http://www.java.com
 [$resource]: http://docs.angularjs.org/#!angular.service.$resource
-[$rouet]: http://docs.angularjs.org/#!angular.service.$route
+[$route]: http://docs.angularjs.org/#!angular.service.$route
 [service]: http://docs.angularjs.org/#!angular.service
 [$xhr]: http://docs.angularjs.org/#!angular.service.$xhr
