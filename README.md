@@ -100,8 +100,8 @@ To see the changes which between any two lessons use the git diff command.
 
 - Introduce the [$route] service which allows binding URLs for deep-linking with views
   - Replace content of root controller PhonesCtrl with [$route] configuration
-  - Map `/phones' to PhoneListCtrl and partials/phones-list.html
-  - Map `/phones/phone-id' to PhoneDetailCtrl and partials/phones-detail.html
+  - Map `/phones` to PhoneListCtrl and partials/phones-list.html
+  - Map `/phones/phone-id` to PhoneDetailCtrl and partials/phones-detail.html
   - Copy deep linking parameters to root controller `params` property for access in sub controllers
   - Replace content of index.html with [ng:view]
 - Create PhoneListCtrl view
