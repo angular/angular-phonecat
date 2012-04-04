@@ -1,12 +1,14 @@
+'use strict';
+
 /* jasmine specs for services go here */
 
 describe('service', function() {
-  beforeEach(module('myApp.services'));
+  beforeEach(module('phonecatApp.services'));
 
 
-  describe('version', function() {
-    it('should return current version', inject(function(version) {
-      expect(version).toEqual('0.1');
+  describe('Phone', function() {
+    it('should provide the phone resource service', inject(function(Phone) {
+      expect(Phone).toBeDefined();
     }));
   });
 });

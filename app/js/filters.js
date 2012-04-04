@@ -1,5 +1,10 @@
+'use strict';
+
 /* http://docs.angularjs.org/#!angular.filter */
 
-angular.filter('checkmark', function(input) {
-  return input ? '\u2713' : '\u2718';
-});
+angular.module('phonecatApp.filters', []).
+  filter('checkmark', function() {
+    return function(input) {
+      return input ? '\u2713' : '\u2718';
+    }
+  });

@@ -9,58 +9,56 @@ describe('PhoneCat controllers', function() {
     });
   });
 
+  beforeEach(module('phonecatApp.services'));
+
 
   describe('PhoneListCtrl', function(){
-    var scope, $browser, ctrl;
+    var scope, $httpBackend, ctrl;
 
-    beforeEach(function() {
-      scope = angular.scope();
-      $browser = scope.$service('$browser');
+    beforeEach(inject(function($rootScope, _$httpBackend_, $controller) {
+      scope = $rootScope.$new();
+      $httpBackend = _$httpBackend_;
 
-      $browser.xhr.expectGET('phones/phones.json').respond([{name: 'Nexus S'},
+      $httpBackend.expectGET('phones/phones.json').respond([{name: 'Nexus S'},
                                                             {name: 'Motorola DROID'}]);
-      ctrl = scope.$new(PhoneListCtrl);
-    });
+      ctrl = $controller(PhoneListCtrl, {$scope: scope});
+    }));
 
 
     it('should create "phones" model with 2 phones fetched from xhr', function() {
-      expect(ctrl.phones).toEqual([]);
-      $browser.xhr.flush();
+      expect(scope.phones).toEqual([]);
+      $httpBackend.flush();
 
-      expect(ctrl.phones).toEqualData([{name: 'Nexus S'},
+      expect(scope.phones).toEqualData([{name: 'Nexus S'},
                                        {name: 'Motorola DROID'}]);
     });
 
 
     it('should set the default value of orderProp model', function() {
-      expect(ctrl.orderProp).toBe('age');
+      expect(scope.orderProp).toBe('age');
     });
   });
 
 
   describe('PhoneDetailCtrl', function(){
-    var scope, $browser, ctrl;
+    var scope, $httpBackend, $controller, ctrl;
 
-    beforeEach(function() {
-      scope = angular.scope();
-      $browser = scope.$service('$browser');
-    });
-
-    beforeEach(function() {
-      scope = angular.scope();
-      $browser = scope.$service('$browser');
-    });
+    beforeEach(inject(function($rootScope, _$httpBackend_, _$controller_) {
+      scope = $rootScope.$new();
+      $httpBackend = _$httpBackend_;
+      $controller = _$controller_;
+    }));
 
 
-    it('should fetch phone detail', function(){
-      scope.params = {phoneId:'xyz'};
-      $browser.xhr.expectGET('phones/xyz.json').respond({name:'phone xyz'});
-      ctrl = scope.$new(PhoneDetailCtrl);
+    it('should fetch phone detail', inject(function($routeParams){
+      $routeParams.phoneId = 'xyz';
+      $httpBackend.expectGET('phones/xyz.json').respond({name:'phone xyz', images: ['http://foo']});
+      ctrl = $controller(PhoneDetailCtrl, {$scope: scope});
 
-      expect(ctrl.phone).toEqualData({});
-      $browser.xhr.flush();
+      expect(scope.phone).toEqualData({});
+      $httpBackend.flush();
 
-      expect(ctrl.phone).toEqualData({name:'phone xyz'});
-    });
+      expect(scope.phone).toEqualData({name:'phone xyz', images: ['http://foo']});
+    }));
   });
 });

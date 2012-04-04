@@ -1,10 +1,10 @@
 <ul class="controls">
   <li>
-    Search: <input type="text" name="query"/>
+    Search: <input ng-model="query" ng-model-instant>
   </li>
   <li>
     Sort by:
-    <select name="orderProp">
+    <select ng-model="orderProp">
       <option value="name">Alphabetical</option>
       <option value="age">Newest</option>
     </select>
@@ -13,9 +13,9 @@
 
 
 <ul class="phones">
-  <li ng:repeat="phone in phones.$filter(query).$orderBy(orderProp)">
+  <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
     <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
-    <a href="#/phones/{{phone.id}}" class="thumb"><img ng:src="{{phone.imageUrl}}"></a>
+    <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
     <p>{{phone.snippet}}</p>
   </li>
 </ul>

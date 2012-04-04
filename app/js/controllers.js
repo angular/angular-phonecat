@@ -1,43 +1,22 @@
 'use strict';
 /* App Controllers */
 
-function PhoneCatCtrl($route) {
-  var self = this;
-
-  $route.when('/phones',
-              {template: 'partials/phone-list.html',   controller: PhoneListCtrl});
-  $route.when('/phones/:phoneId',
-              {template: 'partials/phone-detail.html', controller: PhoneDetailCtrl});
-  $route.otherwise({redirectTo: '/phones'});
-
-  $route.onChange(function(){
-    self.params = $route.current.params;
-  });
-
-  $route.parent(this);
+function PhoneListCtrl($scope, Phone) {
+  $scope.orderProp = 'age';
+  $scope.phones = Phone.query();
 }
 
-//PhoneCatCtrl.$inject = ['$route'];
+//PhoneListCtrl.$inject = ['$scope', 'Phone'];
 
 
-function PhoneListCtrl(Phone) {
-  this.orderProp = 'age';
-  this.phones = Phone.query();
-}
-
-//PhoneListCtrl.$inject = ['Phone'];
-
-
-function PhoneDetailCtrl(Phone) {
-  var self = this;
-
-  self.phone = Phone.get({phoneId: self.params.phoneId}, function(phone) {
-    self.mainImageUrl = phone.images[0];
+function PhoneDetailCtrl($scope, Phone, $routeParams) {
+  $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+    $scope.mainImageUrl = phone.images[0];
   });
 
-  self.setImage = function(imageUrl) {
-    self.mainImageUrl = imageUrl;
+  $scope.setImage = function(imageUrl) {
+    $scope.mainImageUrl = imageUrl;
   }
 }
 
-//PhoneDetailCtrl.$inject = ['Phone'];
+//PhoneDetailCtrl.$inject = ['$scope', 'Phone', '$routeParams'];

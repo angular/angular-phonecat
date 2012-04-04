@@ -2,9 +2,11 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
+angular.module('phonecatApp', ['phonecatApp.filters', 'phonecatApp.services', 'phonecatApp.directives']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/view1', {template: 'partials/partial1.html', controller: MyCtrl1});
-    $routeProvider.when('/view2', {template: 'partials/partial2.html', controller: MyCtrl2});
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.when('/phones',
+                {template: 'partials/phone-list.html',   controller: PhoneListCtrl});
+    $routeProvider.when('/phones/:phoneId',
+                {template: 'partials/phone-detail.html', controller: PhoneDetailCtrl});
+    $routeProvider.otherwise({redirectTo: '/phones'});
   }]);
