@@ -1,1 +1,3 @@
-/* App Controllers */
+'use strict';
+
+/* Controllers */

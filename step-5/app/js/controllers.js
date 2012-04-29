@@ -1,13 +1,13 @@
-/* App Controllers */
+'use strict';
 
-function PhoneListCtrl($xhr) {
-  var self = this;
+/* Controllers */
 
-  $xhr('GET', 'phones/phones.json', function(code, response) {
-    self.phones = response;
+function PhoneListCtrl($scope, $http) {
+  $http.get('phones/phones.json').success(function(data) {
+    $scope.phones = data;
   });
 
-  self.orderProp = 'age';
+  $scope.orderProp = 'age';
 }
 
-//PhoneListCtrl.$inject = ['$xhr'];
+//PhoneListCtrl.$inject = ['$scope', '$http'];

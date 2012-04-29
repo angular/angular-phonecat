@@ -1,16 +1,18 @@
 <!doctype html>
-<html xmlns:ng="http://angularjs.org/">
+<html lang="en" ng-app="phonecat">
 <head>
   <meta charset="utf-8">
   <title>Google Phone Gallery</title>
-  <link rel="stylesheet" href="css/app.css"/>
-</head>
-<body ng:controller="PhoneCatCtrl">
-
-  <ng:view></ng:view>
-
-  <script src="lib/angular/angular.js" ng:autobind></script>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
+</head>
+<body>
+
+  <div ng-view></div>
+
 </body>
 </html>

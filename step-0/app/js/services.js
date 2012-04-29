@@ -1,1 +1,4 @@
-/* http://docs.angularjs.org/#!angular.service */
+'use strict';
+
+/* Services */
+

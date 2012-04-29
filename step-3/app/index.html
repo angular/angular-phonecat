@@ -1,23 +1,36 @@
 <!doctype html>
-<html xmlns:ng="http://angularjs.org/">
+<html lang="en" ng-app>
 <head>
   <meta charset="utf-8">
   <title>Google Phone Gallery</title>
-  <link rel="stylesheet" href="css/app.css"/>
-</head>
-<body ng:controller="PhoneListCtrl">
-
-  Fulltext Search: <input name="query"/>
-
-  <ul class="phones">
-    <li ng:repeat="phone in phones.$filter(query)">
-      {{phone.name}}
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
-
-
-  <script src="lib/angular/angular.js" ng:autobind></script>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="lib/angular/angular.js"></script>
   <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="PhoneListCtrl">
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <!--Sidebar content-->
+
+        Search: <input ng-model="query">
+
+      </div>
+      <div class="span10">
+        <!--Body content-->
+
+        <ul class="phones">
+          <li ng-repeat="phone in phones | filter:query">
+            {{phone.name}}
+            <p>{{phone.snippet}}</p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

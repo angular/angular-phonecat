@@ -1,6 +1,9 @@
-/* http://docs.angularjs.org/#!angular.service */
+'use strict';
 
-angular.service('Phone', function($resource){
+/* Services */
+
+angular.module('phonecatServices', ['ngResource']).
+    factory('Phone', function($resource){
   return $resource('phones/:phoneId.json', {}, {
     query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
   });

@@ -1,1 +1,3 @@
-/* http://docs.angularjs.org/#!angular.filter */
+'use strict';
+
+/* Filters */

@@ -1,9 +1,18 @@
+'use strict';
+
 /* jasmine specs for filters go here */
 
-describe('checkmark filter', function() {
+describe('filter', function() {
 
-  it('should convert boolean values to unicode checkmark or cross', function() {
-    expect(angular.filter.checkmark(true)).toBe('\u2713');
-    expect(angular.filter.checkmark(false)).toBe('\u2718');
+  beforeEach(module('phonecatFilters'));
+
+
+  describe('checkmark', function() {
+
+    it('should convert boolean values to unicode checkmark or cross',
+        inject(function(checkmarkFilter) {
+      expect(checkmarkFilter(true)).toBe('\u2713');
+      expect(checkmarkFilter(false)).toBe('\u2718');
+    }));
   });
-})
+});

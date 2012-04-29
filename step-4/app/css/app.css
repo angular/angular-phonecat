@@ -1,18 +1,6 @@
 /* app css stylesheet */
 
-.controls {
-  position: absolute;
-  width: 9em;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+body {
+  padding-top: 20px;
 }
 
-.phones {
-  margin-left: 11em;
-  padding: 0;
-}
-
-.phones li {
-  margin-bottom: 2em;
-}

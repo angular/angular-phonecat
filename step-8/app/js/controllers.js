@@ -1,43 +1,22 @@
-/* App Controllers */
+'use strict';
 
-function PhoneCatCtrl($route) {
-  var self = this;
+/* Controllers */
 
-  $route.when('/phones',
-              {template: 'partials/phone-list.html',   controller: PhoneListCtrl});
-  $route.when('/phones/:phoneId',
-              {template: 'partials/phone-detail.html', controller: PhoneDetailCtrl});
-  $route.otherwise({redirectTo: '/phones'});
-
-  $route.onChange(function(){
-    self.params = $route.current.params;
+function PhoneListCtrl($scope, $http) {
+  $http.get('phones/phones.json').success(function(data) {
+    $scope.phones = data;
   });
 
-  $route.parent(this);
+  $scope.orderProp = 'age';
 }
 
-//PhoneCatCtrl.$inject = ['$route'];
+//PhoneListCtrl.$inject = ['$scope', '$http'];
 
 
-function PhoneListCtrl($xhr) {
-  var self = this;
-
-  $xhr('GET', 'phones/phones.json', function(code, response) {
-    self.phones = response;
-  });
-
-  self.orderProp = 'age';
-}
-
-//PhoneListCtrl.$inject = ['$xhr'];
-
-
-function PhoneDetailCtrl($xhr) {
-  var self = this;
-
-  $xhr('GET', 'phones/' + self.params.phoneId + '.json', function(code, response) {
-    self.phone = response;
+function PhoneDetailCtrl($scope, $routeParams, $http) {
+  $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
+    $scope.phone = data;
   });
 }
 
-//PhoneDetailCtrl.$inject = ['$xhr'];
+//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];

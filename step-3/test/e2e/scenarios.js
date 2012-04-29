@@ -1,4 +1,7 @@
-/* jasmine-like end2end tests go here */
+'use strict';
+
+/* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
+
 describe('PhoneCat App', function() {
 
   describe('Phone list view', function() {
