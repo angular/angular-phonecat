@@ -5,7 +5,7 @@
 describe('PhoneCat App', function() {
 
   it('should redirect index.html to index.html#/phones', function() {
-    browser().navigateTo('../../app/index.html');
+    browser().navigateTo('../../app/');
     expect(browser().location().url()).toBe('/phones');
   });
 
@@ -54,7 +54,7 @@ describe('PhoneCat App', function() {
   describe('Phone detail view', function() {
 
     beforeEach(function() {
-      browser().navigateTo('../../app/index.html#/phones/nexus-s');
+      browser().navigateTo('../../app/#/phones/nexus-s');
     });
 
 
