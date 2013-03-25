@@ -21,7 +21,7 @@ teaching a single aspect of angular.
   (and don't forget to add `node.exe` to  your executable path)
 
 ### Karma
-- [http://vojtajina.github.com/karma][karma]
+- [http://karma-runner.github.com][karma]
 
 ## Workings of the application
 
