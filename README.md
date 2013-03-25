@@ -233,4 +233,4 @@ For more information on AngularJS please check out http://angularjs.org/
 [$rouet]: http://docs.angularjs.org/#!angular.service.$route
 [service]: http://docs.angularjs.org/#!angular.service
 [$xhr]: http://docs.angularjs.org/#!angular.service.$xhr
-[karma]: http://vojtajina.github.com/karma
+[karma]: http://karma-runner.github.com
