@@ -21,7 +21,7 @@ teaching a single aspect of angular.
   (and don't forget to add `node.exe` to  your executable path)
 
 ### Karma
-- [http://vojtajina.github.com/karma](karma)
+- [http://vojtajina.github.com/karma][karma]
 
 ## Workings of the application
 
@@ -138,7 +138,7 @@ based on angular-seed, the instructions apply to it as well.
 
 ### Running unit tests
 
-Requires [Karma](http://vojtajina.github.com/karma).
+Requires [Karma].
 
 1. start `./scripts/test.sh` (on windows `scripts\test.bat`)
 2. navigate your browser to `http://localhost:9876/`
@@ -160,7 +160,7 @@ info.
 * serve your project directory with your http/backend server or node.js + `scripts/web-server.js`
 * to run do one of:
   * open `http://localhost:port/test/e2e/runner.html` in your browser
-  * run the tests from console with [Karma](vojtajina.github.com/karma) via
+  * run the tests from console with [Karma] via
     `scripts/e2e-test.sh` or `script/e2e-test.bat`
 
 ## Application Directory Layout
