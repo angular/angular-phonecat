@@ -20,8 +20,8 @@ teaching a single aspect of angular.
 - Windows download from [here][node-windows]. (You will also need [7 Zip] to unzip the node archive)
   (and don't forget to add `node.exe` to  your executable path)
 
-### Java
-- http://www.java.com
+### Karma
+- [http://karma-runner.github.com][karma]
 
 ## Workings of the application
 
@@ -138,26 +138,12 @@ based on angular-seed, the instructions apply to it as well.
 
 ### Running unit tests
 
-Requires java.
+Requires [Karma].
 
-1. start `./scripts/test-server.sh` (on windows `scripts\test-server.bat`)
+1. start `./scripts/test.sh` (on windows `scripts\test.bat`)
 2. navigate your browser to `http://localhost:9876/`
-3. click on: capture strict link
-4. run `scripts/test.sh` (on windows `scripts\test.bat`)
-5. edit files in `app/` or `src/` and save them
-6. go to step 4.
-
-
-### Continuous unit testing
-
-Requires ruby and [watchr](https://github.com/mynyml/watchr) gem.
-
-1. start JSTD server and capture a browser as described above
-2. start watchr with `watchr scripts/watchr.rb`
-3. in a different window/tab/editor `tail -f logs/jstd.log`
-4. edit files in `app/` or `src/` and save them
-5. watch the log to see updates
-
+3. edit files in `app/js` or `test/unit` and save them
+4. watch the command line for updates
 
 ### End to end testing
 
@@ -174,7 +160,7 @@ info.
 * serve your project directory with your http/backend server or node.js + `scripts/web-server.js`
 * to run do one of:
   * open `http://localhost:port/test/e2e/runner.html` in your browser
-  * run the tests from console with [Testacular](vojtajina.github.com/testacular) via
+  * run the tests from console with [Karma] via
     `scripts/e2e-test.sh` or `script/e2e-test.bat`
 
 ## Application Directory Layout
@@ -201,14 +187,14 @@ info.
         partial1.html
         partial2.html
 
-    config/testacular.conf.js        --> config file for running unit tests with Testacular
-    config/testacular-e2e.conf.js    --> config file for running e2e tests with Testacular
+    config/karma.conf.js        --> config file for running unit tests with Karma
+    config/karma-e2e.conf.js    --> config file for running e2e tests with Karma
 
     scripts/            --> handy shell/js/ruby scripts
-      e2e-test.sh       --> runs end-to-end tests with Testacular (*nix)
-      e2e-test.bat      --> runs end-to-end tests with Testacular (windows)
-      test.bat          --> autotests unit tests with Testacular (windows)
-      test.sh           --> autotests unit tests with Testacular (*nix)
+      e2e-test.sh       --> runs end-to-end tests with Karma (*nix)
+      e2e-test.bat      --> runs end-to-end tests with Karma (windows)
+      test.bat          --> autotests unit tests with Karma (windows)
+      test.sh           --> autotests unit tests with Karma (*nix)
       web-server.js     --> simple development webserver based on node.js
 
     test/               --> test source files and libraries
@@ -247,3 +233,4 @@ For more information on AngularJS please check out http://angularjs.org/
 [$rouet]: http://docs.angularjs.org/#!angular.service.$route
 [service]: http://docs.angularjs.org/#!angular.service
 [$xhr]: http://docs.angularjs.org/#!angular.service.$xhr
+[karma]: http://karma-runner.github.com
