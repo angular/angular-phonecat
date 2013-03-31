@@ -2,7 +2,7 @@
 
 ## Overview
 
-This application takes the developer thought the process of building a web-application using
+This application takes the developer through the process of building a web-application using
 angular. The application is loosely based on
 [Google phone gallery](http://www.google.com/phone/). Each commit is a separate lesson
 teaching a single aspect of angular.
