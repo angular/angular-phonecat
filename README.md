@@ -2,7 +2,7 @@
 
 ## Overview
 
-This application takes the developer thought the process of building a web-application using
+This application takes the developer through the process of building a web-application using
 angular. The application is loosely based on
 [Google phone gallery](http://www.google.com/phone/). Each commit is a separate lesson
 teaching a single aspect of angular.
@@ -47,15 +47,15 @@ To see the changes which between any two lessons use the git diff command.
 ### step-1
 
 - We have converted the seed application by removing all of the boiler-plate code.
-- We have added single static HTML file which shows a static list of phones. (we will convert this
-  static page into dynamic one with the help of angular)
+- We have added a single static HTML file which shows a static list of phones. (we will convert this
+  static page into a dynamic one with the help of angular)
 
 
 ### step-2
 
 - Converted static page into dynamic one by:
   - create a root controller for the application
-  - extracting the data from HTML into a the controller as a mock dataset
+  - extracting the data from HTML into the controller as a mock dataset
   - convert the static document into a template with the use of `ng:` [directive] (iterate over
     mock data using [ng:repeat] and render it into a view)
 - Added unit test, which mostly shows how one goes about writing a unit test, rather then test
