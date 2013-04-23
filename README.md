@@ -147,12 +147,12 @@ based on angular-seed, the instructions apply to it as well.
 
 ### Running unit tests
 
-- run `grunt test:single` to run the tests once .
+- run `grunt test:single` to run the tests once
 It uses Chrome as the broweser of choice so make sure you have it installed 
 
 ### Continuous unit testing
 
-- run `grunt test` .
+- run `grunt test`
 Every change you make to the unit tests is automatically detected and tested
 
 
