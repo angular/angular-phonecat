@@ -12,17 +12,22 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span2">
+      <div class="span3 offset1">
         <!--Sidebar content-->
-
-        Search: <input ng-model="query">
+		<label>Search:</label>
+		<input ng-model="query">
+        <label>Sort by:</label>
+        <select ng-model="orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="age">Newest</option>
+        </select>
 
       </div>
-      <div class="span10">
+      <div class="span7">
         <!--Body content-->
 
         <ul class="phones">
-          <li ng-repeat="phone in phones | filter:query">
+          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
             {{phone.name}}
             <p>{{phone.snippet}}</p>
           </li>
