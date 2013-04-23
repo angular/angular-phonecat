@@ -2,6 +2,8 @@
 
 body {
   padding-top: 20px;
+  overflow: -moz-scrollbars-vertical;
+  overflow: scroll;
 }
 
 .phones {
@@ -20,4 +22,8 @@ body {
   clear: both;
   height: 100px;
   padding-top: 15px;
+}
+
+.clear-navbar{
+  padding-top: 70px;
 }
