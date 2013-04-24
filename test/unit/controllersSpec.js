@@ -11,7 +11,6 @@ describe('PhoneCat controllers', function() {
     });
   });
 
-
   beforeEach(module('phonecatServices'));
 
 

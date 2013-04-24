@@ -1,0 +1,15 @@
+{
+    "name": "Angular-PhoneCat",
+    "version": "0.0.3",
+    "description": "An Angular tutorial",
+	"dependencies": {
+		"bootstrap":"*",
+		"angular":"*",
+		"angular-scenario":"*",
+		"angular-mocks":"*",
+		"angular-resource":"*",
+		"angular-sanitize":"*",
+		"angular-loader":"*",
+		"angular-cookies": "*"
+		}
+}

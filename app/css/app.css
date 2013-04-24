@@ -2,6 +2,8 @@
 
 body {
   padding-top: 20px;
+  overflow: -moz-scrollbars-vertical;
+  overflow: scroll;
 }
 
 .phones {
@@ -10,7 +12,7 @@ body {
 
 .thumb {
   float: left;
-  margin: -1em 1em 1.5em 0em;
+  margin: -1em 1em 1.5em 0;
   padding-bottom: 1em;
   height: 100px;
   width: 100px;
@@ -22,10 +24,14 @@ body {
   padding-top: 15px;
 }
 
+.clear-navbar{
+  padding-top: 70px;
+}
+
 /** Detail View **/
 img.phone {
   float: left;
-  border: 1px solid black;
+  border: 1px solid gray;
   margin-right: 3em;
   margin-bottom: 2em;
   background-color: white;
@@ -56,23 +62,27 @@ ul.phone-thumbs img:hover {
   cursor: pointer;
 }
 
-
 ul.specs {
   clear: both;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-
+ul.specs > li > div{
+  margin-right: 10px;
+  border-top: 1px solid gray;
+}
 ul.specs > li{
   display: inline-block;
-  width: 200px;
+  width: 19%;
+  min-width: 180px;
   vertical-align: top;
 }
 
 ul.specs > li > span{
   font-weight: bold;
   font-size: 1.2em;
+  
 }
 
 ul.specs dt {
