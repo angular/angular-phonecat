@@ -58,6 +58,10 @@ ul.phone-thumbs img {
   padding: 1em;
 }
 
+ul.phone-thumbs img:hover {
+  cursor: pointer;
+}
+
 ul.specs {
   clear: both;
   margin: 0;
