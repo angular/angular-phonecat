@@ -2,7 +2,7 @@
 
 /* App Module */
 
-angular.module('phonecat', []).
+angular.module('phonecat', ['phonecatFilters']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/phones', {templateUrl: 'partials/phone-list.html',   controller: PhoneListCtrl}).
