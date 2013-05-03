@@ -3,7 +3,7 @@
 BASE_DIR=`dirname $0`
 
 echo ""
-echo "Starting Testacular Server (http://vojtajina.github.com/testacular)"
+echo "Starting Karma Server (https://github.com/karma-runner/karma)"
 echo "-------------------------------------------------------------------"
 
-testacular start $BASE_DIR/../config/testacular.conf.js $*
+karma start $BASE_DIR/../config/karma.conf.js $*
