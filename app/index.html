@@ -1,21 +1,20 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="phonecat">
 <head>
   <meta charset="utf-8">
   <title>Google Phone Gallery</title>
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="lib/angular/1.0.6/angular.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="lib/angular/1.0.6/angular-resource.js"></script>
 </head>
-<body ng-controller="PhoneListCtrl">
+<body>
 
-  <ul>
-    <li ng-repeat="phone in phones">
-      {{phone.name}}
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
+  <div ng-view></div>
 
 </body>
 </html>
