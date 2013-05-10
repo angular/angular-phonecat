@@ -1,0 +1,10 @@
+  <div>
+    <img ng-src="{{phone.images[imgindex]}}" class="phone">
+    <h1>{{phone.name}}</h1>
+    <p>{{phone.description}}</p>
+    <ul class="phone-thumbs">
+      <li ng-repeat="img in phone.images" ng-click="setIndex($index)">
+        <img ng-src="{{img}}">
+      </li>
+    </ul>
+  </div>
