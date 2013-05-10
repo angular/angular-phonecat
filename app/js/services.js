@@ -11,7 +11,8 @@ angular.module('phonecatServices', ['ngResource']).
     return {
       restrict: 'E',
       scope:{
-        phone:'=phone'
+        phone:'=phone',
+        onimagechange:'=onimagechange'
       },
       templateUrl: 'partials/phoneimg.html',
       controller: function ($scope) {
