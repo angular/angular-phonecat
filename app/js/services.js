@@ -19,7 +19,6 @@ angular.module('phonecatServices', ['ngResource']).
 
         $scope.setIndex = function(index) {
           $scope.imgindex = index;
-          $scope.onimagechange(index)
         }
       }
     };
