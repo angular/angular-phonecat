@@ -174,7 +174,7 @@ info.
 * serve your project directory with your http/backend server or node.js + `scripts/web-server.js`
 * to run do one of:
   * open `http://localhost:port/test/e2e/runner.html` in your browser
-  * run the tests from console with [Testacular](vojtajina.github.com/testacular) via
+  * run the tests from console with [Karma](karma-runner.github.com) via
     `scripts/e2e-test.sh` or `script/e2e-test.bat`
 
 ## Application Directory Layout
@@ -201,14 +201,14 @@ info.
         partial1.html
         partial2.html
 
-    config/testacular.conf.js        --> config file for running unit tests with Testacular
-    config/testacular-e2e.conf.js    --> config file for running e2e tests with Testacular
+    config/karma.conf.js        --> config file for running unit tests with Karma
+    config/karma-e2e.conf.js    --> config file for running e2e tests with Karma
 
     scripts/            --> handy shell/js/ruby scripts
-      e2e-test.sh       --> runs end-to-end tests with Testacular (*nix)
-      e2e-test.bat      --> runs end-to-end tests with Testacular (windows)
-      test.bat          --> autotests unit tests with Testacular (windows)
-      test.sh           --> autotests unit tests with Testacular (*nix)
+      e2e-test.sh       --> runs end-to-end tests with Karma (*nix)
+      e2e-test.bat      --> runs end-to-end tests with Karma (windows)
+      test.bat          --> autotests unit tests with Karma (windows)
+      test.sh           --> autotests unit tests with Karma (*nix)
       web-server.js     --> simple development webserver based on node.js
 
     test/               --> test source files and libraries
