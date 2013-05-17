@@ -1,6 +1,5 @@
-
 /**
- * @license AngularJS v1.0.2
+ * @license AngularJS v1.0.6
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
  *
@@ -203,6 +202,30 @@ angular.mock.$Browser.prototype = {
  * Mock implementation of {@link ng.$exceptionHandler} that rethrows or logs errors passed
  * into it. See {@link ngMock.$exceptionHandlerProvider $exceptionHandlerProvider} for configuration
  * information.
+ *
+ *
+ * <pre>
+ *   describe('$exceptionHandlerProvider', function() {
+ *
+ *     it('should capture log messages and exceptions', function() {
+ *
+ *       module(function($exceptionHandlerProvider) {
+ *         $exceptionHandlerProvider.mode('log');
+ *       });
+ *
+ *       inject(function($log, $exceptionHandler, $timeout) {
+ *         $timeout(function() { $log.log(1); });
+ *         $timeout(function() { $log.log(2); throw 'banana peel'; });
+ *         $timeout(function() { $log.log(3); });
+ *         expect($exceptionHandler.errors).toEqual([]);
+ *         expect($log.assertEmpty());
+ *         $timeout.flush();
+ *         expect($exceptionHandler.errors).toEqual(['banana peel']);
+ *         expect($log.log.logs).toEqual([[1], [2], [3]]);
+ *       });
+ *     });
+ *   });
+ * </pre>
  */
 
 angular.mock.$ExceptionHandlerProvider = function() {
@@ -221,8 +244,8 @@ angular.mock.$ExceptionHandlerProvider = function() {
    *   - `rethrow`: If any errors are are passed into the handler in tests, it typically
    *                means that there is a bug in the application or test, so this mock will
    *                make these tests fail.
-   *   - `log`: Sometimes it is desirable to test that an error is throw, for this case the `log` mode stores the
-   *            error and allows later assertion of it.
+   *   - `log`: Sometimes it is desirable to test that an error is thrown, for this case the `log` mode stores an
+   *            array of errors in `$exceptionHandler.errors`, to allow later assertion of them.
    *            See {@link ngMock.$log#assertEmpty assertEmpty()} and
    *             {@link ngMock.$log#reset reset()}
    */
@@ -407,7 +430,7 @@ angular.mock.$LogProvider = function() {
    *
    * *NOTE*: this is not an injectable instance, just a globally available mock class of `Date`.
    *
-   * Mock of the Date type which has its timezone specified via constroctor arg.
+   * Mock of the Date type which has its timezone specified via constructor arg.
    *
    * The main purpose is to create Date-like instances with timezone fixed to the specified timezone
    * offset, so that we can test code that depends on local timezone settings without dependency on
@@ -562,7 +585,7 @@ angular.mock.$LogProvider = function() {
 
 /**
  * @ngdoc function
- * @name angular.mock.debug
+ * @name angular.mock.dump
  * @description
  *
  * *NOTE*: this is not an injectable instance, just a globally available function.
@@ -745,7 +768,7 @@ angular.mock.dump = function(object) {
    }
 
    // testing controller
-   var $http;
+   var $httpBackend;
 
    beforeEach(inject(function($injector) {
      $httpBackend = $injector.get('$httpBackend');
@@ -1630,7 +1653,7 @@ window.jasmine && (function(window) {
    * @name angular.mock.module
    * @description
    *
-   * *NOTE*: This is function is also published on window for easy access.<br>
+   * *NOTE*: This function is also published on window for easy access.<br>
    * *NOTE*: Only available with {@link http://pivotal.github.com/jasmine/ jasmine}.
    *
    * This function registers a module configuration code. It collects the configuration information
@@ -1664,8 +1687,12 @@ window.jasmine && (function(window) {
    * @name angular.mock.inject
    * @description
    *
+<<<<<<< HEAD
    * *NOTE*: This is function is also published on window for easy access.<br>
    * *NOTE*: Only available with {@link http://pivotal.github.com/jasmine/ jasmine}.
+=======
+   * *NOTE*: This function is also published on window for easy access.<br>
+>>>>>>> 8dca056... docs(mocks): fix typos
    *
    * The inject function wraps a function into an injectable function. The inject() creates new
    * instance of {@link AUTO.$injector $injector} per test, which is then used for
@@ -1730,7 +1757,7 @@ window.jasmine && (function(window) {
         try {
           injector.invoke(blockFns[i] || angular.noop, this);
         } catch (e) {
-          if(e.stack) e.stack +=  '\n' + errorForStack.stack;
+          if(e.stack && errorForStack) e.stack +=  '\n' + errorForStack.stack;
           throw e;
         } finally {
           errorForStack = null;
