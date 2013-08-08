@@ -158,6 +158,7 @@ Check out the
 [end-to-end runner's documentation](http://docs.angularjs.org/guide/dev_guide.e2e-testing) for more
 info.
 
+* Install the Karma ng-scenario adapter with `npm install -g karma-ng-scenario`
 * create your end-to-end tests in `test/e2e/scenarios.js`
 * serve your project directory with your http/backend server or node.js + `scripts/web-server.js`
 * to run do one of:
