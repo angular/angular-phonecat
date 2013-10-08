@@ -64,7 +64,7 @@ describe('PhoneCat App', function() {
 
 
     it('should display the first phone image as the main phone image', function() {
-      expect(element('img.phone').attr('src')).toBe('img/phones/nexus-s.0.jpg');
+      expect(element('img.phone.active').attr('src')).toBe('img/phones/nexus-s.0.jpg');
     });
 
 
