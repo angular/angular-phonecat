@@ -69,11 +69,18 @@ describe('PhoneCat App', function() {
 
 
     it('should swap main image if a thumbnail image is clicked on', function() {
+      expect(element('.phone-images img:nth-child(1)').attr('class')).toBe('phone ng-scope active');
+      expect(element('.phone-images img:nth-child(3)').attr('class')).toBe('phone ng-scope');
+
       element('.phone-thumbs li:nth-child(3) img').click();
-      expect(element('img.phone').attr('src')).toBe('img/phones/nexus-s.2.jpg');
+      sleep(1);
+      expect(element('.phone-images img:nth-child(1)').attr('class')).toBe('phone ng-scope');
+      expect(element('.phone-images img:nth-child(3)').attr('class')).toBe('phone ng-scope active');
 
       element('.phone-thumbs li:nth-child(1) img').click();
-      expect(element('img.phone').attr('src')).toBe('img/phones/nexus-s.0.jpg');
+      sleep(1);
+      expect(element('.phone-images img:nth-child(1)').attr('class')).toBe('phone ng-scope active');
+      expect(element('.phone-images img:nth-child(3)').attr('class')).toBe('phone ng-scope');
     });
   });
 });
