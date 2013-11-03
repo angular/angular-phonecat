@@ -4,6 +4,7 @@ ROOT_DIR=`dirname $0`/../..
 cd $ROOT_DIR
 
 SNAP_DIR=angular-phonecat-snapshots
+SANDBOX_DIR=$SNAP_DIR/sandbox
 
 
 rm -rf $SNAP_DIR
@@ -34,9 +35,12 @@ do
   fi
 done
 
-mkdir $SNAP_DIR/sandbox
-cp scripts/private/goto_step.sh $SNAP_DIR/sandbox/
-cp scripts/private/goto_step.bat $SNAP_DIR/sandbox/
+mkdir $SANDBOX_DIR
+cp scripts/private/goto_step.sh $SANDBOX_DIR
+cp scripts/private/goto_step.bat $SANDBOX_DIR
+
+# Install karma modules
+cp -r node_modules/ $SANDBOX_DIR/
 
 zip -r angular-phonecat-`date +"%y%m%d_%H%M"` $SNAP_DIR
 
