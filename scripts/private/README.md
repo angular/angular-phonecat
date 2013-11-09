@@ -29,13 +29,8 @@ use karma to do testing, you will need to install the necessary karma plugins by
 - **goto_step.sh (goto_step.bat)**: These scripts are copied into the `sandbox` folder when the
   snapshots folder is created. Run the appropriate one for your OS to remove the current step's
   application files from the sandbox and copy in a new one.
-- **test-all.sh**: Run this script to run all the unit and e2e tests for all the steps in the
-  tutorial. It is a bit fiddly to get all the pieces running for this to work:
-    - Run `scripts/private/snapshot.sh`
-    - Run `scripts/private/test-all.sh`
-    - Open a new terminal and `cd angular-phonecat-snapshots/sandbox/`
-    - Run `node scripts/web-server.js` for the e2e tests to have an application to talk to.
-    - Open a browser and point it at `http://localhost:9876` for karma to run the tests against.
+- **test-all.sh**: Run this script to recreate the snapshot folder and then run all the unit and e2e
+  tests for all the steps in the tutorial.
 
 ## Scraping Data
 
