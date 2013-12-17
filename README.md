@@ -44,18 +44,18 @@ To see the changes which between any two lessons use the git diff command.
 ### step-1
 
 - We have converted the seed application by removing all of the boiler-plate code.
-- We have added single static HTML file which shows a static list of phones. (we will convert this
-  static page into dynamic one with the help of angular)
+- We have added a single static HTML file which shows a static list of phones. We will convert this
+  static page into dynamic one with the help of angular.
 
 
 ### step-2
 
 - Converted static page into dynamic one by:
-  - create a root controller for the application
+  - creating a root controller for the application
   - extracting the data from HTML into a the controller as a mock dataset
-  - convert the static document into a template with the use of `ng:` [directive] (iterate over
+  - converting the static document into a template with the use of `ng:` [directive] (iterate over
     mock data using [ng:repeat] and render it into a view)
-- Added unit test, which mostly shows how one goes about writing a unit test, rather then test
+- Added a unit test, which mostly shows how one goes about writing a unit test, rather than test
   something of value on our mock dataset.
 
 
@@ -212,7 +212,7 @@ info.
           version.txt           --> version file
       unit/                     --> unit level specs/tests
         controllersSpec.js      --> specs for controllers
-        directivessSpec.js      --> specs for directives
+        directivesSpec.js       --> specs for directives
         filtersSpec.js          --> specs for filters
         servicesSpec.js         --> specs for services
 
@@ -234,6 +234,6 @@ For more information on AngularJS please check out http://angularjs.org/
 [node-generic]: https://github.com/joyent/node/wiki/Installation
 [java]: http://www.java.com
 [$resource]: http://docs.angularjs.org/#!angular.service.$resource
-[$rouet]: http://docs.angularjs.org/#!angular.service.$route
+[$route]: http://docs.angularjs.org/#!angular.service.$route
 [service]: http://docs.angularjs.org/#!angular.service
 [$xhr]: http://docs.angularjs.org/#!angular.service.$xhr
