@@ -2,5 +2,6 @@ logs/*
 !.gitkeep
 node_modules/
 tmp
+.idea
 .DS_Store
 angular-phonecat-snapshots
