@@ -16,9 +16,7 @@ teaching a single aspect of angular.
 
 ### Node.js
 - Generic [installation instructions][node-generic].
-- Mac DMG [here][node-mac]
-- Windows download from [here][node-windows]. (You will also need [7 Zip] to unzip the node archive)
-  (and don't forget to add `node.exe` to  your executable path)
+- Download installer [here][node-download]. Don't forget to add `node.exe` to your executable path.
 
 ## Workings of the application
 
@@ -229,8 +227,7 @@ For more information on AngularJS please check out http://angularjs.org/
 [git-github]: http://help.github.com/set-up-git-redirect
 [ng:repeat]: http://docs.angularjs.org/#!angular.widget.@ng:repeat
 [ng:view]: http://docs.angularjs.org/#!angular.widget.ng:view
-[node-mac]: http://code.google.com/p/rudix/downloads/detail?name=node-0.4.0-0.dmg&can=2&q=
-[node-windows]: http://node-js.prcn.co.cc/
+[node-download]: http://nodejs.org/download/
 [node-generic]: https://github.com/joyent/node/wiki/Installation
 [java]: http://www.java.com
 [$resource]: http://docs.angularjs.org/#!angular.service.$resource
