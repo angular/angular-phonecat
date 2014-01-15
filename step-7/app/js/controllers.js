@@ -2,19 +2,18 @@
 
 /* Controllers */
 
-function PhoneListCtrl($scope, $http) {
-  $http.get('phones/phones.json').success(function(data) {
-    $scope.phones = data;
-  });
+var phonecatControllers = angular.module('phonecatControllers', []);
 
-  $scope.orderProp = 'age';
-}
+phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http',
+  function($scope, $http) {
+    $http.get('phones/phones.json').success(function(data) {
+      $scope.phones = data;
+    });
 
-//PhoneListCtrl.$inject = ['$scope', '$http'];
+    $scope.orderProp = 'age';
+  }]);
 
-
-function PhoneDetailCtrl($scope, $routeParams) {
-  $scope.phoneId = $routeParams.phoneId;
-}
-
-//PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];
+phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.phoneId = $routeParams.phoneId;
+  }]);

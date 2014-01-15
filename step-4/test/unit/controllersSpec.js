@@ -6,15 +6,17 @@ describe('PhoneCat controllers', function() {
   describe('PhoneListCtrl', function(){
     var scope, ctrl;
 
-    beforeEach(function() {
-      scope = {},
-      ctrl = new PhoneListCtrl(scope);
-    });
+    beforeEach(module('phonecatApp'));
+
+    beforeEach(inject(function($controller) {
+      scope = {};
+      ctrl = $controller('PhoneListCtrl', {$scope:scope});
+    }));
 
 
-    it('should create "phones" model with 3 phones', function() {
+    it('should create "phones" model with 3 phones', inject(function($controller) {
       expect(scope.phones.length).toBe(3);
-    });
+    }));
 
 
     it('should set the default value of orderProp model', function() {

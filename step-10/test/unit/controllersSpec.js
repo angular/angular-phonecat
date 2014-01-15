@@ -3,6 +3,8 @@
 /* jasmine specs for controllers go here */
 describe('PhoneCat controllers', function() {
 
+  beforeEach(module('phonecatApp'));
+
   describe('PhoneListCtrl', function(){
     var scope, ctrl, $httpBackend;
 
@@ -12,7 +14,7 @@ describe('PhoneCat controllers', function() {
           respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
 
       scope = $rootScope.$new();
-      ctrl = $controller(PhoneListCtrl, {$scope: scope});
+      ctrl = $controller('PhoneListCtrl', {$scope: scope});
     }));
 
 
@@ -47,7 +49,7 @@ describe('PhoneCat controllers', function() {
 
       $routeParams.phoneId = 'xyz';
       scope = $rootScope.$new();
-      ctrl = $controller(PhoneDetailCtrl, {$scope: scope});
+      ctrl = $controller('PhoneDetailCtrl', {$scope: scope});
     }));
 
 
