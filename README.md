@@ -17,8 +17,7 @@ teaching a single aspect of angular.
 ### Node.js
 - Generic [installation instructions][node-generic].
 - Mac DMG [here][node-mac]
-- Windows download from [here][node-windows]. (You will also need [7 Zip] to unzip the node archive)
-  (and don't forget to add `node.exe` to  your executable path)
+- Windows MSI [here](http://nodejs.org/dist/latest/).
 
 ## Workings of the application
 
