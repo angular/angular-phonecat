@@ -17,7 +17,7 @@ teaching a single aspect of angular.
 ### Node.js
 - Generic [installation instructions][node-generic].
 - Mac DMG [here][node-mac]
-- Windows MSI [here](http://nodejs.org/dist/latest/).
+- Windows MSI [here][node-windows].
 
 ## Workings of the application
 
@@ -229,7 +229,7 @@ For more information on AngularJS please check out http://angularjs.org/
 [ng:repeat]: http://docs.angularjs.org/#!angular.widget.@ng:repeat
 [ng:view]: http://docs.angularjs.org/#!angular.widget.ng:view
 [node-mac]: http://code.google.com/p/rudix/downloads/detail?name=node-0.4.0-0.dmg&can=2&q=
-[node-windows]: http://node-js.prcn.co.cc/
+[node-windows]: http://nodejs.org/dist/latest/
 [node-generic]: https://github.com/joyent/node/wiki/Installation
 [java]: http://www.java.com
 [$resource]: http://docs.angularjs.org/#!angular.service.$resource
