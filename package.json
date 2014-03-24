@@ -1,9 +1,9 @@
 {
   "version": "0.0.0",
   "private": true,
-  "name": "angularjs-seed",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "name": "angular-phonecat",
+  "description": "A tutorial application for AngularJS",
+  "repository": "https://github.com/angular/angular-phonecat",
   "scripts":{
     "start": "node ./scripts/web-server.js",
     "test": "./scripts/test.sh"
