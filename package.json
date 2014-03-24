@@ -1,4 +1,6 @@
 {
+  "version": "0.0.0",
+  "private": true,
   "name": "angularjs-seed",
   "description": "A starter project for AngularJS",
   "repository": "https://github.com/angular/angular-seed",
