@@ -1,5 +1,6 @@
 {
   "name": "angularjs-seed",
+  "version": "0.0.0",
   "description": "A starter project for AngularJS",
   "repository": "https://github.com/angular/angular-seed",
   "devDependencies": {
