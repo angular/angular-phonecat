@@ -2,6 +2,10 @@
   "name": "angularjs-seed",
   "description": "A starter project for AngularJS",
   "repository": "https://github.com/angular/angular-seed",
+  "scripts":{
+    "start": "node ./scripts/web-server.js",
+    "test": "./scripts/test.sh"
+  },
   "devDependencies": {
     "phantomjs": "~1.9",
     "karma": "~0.10.4",
