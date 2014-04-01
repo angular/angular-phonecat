@@ -14,6 +14,9 @@ do
   mkdir $SNAP_DIR/step-$i
   git checkout -f step-$i
 
-    cp -r app test $SNAP_DIR/step-$i/
-    rm -rf $SNAP_DIR/step-$i/test/lib/jstestdriver
+  cp -r app $SNAP_DIR/step-$i/
+
+  node -e "require('shelljs/global'); sed('-i', /\"\\.\\.\\/bower_components/g, '\"../../../bower_components', '$SNAP_DIR/step-$i/app/index.html');"
 done
+
+git checkout -f master
