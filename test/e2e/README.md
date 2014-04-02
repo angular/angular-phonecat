@@ -15,11 +15,11 @@ The application should now be available at `http://localhost:8000/app/index.html
 
 As a one-time setup, download webdriver.
 ```
-npm update-webdriver
+npm run update-webdriver
 ```
 
 Start the Protractor test runner using the e2e configuration:
 
 ```
-npm protractor
+npm run protractor
 ```
