@@ -21,5 +21,5 @@ npm update-webdriver
 Start the Protractor test runner using the e2e configuration:
 
 ```
-node protractor
+npm protractor
 ```
