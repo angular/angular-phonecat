@@ -12,8 +12,14 @@ npm start
 The application should now be available at `http://localhost:8000/app/index.html`
 
 ## Testing with Protractor
+
+As a one-time setup, download webdriver.
+```
+npm update-webdriver
+```
+
 Start the Protractor test runner using the e2e configuration:
 
 ```
-protractor protractor-conf.js
+node protractor
 ```
