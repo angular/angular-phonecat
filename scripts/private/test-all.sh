@@ -24,12 +24,19 @@ ROOT_DIR=`dirname $0`/../..
 
 cd $ROOT_DIR
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Ensure that all the dependencies are there
 npm install
 
+# Ensure that the chromeDriver is installed
+npm run update-webdriver
+
+# Start up the web server
 node_modules/.bin/http-server -p 8000 &
 WEBSERVER_PID=$!
 
-# Steps 0 and 1 do not have any tests - but going to step 0 copies useful files
+# Steps 0 and 1 do not have any tests
+
 # Step 2 only has unit tests
 git checkout -f step-2
 ./node_modules/.bin/karma start test/karma.conf.js --single-run
