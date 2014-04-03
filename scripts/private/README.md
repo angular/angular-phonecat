@@ -17,17 +17,14 @@ We use GitHub to host a live demo of each step.  This is stored in the gh-pages 
 repository.  The folder structure of this branch is different to the main master branch. Each step
 is copied to its own folder.
 
-- **snapshot-web.sh**: Run this script to iterate through each step checking out the application
-  code and copying it to the `angular-phonecat-snapshots-web` folder, before checking out the
-  gh-pages branch and updating the folders with the snapshot.
+- **update-gh-pages.sh**: Run this script to copy changes to the tutorial steps and bower dependencies
+  over  to the gh-pages branch
 
-Once you have generated the snapshots you can review the changes and then commit and push them to
-the gh-pages branch.
+Once you have updated the local gh-pages branch you can review the changes and push to the remote
+gh-pages branch on GitHub.
 
 
 ```
-git add --all step-*
-git commit -m"chore(*): update live steps to new version of tutorial"
 git push origin gh-pages
 ```
 
