@@ -29,7 +29,7 @@ git checkout -f master
 npm install
 
 # Update the bower dependencies
-bower update
+node_modules/.bin/bower update
 
 # Run all the tests on each step
 scripts/private/test-all.sh
