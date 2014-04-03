@@ -5,3 +5,6 @@ build.xml
 
 .project
 .settings
+
+
+node_modules
