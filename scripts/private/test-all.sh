@@ -2,7 +2,7 @@
 
 set -ex
 
-function cleanUp() {
+cleanUp () {
   kill $WEBSERVER_PID
   git checkout -f $BRANCH
 }
