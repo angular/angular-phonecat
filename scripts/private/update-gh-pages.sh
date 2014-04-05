@@ -60,11 +60,11 @@ rm -rf $SNAP_DIR
 
 # Commit any changes to the steps
 git add --all step-*
-git commit -m"chore(step): update live steps to new version of tutorial"
+git commit -m"chore(step): update live steps to new version of tutorial" || true
 
 # Commit any changes to the bower dependencies
 git add --all bower_components
-git commit -m"chore(bower_components): update bower dependencies"
+git commit -m"chore(bower_components): update bower dependencies" || true
 
 
 # Display an info message, including the last two commits
