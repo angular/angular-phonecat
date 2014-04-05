@@ -39,14 +39,14 @@ WEBSERVER_PID=$!
 
 # Step 2 only has unit tests
 git checkout -f step-2
-./node_modules/.bin/karma start test/karma.conf.js --single-run
+./node_modules/.bin/karma start test/karma.conf.js --single-run --browsers=$BROWSERS
 
 # Steps 3 through 12 have both unit and e2e tests
 for i in {3..12}
 do
   git checkout -f step-$i
 
-  node_modules/.bin/karma start test/karma.conf.js --single-run
-  node_modules/.bin/protractor test/protractor-conf.js
+  node_modules/.bin/karma start test/karma.conf.js --single-run --browsers=$BROWSERS
+  node_modules/.bin/protractor test/protractor-conf.js --browser=$BROWSERS_E2E
 
 done
