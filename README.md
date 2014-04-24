@@ -215,7 +215,7 @@ Requires a webserver that serves the application. See Running the app during dev
       private/             --> private scripts used by the Angular Team to maintain this repo
     test/               --> test source files and libraries
       karma.conf.js        --> config file for running unit tests with Karma
-      protractor-conf.js   --> config file for running e2e tests with Karma
+      protractor-conf.js   --> config file for running e2e tests with Protractor
       e2e/
         scenarios.js       --> end-to-end specs
       unit/             --> unit level specs/tests
