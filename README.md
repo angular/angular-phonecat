@@ -156,21 +156,33 @@ large version of the thumbnail image.
   - Animate changes to the main phone image in the detail view.
 
 
-## Development with angular-seed
+## Development with angular-phonecat
 
 The following docs describe how you can test and develop further this application.
 
+
+### Installing dependencies
+
+The application relies upon various node.js tools, such as Bower, Karma and Protractor.  You can
+install these by running:
+
+```
+npm install
+```
+
+Most of the scripts described below will run this automatically but it doesn't do any harm to run
+it whenever you like.
+
 ### Running the app during development
 
-1. Run `npm start`
-2. navigate your browser to `http://localhost:8000/app/index.html` to see the app running in your browser.
+- Run `npm start`
+- navigate your browser to `http://localhost:8000/app/index.html` to see the app running in your browser.
 
 ### Running unit tests
 
 We recommend using [Jasmine][jasmine] and [Karma][karma] for your unit tests/specs, but you are free
 to use whatever works for you.
 
-- Ensure the tools are installed: run `npm install`.
 - Start Karma with `npm test`
   - A browser will start and connect to the Karma server. Chrome is the default browser, others can
   be captured by loading the same url as the one in Chrome or by changing the `test/karma.conf.js`
@@ -185,13 +197,12 @@ We recommend using [Jasmine][jasmine] and [Protractor][protractor] for end-to-en
 
 Requires a webserver that serves the application. See Running the app during development, above.
 
-- Ensure that the tools are installed: run `npm install`.
 - Serve the application: run `npm start`.
 - In a separate console run the end2end tests: `npm run protractor`. Protractor will execute the
   end2end test scripts against the web application itself.
   - The configuration is set up to run the tests on Chrome directly. If you want to run against
     other browsers then you must install the webDriver, `npm run update-webdriver`, and modify the
-    configuration at `test/protractor-conf.js`.
+  configuration at `test/protractor-conf.js`.
 
 ## Application Directory Layout
 
