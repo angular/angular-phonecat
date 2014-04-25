@@ -162,8 +162,9 @@ The following docs describe how you can test and develop further this applicatio
 
 ### Running the app during development
 
-1. Run `npm start`
-2. navigate your browser to `http://localhost:8000/app/index.html` to see the app running in your browser.
+1. If you haven't done so already, run `npm install`
+2. Run `npm start`
+3. navigate your browser to `http://localhost:8000/app/index.html` to see the app running in your browser.
 
 ### Running unit tests
 
