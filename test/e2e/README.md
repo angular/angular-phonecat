@@ -2,7 +2,7 @@
 To run the end-2-end tests against the application you use [Protractor](https://github.com/angular/protractor).
 
 ## Starting the Web Server
-In either case you will need the application to be running via the web-server. 
+In either case you will need the application to be running via the web-server.
 From the root folder of the repository run:
 
 ```

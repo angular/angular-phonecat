@@ -17,9 +17,11 @@ The full tutorial can be found at http://docs.angularjs.org/tutorial.
 - A good place to learn about setting up git is [here][git-github]
 - Git [home][git-home] (download, documentation)
 
-### Node.js
+### Node.js and Tools
 
 - Get [Node.js][node-download].
+- Install the tool dependencies (`npm install`)
+
 
 ## Workings of the application
 
@@ -170,6 +172,9 @@ install these by running:
 npm install
 ```
 
+This will also run bower, which will download the angular files needed for the current step of the
+tutorial.
+
 Most of the scripts described below will run this automatically but it doesn't do any harm to run
 it whenever you like.
 
@@ -221,6 +226,7 @@ Requires a webserver that serves the application. See Running the app during dev
       partials/         --> angular view partials (partial html templates) used by ngRoute
         partial1.html
         partial2.html
+      bower_components  --> 3rd party js libraries, including angular and jquery
 
     scripts/            --> handy scripts
       update-repo.sh       --> pull down the latest version of this repos
