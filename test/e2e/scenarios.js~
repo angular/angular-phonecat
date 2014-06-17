@@ -53,7 +53,7 @@ describe('PhoneCat App', function() {
         "MOTOROLA XOOM\u2122"
       ]);
 
-      element(by.model('orderProp')).element(by.css('option[value="name"]')).click();
+      element(by.model('orderProp')).findElement(by.css('option[value="name"]')).click();
 
       expect(getNames()).toEqual([
         "MOTOROLA XOOM\u2122",
