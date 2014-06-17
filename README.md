@@ -83,7 +83,7 @@ To see the changes which between any two lessons use the git diff command.
 
 ### step-5
 
-- Replac the in-memory dataset with data loaded from the server (in
+- Replace the in-memory dataset with data loaded from the server (in
   the form of static `phones.json` file).
   - The `phones.json` file is loaded using the `$http` service.
 - Demonstrate the use of [services][service] and [dependency injection][DI].
