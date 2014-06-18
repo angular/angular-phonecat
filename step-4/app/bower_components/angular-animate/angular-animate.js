@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.17
+ * @license AngularJS v1.2.18
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -750,7 +750,7 @@ angular.module('ngAnimate', ['ng'])
          * @kind function
          *
          * @param {boolean=} value If provided then set the animation on or off.
-         * @param {DOMElement} element If provided then the element will be used to represent the enable/disable operation
+         * @param {DOMElement=} element If provided then the element will be used to represent the enable/disable operation
          * @return {boolean} Current animation state.
          *
          * @description
