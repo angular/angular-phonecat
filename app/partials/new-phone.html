@@ -1,0 +1,11 @@
+<div>
+  <pre>Back: <a href="#/phones">[---]</a></pre>
+  <form novalidate class="simple-form">
+    Age : <input type="number" ng-model="phone.age" /><br />
+    Id : <input type="text" ng-model="phone.id" /><br />
+    Name : <input type="text" ng-model="phone.name" /><br />
+    Snippet : <input type="text" ng-model="phone.snippet" /><br />
+    <button ng-click="update(phone)">SAVE</button>
+  </form>
+  <pre>form = {{phone | json}}</pre>
+</div>

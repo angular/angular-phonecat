@@ -4,9 +4,11 @@
 
 var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
-  function($scope, Phone) {
-    $scope.phones = Phone.query();
+phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone', 'NewPhones',
+  function($scope, Phone, NewPhones) {
+    Phone.query(function(data) {
+      $scope.phones = data.concat(NewPhones.getPhones());
+    });
     $scope.orderProp = 'age';
   }]);
 
@@ -19,4 +21,13 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Ph
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     }
+  }]);
+
+phonecatControllers.controller('NewPhoneCtrl', ['$scope', 'NewPhones',
+  function($scope, NewPhones) {
+    $scope.phone = {"imageUrl": "img/phones/default.jpg"};
+
+    $scope.update = function(phone) {
+      NewPhones.addPhone(phone);
+    };
   }]);
