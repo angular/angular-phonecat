@@ -6,7 +6,28 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 
 phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
   function($scope, Phone) {
-    $scope.phones = Phone.query();
+    var sliceStart = 0;
+    Phone.query(function(data) {
+      $scope.phones = data.slice(sliceStart, sliceStart + 3);
+    });
+    $scope.loadPrev = function() {
+      Phone.query(function(data) {
+        sliceStart -= 2;
+        if (sliceStart < 0) {
+          sliceStart = 0;
+        }
+        $scope.phones = data.slice(sliceStart, sliceStart + 3);
+      });
+    }
+    $scope.loadMore = function() {
+      Phone.query(function(data) {
+        sliceStart += 2;
+        if (sliceStart + 3 > data.length) {
+          sliceStart = data.length - 3;
+        }
+        $scope.phones = data.slice(sliceStart, sliceStart + 3);
+      });
+    }
     $scope.orderProp = 'age';
   }]);
 
