@@ -40,7 +40,7 @@ for i in {0..12}
 do
   git checkout -f step-$i
 
-  node_modules/.bin/karma start test/karma.conf.js --single-run --browsers=$BROWSERS
+  node_modules/karma/bin/karma start test/karma.conf.js --single-run --browsers=$BROWSERS
   node_modules/.bin/protractor test/protractor-conf.js --browser=$BROWSERS_E2E
 
 done
