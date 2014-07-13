@@ -5,7 +5,7 @@
         "ui": "TouchWiz"
     }, 
     "availability": [
-        "AT&amp;T,", 
+        "AT&T,", 
         "Sprint,", 
         "T-Mobile,", 
         "Verizon"
@@ -24,7 +24,7 @@
     }, 
     "connectivity": {
         "bluetooth": "Bluetooth 3.0", 
-        "cell": "AT&amp;T: GSM/EDGE : 850/900/1800/1900; 3G : 850/1900/2100&lt;p&gt;\r\n\r\nSprint: CDMA : 850/1900MHz&lt;p&gt;\r\n\r\nT-Mobile: GSM/EDGE : 850/900/1800/1900; 3G : 1700/1900&lt;p&gt;\r\n\r\nVerizon: CDMA : 800MHz/1900MHz", 
+        "cell": "AT&T: GSM/EDGE : 850/900/1800/1900; 3G : 850/1900/2100\r\n\r\nSprint: CDMA : 850/1900MHz\r\n\r\nT-Mobile: GSM/EDGE : 850/900/1800/1900; 3G : 1700/1900\r\n\r\nVerizon: CDMA : 800MHz/1900MHz", 
         "gps": true, 
         "infrared": false, 
         "wifi": "802.11 b/g/n"
