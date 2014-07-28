@@ -2,7 +2,7 @@
   "name": "angular-seed",
   "description": "A starter project for AngularJS",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/angular/angular-phonecat",
   "license": "MIT",
   "private": true,
   "dependencies": {
