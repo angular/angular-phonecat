@@ -10,4 +10,4 @@ before_script:
   - npm run update-webdriver
 
 script:
-  - scripts/private/test-all.sh
+  - bash scripts/private/test-all.sh
