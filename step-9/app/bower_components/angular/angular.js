@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.24
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68,7 +68,7 @@ function minErr(module) {
       return match;
     });
 
-    message = message + '\nhttp://errors.angularjs.org/1.2.23/' +
+    message = message + '\nhttp://errors.angularjs.org/1.2.24/' +
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i-2) + '=' +
@@ -1987,11 +1987,11 @@ function setupModuleLoader(window) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.2.23',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.2.24',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 2,
-  dot: 23,
-  codeName: 'superficial-malady'
+  dot: 24,
+  codeName: 'static-levitation'
 };
 
 
@@ -4581,6 +4581,13 @@ function Browser(window, document, $log, $sniffer) {
     urlChangeListeners.push(callback);
     return callback;
   };
+
+  /**
+   * Checks whether the url has changed outside of Angular.
+   * Needs to be exported to be able to check for changes that have been done in sync,
+   * as hashchange/popstate events fire in async.
+   */
+  self.$$checkUrlChange = fireUrlChange;
 
   //////////////////////////////////////////////////////////////
   // Misc API
@@ -8407,7 +8414,7 @@ function $HttpProvider() {
           if (isObject(v)) {
             if (isDate(v)){
               v = v.toISOString();
-            } else if (isObject(v)) {
+            } else {
               v = toJson(v);
             }
           }
@@ -8857,7 +8864,7 @@ function $InterpolateProvider() {
      * @description
      * Symbol to denote the start of expression in the interpolated string. Defaults to `{{`.
      *
-     * Use {@link ng.$interpolateProvider#startSymbol $interpolateProvider#startSymbol} to change
+     * Use {@link ng.$interpolateProvider#startSymbol `$interpolateProvider.startSymbol`} to change
      * the symbol.
      *
      * @returns {string} start symbol.
@@ -8873,7 +8880,7 @@ function $InterpolateProvider() {
      * @description
      * Symbol to denote the end of expression in the interpolated string. Defaults to `}}`.
      *
-     * Use {@link ng.$interpolateProvider#endSymbol $interpolateProvider#endSymbol} to change
+     * Use {@link ng.$interpolateProvider#endSymbol `$interpolateProvider.endSymbol`} to change
      * the symbol.
      *
      * @returns {string} end symbol.
@@ -9463,17 +9470,16 @@ LocationHashbangInHtml5Url.prototype =
    * Change path, search and hash, when called with parameter and return `$location`.
    *
    * @param {string=} url New url without base prefix (e.g. `/path?a=b#hash`)
-   * @param {string=} replace The path that will be changed
    * @return {string} url
    */
-  url: function(url, replace) {
+  url: function(url) {
     if (isUndefined(url))
       return this.$$url;
 
     var match = PATH_MATCH.exec(url);
     if (match[1]) this.path(decodeURIComponent(match[1]));
     if (match[2] || match[1]) this.search(match[3] || '');
-    this.hash(match[5] || '', replace);
+    this.hash(match[5] || '');
 
     return this;
   },
@@ -9531,10 +9537,11 @@ LocationHashbangInHtml5Url.prototype =
    * Note: Path should always begin with forward slash (/), this method will add the forward slash
    * if it is missing.
    *
-   * @param {string=} path New path
+   * @param {(string|number)=} path New path
    * @return {string} path
    */
   path: locationGetterSetter('$$path', function(path) {
+    path = path ? path.toString() : '';
     return path.charAt(0) == '/' ? path : '/' + path;
   }),
 
@@ -9570,7 +9577,7 @@ LocationHashbangInHtml5Url.prototype =
    * If the argument is a hash object containing an array of values, these values will be encoded
    * as duplicate search parameters in the url.
    *
-   * @param {(string|Array<string>|boolean)=} paramValue If `search` is a string, then `paramValue`
+   * @param {(string|Number|Array<string>|boolean)=} paramValue If `search` is a string or number, then `paramValue`
    * will override only a single search property.
    *
    * If `paramValue` is an array, it will override the property of the `search` component of
@@ -9589,7 +9596,8 @@ LocationHashbangInHtml5Url.prototype =
       case 0:
         return this.$$search;
       case 1:
-        if (isString(search)) {
+        if (isString(search) || isNumber(search)) {
+          search = search.toString();
           this.$$search = parseKeyValue(search);
         } else if (isObject(search)) {
           // remove object undefined or null properties
@@ -9626,10 +9634,12 @@ LocationHashbangInHtml5Url.prototype =
    *
    * Change hash fragment when called with parameter and return `$location`.
    *
-   * @param {string=} hash New hash fragment
+   * @param {(string|number)=} hash New hash fragment
    * @return {string} hash
    */
-  hash: locationGetterSetter('$$hash', identity),
+  hash: locationGetterSetter('$$hash', function(hash) {
+    return hash ? hash.toString() : '';
+  }),
 
   /**
    * @ngdoc method
@@ -10824,7 +10834,7 @@ Parser.prototype = {
       var context = contextGetter ? contextGetter(scope, locals) : scope;
 
       for (var i = 0; i < argsFn.length; i++) {
-        args.push(argsFn[i](scope, locals));
+        args.push(ensureSafeObject(argsFn[i](scope, locals), parser.text));
       }
       var fnPtr = fn(scope, locals, context) || noop;
 
@@ -10912,13 +10922,15 @@ Parser.prototype = {
 //////////////////////////////////////////////////
 
 function setter(obj, path, setValue, fullExp, options) {
+  ensureSafeObject(obj, fullExp);
+
   //needed?
   options = options || {};
 
   var element = path.split('.'), key;
   for (var i = 0; element.length > 1; i++) {
     key = ensureSafeMemberName(element.shift(), fullExp);
-    var propertyObj = obj[key];
+    var propertyObj = ensureSafeObject(obj[key], fullExp);
     if (!propertyObj) {
       propertyObj = {};
       obj[key] = propertyObj;
@@ -10938,7 +10950,6 @@ function setter(obj, path, setValue, fullExp, options) {
     }
   }
   key = ensureSafeMemberName(element.shift(), fullExp);
-  ensureSafeObject(obj, fullExp);
   ensureSafeObject(obj[key], fullExp);
   obj[key] = setValue;
   return setValue;
@@ -12002,10 +12013,26 @@ function $RootScopeProvider(){
     /**
      * @ngdoc property
      * @name $rootScope.Scope#$id
-     * @returns {number} Unique scope ID (monotonically increasing alphanumeric sequence) useful for
-     *   debugging.
+     *
+     * @description
+     * Unique scope ID (monotonically increasing) useful for debugging.
      */
 
+     /**
+      * @ngdoc property
+      * @name $rootScope.Scope#$parent
+      *
+      * @description
+      * Reference to the parent scope.
+      */
+
+      /**
+       * @ngdoc property
+       * @name $rootScope.Scope#$root
+       *
+       * @description
+       * Reference to the root scope.
+       */
 
     Scope.prototype = {
       constructor: Scope,
@@ -12017,9 +12044,8 @@ function $RootScopeProvider(){
        * @description
        * Creates a new child {@link ng.$rootScope.Scope scope}.
        *
-       * The parent scope will propagate the {@link ng.$rootScope.Scope#$digest $digest()} and
-       * {@link ng.$rootScope.Scope#$digest $digest()} events. The scope can be removed from the
-       * scope hierarchy using {@link ng.$rootScope.Scope#$destroy $destroy()}.
+       * The parent scope will propagate the {@link ng.$rootScope.Scope#$digest $digest()} event.
+       * The scope can be removed from the scope hierarchy using {@link ng.$rootScope.Scope#$destroy $destroy()}.
        *
        * {@link ng.$rootScope.Scope#$destroy $destroy()} must be called on a scope when it is
        * desired for the scope and its child scopes to be permanently detached from the parent and
@@ -12472,6 +12498,8 @@ function $RootScopeProvider(){
             logIdx, logMsg, asyncTask;
 
         beginPhase('$digest');
+        // Check for changes to browser url that happened in sync before the call to $digest
+        $browser.$$checkUrlChange();
 
         lastDirtyWatch = null;
 
@@ -14525,16 +14553,6 @@ function $WindowProvider(){
  * For more information about how angular filters work, and how to create your own filters, see
  * {@link guide/filter Filters} in the Angular Developer Guide.
  */
-/**
- * @ngdoc method
- * @name $filterProvider#register
- * @description
- * Register filter factory function.
- *
- * @param {String} name Name of the filter.
- * @param {Function} fn The filter factory function which is injectable.
- */
-
 
 /**
  * @ngdoc service
@@ -14573,7 +14591,7 @@ function $FilterProvider($provide) {
 
   /**
    * @ngdoc method
-   * @name $controllerProvider#register
+   * @name $filterProvider#register
    * @param {string|Object} name Name of the filter function, or an object map of filters where
    *    the keys are the filter names and the values are the filter factories.
    * @returns {Object} Registered filter instance, or if a map of filters was provided then a map
@@ -14646,7 +14664,9 @@ function $FilterProvider($provide) {
  *     which have property `name` containing "M" and property `phone` containing "1". A special
  *     property name `$` can be used (as in `{$:"text"}`) to accept a match against any
  *     property of the object. That's equivalent to the simple substring match with a `string`
- *     as described above.
+ *     as described above. The predicate can be negated by prefixing the string with `!`.
+ *     For Example `{name: "!M"}` predicate will return an array of items which have property `name`
+ *     not containing "M".
  *
  *   - `function(value)`: A predicate function can be used to write arbitrary filters. The function is
  *     called for each element of `array`. The final result is an array of those elements that
@@ -14995,6 +15015,10 @@ function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
     number = +(Math.round(+(number.toString() + 'e' + fractionSize)).toString() + 'e' + -fractionSize);
 
+    if (number === 0) {
+      isNegative = false;
+    }
+
     var fraction = ('' + number).split(DECIMAL_SEP);
     var whole = fraction[0];
     fraction = fraction[1] || '';
@@ -15164,8 +15188,8 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
  *   * `'mediumTime'`: equivalent to `'h:mm:ss a'` for en_US locale (e.g. 12:05:08 pm)
  *   * `'shortTime'`: equivalent to `'h:mm a'` for en_US locale (e.g. 12:05 pm)
  *
- *   `format` string can contain literal values. These need to be quoted with single quotes (e.g.
- *   `"h 'in the morning'"`). In order to output single quote, use two single quotes in a sequence
+ *   `format` string can contain literal values. These need to be escaped by surrounding with single quotes (e.g.
+ *   `"h 'in the morning'"`). In order to output a single quote, escape it - i.e., two single quotes in a sequence
  *   (e.g. `"h 'o''clock'"`).
  *
  * @param {(Date|number|string)} date Date to format either as Date object, milliseconds (string or
@@ -15185,6 +15209,8 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
           <span>{{1288323623006 | date:'yyyy-MM-dd HH:mm:ss Z'}}</span><br>
        <span ng-non-bindable>{{1288323623006 | date:'MM/dd/yyyy @ h:mma'}}</span>:
           <span>{{'1288323623006' | date:'MM/dd/yyyy @ h:mma'}}</span><br>
+       <span ng-non-bindable>{{1288323623006 | date:"MM/dd/yyyy 'at' h:mma"}}</span>:
+          <span>{{'1288323623006' | date:"MM/dd/yyyy 'at' h:mma"}}</span><br>
      </file>
      <file name="protractor.js" type="protractor">
        it('should format date', function() {
@@ -15194,6 +15220,8 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZE']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+
             toMatch(/2010\-10\-2\d \d{2}:\d{2}:\d{2} (\-|\+)?\d{4}/);
          expect(element(by.binding("'1288323623006' | date:'MM/dd/yyyy @ h:mma'")).getText()).
             toMatch(/10\/2\d\/2010 @ \d{1,2}:\d{2}(AM|PM)/);
+         expect(element(by.binding("'1288323623006' | date:\"MM/dd/yyyy 'at' h:mma\"")).getText()).
+            toMatch(/10\/2\d\/2010 at \d{1,2}:\d{2}(AM|PM)/);
        });
      </file>
    </example>
@@ -15555,7 +15583,7 @@ function limitToFilter(){
 orderByFilter.$inject = ['$parse'];
 function orderByFilter($parse){
   return function(array, sortPredicate, reverseOrder) {
-    if (!isArray(array)) return array;
+    if (!(isArrayLike(array))) return array;
     if (!sortPredicate) return array;
     sortPredicate = isArray(sortPredicate) ? sortPredicate: [sortPredicate];
     sortPredicate = map(sortPredicate, function(predicate){
@@ -16142,8 +16170,9 @@ function FormController(element, attrs, $scope, $animate) {
   // convenience method for easy toggling of classes
   function toggleValidCss(isValid, validationErrorKey) {
     validationErrorKey = validationErrorKey ? '-' + snake_case(validationErrorKey, '-') : '';
-    $animate.removeClass(element, (isValid ? INVALID_CLASS : VALID_CLASS) + validationErrorKey);
-    $animate.addClass(element, (isValid ? VALID_CLASS : INVALID_CLASS) + validationErrorKey);
+    $animate.setClass(element,
+      (isValid ? VALID_CLASS : INVALID_CLASS) + validationErrorKey,
+      (isValid ? INVALID_CLASS : VALID_CLASS) + validationErrorKey);
   }
 
   /**
@@ -16358,8 +16387,6 @@ function FormController(element, attrs, $scope, $animate) {
  * hitting enter in any of the input fields will trigger the click handler on the *first* button or
  * input[type=submit] (`ngClick`) *and* a submit handler on the enclosing form (`ngSubmit`)
  *
- * @param {string=} name Name of the form. If specified, the form controller will be published into
- *                       related scope, under this name.
  *
  * ## Animation Hooks
  *
@@ -16437,6 +16464,8 @@ function FormController(element, attrs, $scope, $animate) {
       </file>
     </example>
  *
+ * @param {string=} name Name of the form. If specified, the form controller will be published into
+ *                       related scope, under this name.
  */
 var formDirectiveFactory = function(isNgForm) {
   return ['$timeout', function($timeout) {
@@ -17020,7 +17049,7 @@ function textInputType(scope, element, attr, ctrl, $sniffer, $browser) {
     // a row.
     var revalidate = validity && ctrl.$$hasNativeValidators;
     if (ctrl.$viewValue !== value || (value === '' && revalidate)) {
-      if (scope.$$phase) {
+      if (scope.$root.$$phase) {
         ctrl.$setViewValue(value);
       } else {
         scope.$apply(function() {
@@ -19062,7 +19091,9 @@ var ngControllerDirective = [function() {
       <button ng-click="count = count + 1" ng-init="count=0">
         Increment
       </button>
-      count: {{count}}
+      <span>
+        count: {{count}}
+      <span>
      </file>
      <file name="protractor.js" type="protractor">
        it('should check ng-click', function() {
@@ -19080,19 +19111,33 @@ var ngControllerDirective = [function() {
  * Events that are handled via these handler are always configured not to propagate further.
  */
 var ngEventDirectives = {};
+
+// For events that might fire synchronously during DOM manipulation
+// we need to execute their event handlers asynchronously using $evalAsync,
+// so that they are not executed in an inconsistent state.
+var forceAsyncEvents = {
+  'blur': true,
+  'focus': true
+};
 forEach(
   'click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste'.split(' '),
   function(name) {
     var directiveName = directiveNormalize('ng-' + name);
-    ngEventDirectives[directiveName] = ['$parse', function($parse) {
+    ngEventDirectives[directiveName] = ['$parse', '$rootScope', function($parse, $rootScope) {
       return {
         compile: function($element, attr) {
           var fn = $parse(attr[directiveName]);
           return function ngEventHandler(scope, element) {
-            element.on(lowercase(name), function(event) {
-              scope.$apply(function() {
+            var eventName = lowercase(name);
+            element.on(eventName, function(event) {
+              var callback = function() {
                 fn(scope, {$event:event});
-              });
+              };
+              if (forceAsyncEvents[eventName] && $rootScope.$$phase) {
+                scope.$evalAsync(callback);
+              } else {
+                scope.$apply(callback);
+              }
             });
           };
         }
@@ -19409,6 +19454,10 @@ forEach(
  * @description
  * Specify custom behavior on focus event.
  *
+ * Note: As the `focus` event is executed synchronously when calling `input.focus()`
+ * AngularJS executes the expression using `scope.$evalAsync` if the event is fired
+ * during an `$apply` to ensure a consistent state.
+ *
  * @element window, input, select, textarea, a
  * @priority 0
  * @param {expression} ngFocus {@link guide/expression Expression} to evaluate upon
@@ -19424,6 +19473,14 @@ forEach(
  *
  * @description
  * Specify custom behavior on blur event.
+ *
+ * A [blur event](https://developer.mozilla.org/en-US/docs/Web/Events/blur) fires when
+ * an element has lost focus.
+ *
+ * Note: As the `blur` event is executed synchronously also during DOM manipulations
+ * (e.g. removing a focussed input),
+ * AngularJS executes the expression using `scope.$evalAsync` if the event is fired
+ * during an `$apply` to ensure a consistent state.
  *
  * @element window, input, select, textarea, a
  * @priority 0
@@ -20505,8 +20562,9 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
                if (block && block.scope) lastBlockMap[block.id] = block;
              });
              // This is a duplicate and we need to throw an error
-             throw ngRepeatMinErr('dupes', "Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique keys. Repeater: {0}, Duplicate key: {1}",
-                                                                                                                                                    expression,       trackById);
+             throw ngRepeatMinErr('dupes',
+                  "Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique keys. Repeater: {0}, Duplicate key: {1}, Duplicate value: {2}",
+                  expression, trackById, toJson(value));
            } else {
              // new never before seen block
              nextBlockOrder[index] = { id: trackById };
