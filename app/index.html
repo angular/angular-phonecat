@@ -1,21 +1,38 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
-<head>
-  <meta charset="utf-8">
-  <title>Google Phone Gallery</title>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="css/app.css">
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="js/controllers.js"></script>
-</head>
-<body ng-controller="PhoneListCtrl">
+<html lang="en" ng-app="phonecatApp" ng-controller="PhoneListCtrl">
 
-  <ul>
-    <li ng-repeat="phone in phones">
-      {{phone.name}}
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
+<head>
+    <meta charset="utf-8">
+    <title ng-bind-template="Google Phone Gallery: {{query}}">Google Phone Gallery</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <!-- Sidebar Content -->
+                Search:<input ng-model="query">
+                Sort by: 
+                <select ng-model="orderProp">
+                  <option value="name">Alphabetical</option>
+                  <option value="age">Newest</option>  
+                </select>
+            </div>
+            <div class="col-md-10">
+                <ul class="phones">
+                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                        {{phone.name}}
+                        <p>{{phone.snippet}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>
