@@ -7,31 +7,14 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                <!-- Sidebar Content -->
-                Search:<input ng-model="query">
-                Sort by: 
-                <select ng-model="orderProp">
-                  <option value="name">Alphabetical</option>
-                  <option value="age">Newest</option>  
-                </select>
-            </div>
-            <div class="col-md-10">
-                <ul class="phones">
-                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-                        {{phone.name}}
-                        <p>{{phone.snippet}}</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+<div ng-view></div>
 
 </body>
 
