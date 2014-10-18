@@ -109,11 +109,11 @@ To see the changes which between any two lessons use the git diff command.
     template of the current route.
 
 - Create phone list route:
-  - Map `/phones` route to `PhoneListCtrl` and `partails/phones-list.html`.
+  - Map `/phones` route to `PhoneListCtrl` and `partials/phones-list.html`.
   - Preserve existing `PhoneListCtrl` controller.
   - Move existing html from `index.html` to `partials/phone-list.html`.
 - Create phone details route:
-  - Map `/phones/<phone-id>` route to `PhoneDetailCtrl` and `partails/phones-detail.html`.
+  - Map `/phones/<phone-id>` route to `PhoneDetailCtrl` and `partials/phones-detail.html`.
   - Create empty placeholder `PhoneDetailsCtrl` controller.
 
 
