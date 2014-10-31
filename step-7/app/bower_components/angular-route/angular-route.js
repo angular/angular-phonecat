@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0
+ * @license AngularJS v1.3.1
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -39,7 +39,7 @@ var ngRouteModule = angular.module('ngRoute', ['ng']).
  * ## Dependencies
  * Requires the {@link ngRoute `ngRoute`} module to be installed.
  */
-function $RouteProvider(){
+function $RouteProvider() {
   function inherit(parent, extra) {
     return angular.extend(new (angular.extend(function() {}, {prototype:parent}))(), extra);
   }
@@ -188,7 +188,7 @@ function $RouteProvider(){
 
     path = path
       .replace(/([().])/g, '\\$1')
-      .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option){
+      .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option) {
         var optional = option === '?' ? option : null;
         var star = option === '*' ? option : null;
         keys.push({ name: key, optional: !!optional });
@@ -870,7 +870,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  * Emitted every time the ngView content is reloaded.
  */
 ngViewFactory.$inject = ['$route', '$anchorScroll', '$animate'];
-function ngViewFactory(   $route,   $anchorScroll,   $animate) {
+function ngViewFactory($route, $anchorScroll, $animate) {
   return {
     restrict: 'ECA',
     terminal: true,
@@ -887,16 +887,16 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
         update();
 
         function cleanupLastView() {
-          if(previousLeaveAnimation) {
+          if (previousLeaveAnimation) {
             $animate.cancel(previousLeaveAnimation);
             previousLeaveAnimation = null;
           }
 
-          if(currentScope) {
+          if (currentScope) {
             currentScope.$destroy();
             currentScope = null;
           }
-          if(currentElement) {
+          if (currentElement) {
             previousLeaveAnimation = $animate.leave(currentElement);
             previousLeaveAnimation.then(function() {
               previousLeaveAnimation = null;
@@ -920,7 +920,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
             // function is called before linking the content, which would apply child
             // directives to non existing elements.
             var clone = $transclude(newScope, function(clone) {
-              $animate.enter(clone, null, currentElement || $element).then(function onNgViewEnter () {
+              $animate.enter(clone, null, currentElement || $element).then(function onNgViewEnter() {
                 if (angular.isDefined(autoScrollExp)
                   && (!autoScrollExp || scope.$eval(autoScrollExp))) {
                   $anchorScroll();
