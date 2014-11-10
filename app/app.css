@@ -51,6 +51,7 @@ h1 {
 .phone-thumbs li {
   background-color: white;
   border: 1px solid black;
+  cursor: pointer;
   display: inline-block;
   margin: 1em;
 }
