@@ -14,20 +14,20 @@ The full tutorial can be found at http://docs.angularjs.org/tutorial.
 
 ### Git
 
-- A good place to learn about setting up git is [here][git-github]
-- Git [home][git-home] (download, documentation)
+- A good place to learn about setting up git is [here][git-github].
+- Git [home][git-home] (download, documentation).
 
 ### Node.js and Tools
 
 - Get [Node.js][node-download].
-- Install the tool dependencies (`npm install`)
+- Install the tool dependencies (`npm install`).
 
 
 ## Workings of the application
 
 - The application filesystem layout structure is based on the [angular-seed] project.
 - There is no dynamic backend (no application server) for this application. Instead we fake the
-  an application server by fetching static json files.
+  application server by fetching static json files.
 - Read the Development section at the end to familiarize yourself with running and developing
   an angular application.
 
@@ -41,8 +41,8 @@ To see the changes which between any two lessons use the git diff command.
 
 ### step-0
 
-- Add ngApp directive to bootstrap the app
-- Add simple template with an expression
+- Add ngApp directive to bootstrap the app.
+- Add simple template with an expression.
 
 
 ### step-1
@@ -54,12 +54,12 @@ To see the changes which between any two lessons use the git diff command.
 ### step-2
 
 - Convert the static html list into dynamic one by:
-  - creating `PhoneListCtrl` controller for the application
+  - creating `PhoneListCtrl` controller for the application.
   - extracting the data from HTML, moving it into the controller as an in-memory dataset.
   - converting the static HTML document into an Angular template with the use of the `ngRepeat`
     directive which iterates over the dataset of phones.
     `ngRepeat` clones its contents for each instance in the dataset and renders it into the view.
-- Add a simple unit test to show off how to write tests and run them with Karma
+- Add a simple unit test to show off how to write tests and run them with Karma.
 
 
 ### step-3
