@@ -9,7 +9,7 @@
     "karma": "^0.12.16",
     "karma-chrome-launcher": "^0.1.4",
     "karma-jasmine": "^0.1.5",
-    "protractor": "~1.0.0",
+    "protractor": "*",
     "http-server": "^0.6.1",
     "tmp": "0.0.23",
     "bower": "^1.3.1",
