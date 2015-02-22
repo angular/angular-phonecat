@@ -18,5 +18,5 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Ph
 
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
-    }
+    };
   }]);
