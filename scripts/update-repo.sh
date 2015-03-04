@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ###
-# This scripts updates the local repo with the latest changes from github.
+# This script updates the local repo with the latest changes from Github.
 #
-# The master branch will be REPLACED with what's in github and all local changes
+# The master branch will be REPLACED with what's in Github and all local changes
 # will be LOST.
 ###
 
