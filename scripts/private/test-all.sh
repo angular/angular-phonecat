@@ -9,17 +9,6 @@ cleanUp () {
 
 trap cleanUp EXIT
 
-# Define reasonable set of browsers in case we are running manually from commandline
-if [[ -z "$BROWSERS" ]]
-then
-  BROWSERS="Chrome"
-fi
-
-if [[ -z "$BROWSERS_E2E" ]]
-then
-  BROWSERS_E2E="Chrome"
-fi
-
 ROOT_DIR=`dirname $0`/../..
 
 cd $ROOT_DIR
@@ -40,7 +29,7 @@ for i in {0..12}
 do
   git checkout -f step-$i
 
-  node_modules/karma/bin/karma start test/karma.conf.js --single-run --browsers=$BROWSERS
-  node_modules/.bin/protractor test/protractor-conf.js --browser=$BROWSERS_E2E
+  node_modules/karma/bin/karma start test/karma.conf.js --single-run
+  node_modules/.bin/protractor test/protractor-conf.js
 
 done
