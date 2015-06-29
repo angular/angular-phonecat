@@ -1,6 +1,6 @@
 {
   "name": "angular",
-  "version": "1.3.16",
+  "version": "1.4.1",
   "description": "HTML enhanced for web apps",
   "main": "index.js",
   "scripts": {
