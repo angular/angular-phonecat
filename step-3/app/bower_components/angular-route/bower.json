@@ -1,9 +1,9 @@
 {
   "name": "angular-route",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "main": "./angular-route.js",
   "ignore": [],
   "dependencies": {
-    "angular": "1.4.1"
+    "angular": "1.4.2"
   }
 }
