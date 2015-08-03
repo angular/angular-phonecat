@@ -94,6 +94,16 @@ ul.specs dt {
   font-weight: bold;
 }
 
+.searchcol {
+}
+
+@media screen and (min-width:1650px) {
+    .col-md-2.searchcol {
+        width: 200px;
+    }
+}
+
+}
 h1 {
   border-bottom: 1px solid gray;
 }
