@@ -247,6 +247,10 @@ Requires a webserver that serves the application. See Running the app during dev
 
 For more information on AngularJS please check out http://angularjs.org/
 
+## Chinese Community
+
+primer tutorial [AngularJS中文社区](http://angularjs.cn/tag/AngularJS)
+
 [7 Zip]: http://www.7-zip.org/
 [angular-seed]: https://github.com/angular/angular-seed
 [DI]: http://docs.angularjs.org/guide/di
