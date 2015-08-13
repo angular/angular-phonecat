@@ -1,6 +1,6 @@
 'use strict';
 
-/* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
+/* https://docs.angularjs.org/guide/e2e-testing */
 
 describe('PhoneCat App', function() {
 
