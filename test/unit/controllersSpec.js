@@ -66,7 +66,9 @@ describe('PhoneCat controllers', function() {
       expect(scope.phone).toEqualData({});
       $httpBackend.flush();
 
-      expect(scope.phone).toEqualData(xyzPhoneData());
+      var xyzPhoneInstance = xyzPhoneData();
+      expect(scope.phone).toEqual(xyzPhoneInstance);
+      expect(scope.mainImageUrl).toEqual(xyzPhoneInstance.images[0]);
     });
   });
 });
