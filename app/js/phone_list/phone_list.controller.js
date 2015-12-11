@@ -6,7 +6,6 @@ angular.module('phonecat.list')
 PhoneListCtrl.$inject = ['Phone'];
 
 function PhoneListCtrl(Phone) {
-  var vm = this;
-  vm.phones = Phone.query();
-  vm.orderProp = 'age';
+  this.phones = Phone.query();
+  this.orderProp = 'age';
 }

@@ -9,14 +9,10 @@ angular.module('phonecatApp', [
     function($routeProvider) {
       $routeProvider.
         when('/phones', {
-          templateUrl: 'js/phone_list/phone_list.html',
-          controller: 'PhoneListCtrl',
-          controllerAs: 'vm'
+          template: '<phone-list></phone-list>'
         }).
         when('/phones/:phoneId', {
-          templateUrl: 'js/phone_detail/phone_detail.html',
-          controller: 'PhoneDetailCtrl',
-          controllerAs: 'vm'
+          template: '<phone-detail></phone-detail>'
         }).
         otherwise({
           redirectTo: '/phones'

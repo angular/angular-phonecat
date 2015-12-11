@@ -1,18 +1,19 @@
 'use strict';
 
 angular.module('phonecat.detail')
-  .controller('PhoneDetailCtrl', PhonecatDetailCtrl);
+  .controller('PhoneDetailCtrl', PhoneDetailCtrl);
 
-PhonecatDetailCtrl.$inject = ['$routeParams', 'Phone'];
 
-function PhonecatDetailCtrl($routeParams, Phone) {
-  var vm = this;
+PhoneDetailCtrl.$inject = ['$routeParams', 'Phone'];
 
-  vm.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-    vm.mainImageUrl = phone.images[0];
+function PhoneDetailCtrl($routeParams, Phone) {
+  var phoneDetail = this;
+
+  phoneDetail.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+    phoneDetail.mainImageUrl = phone.images[0];
   });
 
-  vm.setImage = function(imageUrl) {
-    vm.mainImageUrl = imageUrl;
+  phoneDetail.setImage = function(imageUrl) {
+    phoneDetail.mainImageUrl = imageUrl;
   };
 }
