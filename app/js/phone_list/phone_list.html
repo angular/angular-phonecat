@@ -3,9 +3,9 @@
     <div class="col-md-2">
       <!--Sidebar content-->
 
-      Search: <input ng-model="query">
+      Search: <input ng-model="vm.query">
       Sort by:
-      <select ng-model="orderProp">
+      <select ng-model="vm.orderProp">
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select>
@@ -15,7 +15,7 @@
       <!--Body content-->
 
       <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
+        <li ng-repeat="phone in vm.phones | filter:vm.query | orderBy:vm.orderProp"
             class="thumbnail phone-listing">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>

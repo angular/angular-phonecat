@@ -21,8 +21,8 @@ describe('PhoneCat App', function() {
 
     it('should filter the phone list as a user types into the search box', function() {
 
-      var phoneList = element.all(by.repeater('phone in phones'));
-      var query = element(by.model('query'));
+      var phoneList = element.all(by.repeater('phone in vm.phones'));
+      var query = element(by.model('vm.query'));
 
       expect(phoneList.count()).toBe(20);
 
@@ -37,8 +37,8 @@ describe('PhoneCat App', function() {
 
     it('should be possible to control phone order via the drop down select box', function() {
 
-      var phoneNameColumn = element.all(by.repeater('phone in phones').column('phone.name'));
-      var query = element(by.model('query'));
+      var phoneNameColumn = element.all(by.repeater('phone in vm.phones').column('phone.name'));
+      var query = element(by.model('vm.query'));
 
       function getNames() {
         return phoneNameColumn.map(function(elm) {
@@ -53,7 +53,7 @@ describe('PhoneCat App', function() {
         "MOTOROLA XOOM\u2122"
       ]);
 
-      element(by.model('orderProp')).element(by.css('option[value="name"]')).click();
+      element(by.model('vm.orderProp')).element(by.css('option[value="name"]')).click();
 
       expect(getNames()).toEqual([
         "MOTOROLA XOOM\u2122",
@@ -63,7 +63,7 @@ describe('PhoneCat App', function() {
 
 
     it('should render phone specific links', function() {
-      var query = element(by.model('query'));
+      var query = element(by.model('vm.query'));
       query.sendKeys('nexus');
       element.all(by.css('.phones li a')).first().click();
       browser.getLocationAbsUrl().then(function(url) {
