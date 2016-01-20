@@ -7,9 +7,11 @@
   "license": "MIT",
   "dependencies": {
     "angular": "1.7.x",
+    "angular-animate": "1.7.x",
     "angular-resource": "1.7.x",
     "angular-route": "1.7.x",
-    "bootstrap": "3.3.x"
+    "bootstrap": "3.3.x",
+    "jquery": "3.3.x"
   },
   "devDependencies": {
     "angular-mocks": "1.7.x",
