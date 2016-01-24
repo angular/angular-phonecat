@@ -1,9 +1,9 @@
 'use strict';
 
-describe('service', function() {
+describe('Phone', function() {
 
   // load modules
-  beforeEach(module('phonecatApp'));
+  beforeEach(module('phonecat.core'));
 
   // Test service availability
   it('check the existence of Phone factory', inject(function(Phone) {

@@ -4,10 +4,9 @@
 
 var phonecatApp = angular.module('phonecatApp', [
   'ngRoute',
-  'phonecatAnimations',
-  'phonecatComponents',
-  'phonecatFilters',
-  'phonecatServices'
+  'phonecat.core',
+  'phonecat.phoneList',
+  'phonecat.phoneDetail'
 ]);
 
 phonecatApp.config(['$routeProvider',
