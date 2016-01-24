@@ -33,11 +33,17 @@ describe('PhoneCat controllers', function() {
 
 
   describe('PhoneDetailCtrl', function(){
-    var $httpBackend, ctrl;
+    var $httpBackend, ctrl,
+        xyzPhoneData = function() {
+          return {
+            name: 'phone xyz',
+                images: ['image/url1.png', 'image/url2.png']
+          }
+        };
 
     beforeEach(inject(function(_$httpBackend_, $routeParams, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('phones/xyz.json').respond({name:'phone xyz'});
+      $httpBackend.expectGET('phones/xyz.json').respond(xyzPhoneData());
 
       $routeParams.phoneId = 'xyz';
       ctrl = $controller('PhoneDetailCtrl');
@@ -48,7 +54,7 @@ describe('PhoneCat controllers', function() {
       expect(ctrl.phone).toBeUndefined();
       $httpBackend.flush();
 
-      expect(ctrl.phone).toEqual({name:'phone xyz'});
+      expect(ctrl.phone).toEqual(xyzPhoneData());
     });
   });
 });

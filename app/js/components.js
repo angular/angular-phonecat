@@ -26,5 +26,10 @@ phonecatComponents.component('phoneDetail', {
     var ctrl = this;
     $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
       ctrl.phone = data;
+      ctrl.mainImageUrl = data.images[0];
     });
+
+    ctrl.setImage = function(imageUrl) {
+      ctrl.mainImageUrl = imageUrl;
+    };
   }]);
