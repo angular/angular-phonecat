@@ -4,17 +4,24 @@
 describe('PhoneCat controllers', function() {
 
   describe('PhoneListCtrl', function(){
-    var ctrl;
+    var ctrl, $httpBackend;
 
     beforeEach(module('phonecatApp'));
+    beforeEach(inject(function(_$httpBackend_, $controller) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('phones/phones.json').
+          respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
 
-    beforeEach(inject(function($controller) {
       ctrl = $controller('PhoneListCtrl');
     }));
 
 
-    it('should create "phones" model with 3 phones', function() {
-      expect(ctrl.phones.length).toBe(3);
+    it('should create "phones" model with 2 phones fetched from xhr', function() {
+      expect(ctrl.phones).toBeUndefined();
+      $httpBackend.flush();
+
+      expect(ctrl.phones).toEqual([{name: 'Nexus S'},
+                                   {name: 'Motorola DROID'}]);
     });
 
 
