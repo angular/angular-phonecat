@@ -3,6 +3,10 @@
 /* jasmine specs for controllers go here */
 describe('PhoneCat controllers', function() {
 
+  beforeEach(function(){
+    jasmine.addCustomEqualityTester(angular.equals);
+  });
+
   beforeEach(module('phonecatApp'));
 
   describe('PhoneListCtrl', function(){
@@ -18,11 +22,11 @@ describe('PhoneCat controllers', function() {
 
 
     it('should create "phones" model with 2 phones fetched from xhr', function() {
-      expect(ctrl.phones).toBeUndefined();
+      expect(ctrl.phones).toEqual([]);
       $httpBackend.flush();
 
-      expect(ctrl.phones).toEqual([{name: 'Nexus S'},
-                                   {name: 'Motorola DROID'}]);
+      expect(ctrl.phones).toEqual(
+          [{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
     });
 
 
@@ -51,7 +55,7 @@ describe('PhoneCat controllers', function() {
 
 
     it('should fetch phone detail', function() {
-      expect(ctrl.phone).toBeUndefined();
+      expect(ctrl.phone).toEqual({});
       $httpBackend.flush();
 
       expect(ctrl.phone).toEqual(xyzPhoneData());

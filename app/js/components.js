@@ -7,26 +7,20 @@ var phonecatComponents = angular.module('phonecatComponents', []);
 phonecatComponents.component('phoneList', {
   controller: 'PhoneListCtrl',
   templateUrl: 'partials/phone-list.html'
-}).controller('PhoneListCtrl', ['$http', function ($http) {
-  var ctrl = this;
-
-  $http.get('phones/phones.json').success(function(data) {
-    ctrl.phones = data;
-  });
-
-  ctrl.orderProp = 'age';
+}).controller('PhoneListCtrl', ['Phone', function (Phone) {
+  this.phones = Phone.query();
+  this.orderProp = 'age';
 }]);
 
 
 phonecatComponents.component('phoneDetail', {
   controller: 'PhoneDetailCtrl',
   templateUrl: 'partials/phone-detail.html'
-}).controller('PhoneDetailCtrl', ['$routeParams', '$http',
-  function($routeParams, $http) {
+}).controller('PhoneDetailCtrl', ['$routeParams', 'Phone',
+  function($routeParams, Phone) {
     var ctrl = this;
-    $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
-      ctrl.phone = data;
-      ctrl.mainImageUrl = data.images[0];
+    ctrl.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+      ctrl.mainImageUrl = phone.images[0];
     });
 
     ctrl.setImage = function(imageUrl) {
