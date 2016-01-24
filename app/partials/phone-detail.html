@@ -48,9 +48,9 @@
       <dt>Bluetooth</dt>
       <dd>{{$ctrl.phone.connectivity.bluetooth}}</dd>
       <dt>Infrared</dt>
-      <dd>{{$ctrl.phone.connectivity.infrared}}</dd>
+      <dd>{{$ctrl.phone.connectivity.infrared | checkmark}}</dd>
       <dt>GPS</dt>
-      <dd>{{$ctrl.phone.connectivity.gps}}</dd>
+      <dd>{{$ctrl.phone.connectivity.gps | checkmark}}</dd>
     </dl>
   </li>
   <li>
@@ -79,7 +79,7 @@
       <dt>Screen resolution</dt>
       <dd>{{$ctrl.phone.display.screenResolution}}</dd>
       <dt>Touch screen</dt>
-      <dd>{{$ctrl.phone.display.touchScreen}}</dd>
+      <dd>{{$ctrl.phone.display.touchScreen | checkmark}}</dd>
     </dl>
   </li>
   <li>
@@ -92,9 +92,9 @@
       <dt>Audio / headphone jack</dt>
       <dd>{{$ctrl.phone.hardware.audioJack}}</dd>
       <dt>FM Radio</dt>
-      <dd>{{$ctrl.phone.hardware.fmRadio}}</dd>
+      <dd>{{$ctrl.phone.hardware.fmRadio | checkmark}}</dd>
       <dt>Accelerometer</dt>
-      <dd>{{$ctrl.phone.hardware.accelerometer}}</dd>
+      <dd>{{$ctrl.phone.hardware.accelerometer | checkmark}}</dd>
     </dl>
   </li>
   <li>
