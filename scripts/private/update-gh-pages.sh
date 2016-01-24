@@ -39,7 +39,7 @@ rm -rf $SNAP_DIR
 mkdir $SNAP_DIR
 
 # Iterate through each step, checking it out and copying it into the temporary snapshot directory
-for i in {0..12}
+for i in {0..13}
 do
   mkdir $SNAP_DIR/step-$i
   git checkout -f step-$i

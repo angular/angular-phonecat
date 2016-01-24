@@ -157,6 +157,14 @@ large version of the thumbnail image.
   - Animate changes to the phone list, adding, removing and reordering phones.
   - Animate changes to the main phone image in the detail view.
 
+### step-13
+
+- Organize the code to comply with the [Angular Style Guide](https://github.com/johnpapa/angular-styleguide):
+  - Use modules by feature structure.
+  - Split files so that there is one application component per file.
+  - Use `feature.type.js` file naming scheme.
+
+
 
 ## Development with angular-phonecat
 
