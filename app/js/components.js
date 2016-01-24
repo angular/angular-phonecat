@@ -21,7 +21,10 @@ phonecatComponents.component('phoneList', {
 phonecatComponents.component('phoneDetail', {
   controller: 'PhoneDetailCtrl',
   templateUrl: 'partials/phone-detail.html'
-}).controller('PhoneDetailCtrl', ['$routeParams',
-  function($routeParams) {
-    this.phoneId = $routeParams.phoneId;
+}).controller('PhoneDetailCtrl', ['$routeParams', '$http',
+  function($routeParams, $http) {
+    var ctrl = this;
+    $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
+      ctrl.phone = data;
+    });
   }]);

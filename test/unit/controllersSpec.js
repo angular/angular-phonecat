@@ -3,10 +3,11 @@
 /* jasmine specs for controllers go here */
 describe('PhoneCat controllers', function() {
 
+  beforeEach(module('phonecatApp'));
+
   describe('PhoneListCtrl', function(){
     var ctrl, $httpBackend;
 
-    beforeEach(module('phonecatApp'));
     beforeEach(inject(function(_$httpBackend_, $controller) {
       $httpBackend = _$httpBackend_;
       $httpBackend.expectGET('phones/phones.json').
@@ -32,5 +33,22 @@ describe('PhoneCat controllers', function() {
 
 
   describe('PhoneDetailCtrl', function(){
+    var $httpBackend, ctrl;
+
+    beforeEach(inject(function(_$httpBackend_, $routeParams, $controller) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('phones/xyz.json').respond({name:'phone xyz'});
+
+      $routeParams.phoneId = 'xyz';
+      ctrl = $controller('PhoneDetailCtrl');
+    }));
+
+
+    it('should fetch phone detail', function() {
+      expect(ctrl.phone).toBeUndefined();
+      $httpBackend.flush();
+
+      expect(ctrl.phone).toEqual({name:'phone xyz'});
+    });
   });
 });
