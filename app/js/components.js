@@ -2,9 +2,9 @@
 
 /* Components */
 
-var phonecatApp = angular.module('phonecatApp', []);
+var phonecatComponents = angular.module('phonecatComponents', []);
 
-phonecatApp.component('phoneList', {
+phonecatComponents.component('phoneList', {
   controller: 'PhoneListCtrl',
   templateUrl: 'partials/phone-list.html'
 }).controller('PhoneListCtrl', ['$http', function ($http) {
@@ -16,3 +16,12 @@ phonecatApp.component('phoneList', {
 
   ctrl.orderProp = 'age';
 }]);
+
+
+phonecatComponents.component('phoneDetail', {
+  controller: 'PhoneDetailCtrl',
+  templateUrl: 'partials/phone-detail.html'
+}).controller('PhoneDetailCtrl', ['$routeParams',
+  function($routeParams) {
+    this.phoneId = $routeParams.phoneId;
+  }]);
