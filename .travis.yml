@@ -1,13 +1,21 @@
 language: node_js
 node_js:
   - 0.10
+services:
+  - docker
 
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
 before_script:
+  - docker build -t tktk8924/angular-phonecat -f Dockerfile.pro .
+  - docker run -d -p 127.0.0.1:80:80 --name angular-phonecat tktk8924/angular-phonecat
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - npm install
   - npm run update-webdriver
+  - npm start > /dev/null &
+  - sleep 3
 
 script:
-  - scripts/private/test-all.sh
+  - node_modules/.bin/karma start karma.conf.js --single-run
+  - node_modules/.bin/protractor protractor.conf.js
