@@ -18,4 +18,4 @@ before_script:
 
 script:
   - node_modules/.bin/karma start test/karma.conf.js --single-run
-  - node_modules/.bin/protractor test/protractor.conf.js
+  - node_modules/.bin/protractor test/protractor-conf.js
