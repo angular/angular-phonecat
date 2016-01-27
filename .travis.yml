@@ -23,4 +23,4 @@ script:
   - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
 
 after_success:
-  - echo $TRAVIS_TEST_RESULT
+  - if [ "$TRAVIS_TEST_RESULT" -eq 0 ]; then curl -s -X POST $TUTUM_WEB_REDEPLOY_TRIGGER_URL; fi
