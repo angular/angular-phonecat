@@ -23,3 +23,6 @@ script:
 after_success:
   - docker login -u $TUTUM_USERNAME -p $TUTUM_PASSWORD -e $TUTUM_EMAIL tutum.co
   - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
+
+notifications:
+  slack: 'tktk8924:$SLACK_TOKEN'
