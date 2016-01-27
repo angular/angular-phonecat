@@ -7,7 +7,7 @@ services:
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
 before_script:
-  - docker build -t tktk8924/angular-phonecat -f Dockerfile.pro .
+  - docker build -t tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH -f Dockerfile.pro .
   - docker run -d -p 127.0.0.1:80:80 --name angular-phonecat tktk8924/angular-phonecat
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
@@ -19,3 +19,7 @@ before_script:
 script:
   - node_modules/.bin/karma start test/karma.conf.js --single-run
   - node_modules/.bin/protractor test/protractor-conf.js
+
+after_success:
+  - docker login tutum.co -u $TUTUM_USERNAME -p $TUTUM_PASSWORD
+  - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
