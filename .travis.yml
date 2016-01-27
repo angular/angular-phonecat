@@ -19,8 +19,7 @@ before_script:
 script:
   - node_modules/.bin/karma start test/karma.conf.js --single-run
   - node_modules/.bin/protractor test/protractor-conf.js
-  - docker login -u $TUTUM_USERNAME -p $TUTUM_PASSWORD -e $TUTUM_EMAIL tutum.co
-  - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
 
 after_success:
-  - curl -s -X POST $TUTUM_WEB_REDEPLOY_TRIGGER_URL
+  - docker login -u $TUTUM_USERNAME -p $TUTUM_PASSWORD -e $TUTUM_EMAIL tutum.co
+  - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
