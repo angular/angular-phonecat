@@ -25,4 +25,4 @@ after_success:
   - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
 
 notifications:
-  slack: '$SLACK_TEAM:$SLACK_TOKEN'
+  slack: "$SLACK_TEAM:$SLACK_TOKEN"
