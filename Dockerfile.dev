@@ -23,6 +23,7 @@ RUN chmod a+x /usr/bin/xvfb-daemon-run
 WORKDIR /app
 COPY ./ .
 
+RUN npm install -g nodemon
 RUN npm install
 RUN node_modules/.bin/bower --allow-root install
 
@@ -30,4 +31,4 @@ ENV DISPLAY :99
 
 EXPOSE 8000
 CMD /etc/init.d/xvfb start && \
-    npm start
+    nodemon -L
