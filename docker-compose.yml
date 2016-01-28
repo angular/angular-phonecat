@@ -1,6 +1,6 @@
 app:
   build: .
-  dockerfile: Dockerfile.dev
+  command: nodemon -L
   volumes:
     - .:/app
   ports:
