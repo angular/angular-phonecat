@@ -7,7 +7,7 @@ services:
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
 before_script:
-  - docker build -t tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH -f Dockerfile
+  - docker build -t tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH .
   - docker run -d -p 127.0.0.1:8000:8000 tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
