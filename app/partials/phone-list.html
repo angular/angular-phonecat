@@ -3,7 +3,7 @@
     <div class="col-md-2">
       <!--Sidebar content-->
 
-      Search: <input ng-model="query">
+      Search: <input ng-model="query" aria-label="Search">
       Sort by:
       <select ng-model="orderProp">
         <option value="name">Alphabetical</option>
@@ -14,7 +14,7 @@
     <div class="col-md-10">
       <!--Body content-->
 
-      <ul class="phones">
+      <ul result-list class="phones" id="phonesList" aria-live="polite" aria-relevant="{{relevant}}">
         <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
             class="thumbnail phone-listing">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"></a>
