@@ -8,19 +8,11 @@ var phonecatDirectives = angular.module('phonecatDirectives', []);
     return {
       restrict: 'A',
       link: function($scope, $element, $attrs) {
-        $scope.$watch('query.length', function(length){
+        var ariaStatus = document.querySelector('.aria-status');
+        $scope.$watch('filtered.length', function(length){
           if($scope.numItems !== undefined){
-            if(length < $scope.numItems){
-              // if we're removing items
-              console.log('removing items: '+length);
-              $scope.relevant = 'removals';
-            }
-            else if(length > $scope.numItems){
-              console.log('adding items: '+length);
-              $scope.relevant = 'additions';
-            }
+            ariaStatus.innerHTML = length + ' item(s) found';
           }
-          $scope.numItems = length;
         });
       }
     }

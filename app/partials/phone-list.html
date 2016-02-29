@@ -9,19 +9,23 @@
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select>
+      
+      <div class="aria-status sr-only" role="status" aria-live="assertive"></div>
 
     </div>
     <div class="col-md-10">
       <!--Body content-->
 
-      <ul result-list class="phones" id="phonesList" aria-live="polite" aria-relevant="{{relevant}}">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
+      <ul result-list class="phones" id="phonesList">
+        <li ng-repeat="phone in filtered = (phones | filter:query | orderBy:orderProp)"
             class="thumbnail phone-listing">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
           <p>{{phone.snippet}}</p>
         </li>
       </ul>
+      
+      
 
     </div>
   </div>
