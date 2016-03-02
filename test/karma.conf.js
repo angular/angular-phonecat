@@ -17,7 +17,6 @@ module.exports = function(config){
 
     frameworks: ['jasmine'],
 
-    // browsers : ['Chrome', 'Firefox'],
     browsers : ['Chrome', 'Firefox'],
 
     plugins : [
