@@ -7,8 +7,8 @@ services:
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
 before_script:
-  - docker build -t tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH .
-  - docker run -d -p 127.0.0.1:8000:8000 tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
+  - docker build -t $DOCKER_USERNAME/angular-phonecat:$TRAVIS_BRANCH .
+  - docker run -d -p 127.0.0.1:8000:8000 $DOCKER_USERNAME/angular-phonecat:$TRAVIS_BRANCH
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install
@@ -19,10 +19,5 @@ script:
   - node_modules/.bin/protractor test/protractor-conf.js
 
 after_success:
-  - docker login -u $TUTUM_USERNAME -p $TUTUM_PASSWORD -e $TUTUM_EMAIL tutum.co
-  - docker push tutum.co/tktk8924/angular-phonecat:$TRAVIS_BRANCH
-
-notifications:
-  slack:
-    rooms:
-      - secure: "mSd7aYHbbg0N2kPK0L0RGwUFDzeSM9+yIAAZ3HWGeNhLqi5/ee6wYFX8pl9od60QQ+xmg9S0xg3HjX4CQgHjwRJi4goiWR4Qbw9UzX/CQc6rVU4RbJd4+ycGcoFRlFP2U9nccw1Wbd2k41HwS3KyAfXLjvw3GK6vCATCcAN/WzAy7ZW28DmiePxfcBXNg1UFXN7UIB5DY6Yn1Etu+EOkhMOlo4YKJEygJaW1ZCPvw8uQZj46IXegm/c//NhEQwfjROYP9wa8ZGG6jXxmUDMQH5uyWrpqDyhfJLi3r5NJpNCNoz12TCwd7qmSTLC9+Mwz5/yKuk9jq7pVBNa4EVrnFhZVu1PAO+6KDK6J0xyxjvJkQLS1foAoZlr6FAvCneEghfPfDdlHxk+ly84NmZ86dLVC3x7e1Z8Bv5g8spvfnicHrjxW4cpX05v37rqBPtDW5ambJlB8wY3hRgbojC1ajwZtzsXXyjZpZ9NV7g3gFNLAzcDTXkUdPJYUNryArydmHmOmZRa+Eko1cRCluWkTLOXeUp1uDu5qiFV9lSpXV/Bm1wdnv6CeeybLMiJKUg79j3NOkJfqaSN5UWecA9nyMY08S53t8Vh9Oyi3/H83jYHU6LDGHasPG//flPNqhZdZqkHcBf85OzkUZTFXRDErRztZ6QC1ch9zCWVeF2voTUE="
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL
+  - docker push $DOCKER_USERNAME/angular-phonecat:$TRAVIS_BRANCH
