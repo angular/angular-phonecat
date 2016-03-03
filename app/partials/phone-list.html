@@ -3,14 +3,14 @@
     <div class="col-md-2">
       <!--Sidebar content-->
 
-      Search: <input ng-model="query" aria-label="Search">
-      Sort by:
-      <select ng-model="orderProp">
+      <label for="search">Search:</label> <input ng-model="query" aria-label="Search" id="search">
+      <label for="order">Sort by:</label>
+      <select id="order" ng-model="orderProp">
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select>
       
-      <div class="aria-status sr-only" role="status" aria-live="assertive"></div>
+      <div class="aria-status" role="status" aria-live="assertive"></div>
 
     </div>
     <div class="col-md-10">
