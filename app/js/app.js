@@ -4,9 +4,10 @@
 
 var phonecatApp = angular.module('phonecatApp', [
   'ngRoute',
+  'ngAria',
   'phonecatAnimations',
-
   'phonecatControllers',
+  'phonecatDirectives',
   'phonecatFilters',
   'phonecatServices'
 ]);

@@ -3,25 +3,28 @@
     <div class="col-md-2">
       <!--Sidebar content-->
 
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
+      <label for="search">Search:</label> <input ng-model="query" aria-label="Search" id="search">
+      <label for="order">Sort by:</label>
+      <select id="order" ng-model="orderProp">
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select>
+      
+      <div class="aria-status" role="status" aria-live="assertive"></div>
 
     </div>
     <div class="col-md-10">
       <!--Body content-->
 
-      <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
-            class="thumbnail phone-listing">
+      <ul result-list class="phones" id="phonesList">
+        <li ng-repeat="phone in filtered = (phones | filter:query | orderBy:orderProp)" class="thumbnail phone-listing">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
           <p>{{phone.snippet}}</p>
         </li>
       </ul>
+      
+      
 
     </div>
   </div>
