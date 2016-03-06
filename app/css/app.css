@@ -67,6 +67,10 @@ ul.phone-thumbs img {
   padding: 1em;
 }
 
+ul.phone-thumbs img:focus {
+  border:2px solid black;
+}
+
 ul.phone-thumbs img:hover {
   cursor: pointer;
 }
@@ -93,6 +97,8 @@ ul.specs > li > span{
 ul.specs dt {
   font-weight: bold;
 }
+
+ul.specs h2 { font-size:1.5em }
 
 h1 {
   border-bottom: 1px solid gray;
