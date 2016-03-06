@@ -17,8 +17,7 @@
       <!--Body content-->
 
       <ul result-list class="phones" id="phonesList">
-        <li ng-repeat="phone in filtered = (phones | filter:query | orderBy:orderProp)"
-            class="thumbnail phone-listing">
+        <li ng-repeat="phone in filtered = (phones | filter:query | orderBy:orderProp)" class="thumbnail phone-listing">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
           <p>{{phone.snippet}}</p>
