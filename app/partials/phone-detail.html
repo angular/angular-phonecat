@@ -9,22 +9,24 @@
 
 <p>{{phone.description}}</p>
 
+<p class="sr-only">Click on each image to see the enlarge version.</p>
+
 <ul class="phone-thumbs">
   <li ng-repeat="img in phone.images">
-    <img ng-src="{{img}}" ng-click="setImage(img)">
+    <img ng-src="{{img}}" ng-click="setImage(img)" alt="">
   </li>
 </ul>
 
 <ul class="specs">
   <li>
-    <span>Availability and Networks</span>
+    <h2>Availability and Networks</h2>
     <dl>
       <dt>Availability</dt>
       <dd ng-repeat="availability in phone.availability">{{availability}}</dd>
     </dl>
   </li>
   <li>
-    <span>Battery</span>
+    <h2>Battery</h2>
     <dl>
       <dt>Type</dt>
       <dd>{{phone.battery.type}}</dd>
@@ -35,7 +37,7 @@
     </dl>
   </li>
   <li>
-    <span>Storage and Memory</span>
+    <h2>Storage and Memory</h2>
     <dl>
       <dt>RAM</dt>
       <dd>{{phone.storage.ram}}</dd>
@@ -44,7 +46,7 @@
     </dl>
   </li>
   <li>
-    <span>Connectivity</span>
+    <h2>Connectivity</h2>
     <dl>
       <dt>Network Support</dt>
       <dd>{{phone.connectivity.cell}}</dd>
@@ -59,7 +61,7 @@
     </dl>
   </li>
   <li>
-    <span>Android</span>
+    <h2>Android</h2>
     <dl>
       <dt>OS Version</dt>
       <dd>{{phone.android.os}}</dd>
@@ -68,7 +70,7 @@
     </dl>
   </li>
   <li>
-    <span>Size and Weight</span>
+    <h2>Size and Weight</h2>
     <dl>
       <dt>Dimensions</dt>
       <dd ng-repeat="dim in phone.sizeAndWeight.dimensions">{{dim}}</dd>
@@ -77,7 +79,7 @@
     </dl>
   </li>
   <li>
-    <span>Display</span>
+    <h2>Display</h2>
     <dl>
       <dt>Screen size</dt>
       <dd>{{phone.display.screenSize}}</dd>
@@ -88,7 +90,7 @@
     </dl>
   </li>
   <li>
-    <span>Hardware</span>
+    <h2>Hardware</h2>
     <dl>
       <dt>CPU</dt>
       <dd>{{phone.hardware.cpu}}</dd>
@@ -103,7 +105,7 @@
     </dl>
   </li>
   <li>
-    <span>Camera</span>
+    <h2>Camera</h2>
     <dl>
       <dt>Primary</dt>
       <dd>{{phone.camera.primary}}</dd>
@@ -112,7 +114,7 @@
     </dl>
   </li>
   <li>
-    <span>Additional Features</span>
+    <h2>Additional Features</h2>
     <dd>{{phone.additionalFeatures}}</dd>
   </li>
 </ul>
