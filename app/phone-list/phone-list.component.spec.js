@@ -3,7 +3,7 @@
 describe('phoneList', function() {
 
   // Load the module that contains the `phoneList` component before each test
-  beforeEach(module('phonecatApp'));
+  beforeEach(module('phoneList'));
 
   // Test the controller
   describe('PhoneListController', function() {
