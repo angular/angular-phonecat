@@ -39,18 +39,13 @@ rm -rf $SNAP_DIR
 mkdir $SNAP_DIR
 
 # Iterate through each step, checking it out and copying it into the temporary snapshot directory
-for i in {0..12}
+for i in $(seq 0 14)
 do
   mkdir $SNAP_DIR/step-$i
   git checkout -f step-$i
 
   cp -r app $SNAP_DIR/step-$i/
-
-  # In gh-pages the step directories are one directory further down so we must modify the path
-  # to the bower_components in the index.html files.
-  node -e "require('shelljs/global'); sed('-i', /\"\\.\\.\\/bower_components/g, '\"../../bower_components', '$SNAP_DIR/step-$i/app/index.html');"
 done
-
 
 # Move the snapshot step folders into the gh-pages branch
 git checkout -f gh-pages
@@ -62,14 +57,9 @@ rm -rf $SNAP_DIR
 git add --all step-*
 git commit -m"chore(step): update live steps to new version of tutorial" || true
 
-# Commit any changes to the bower dependencies
-git add --all bower_components
-git commit -m"chore(bower_components): update bower dependencies" || true
-
-
-# Display an info message, including the last two commits
+# Display an info message, including the last commit
 echo gh-pages has been updated. See the log below.
-git log -2
+git log -1
 
 # Push changes to the gh-pages branch on GitHub
 git push origin gh-pages
