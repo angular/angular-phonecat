@@ -9,13 +9,25 @@
         <option value="name">Alphabetical</option>
         <option value="age">Newest</option>
       </select>
+      Carrier:
+       <select ng-model="carrier">
+         <option></option>
+         <option>AT&amp;T</option>
+         <option>Cellular South</option>
+         <option>Dell</option>
+         <option>Best Buy</option>
+         <option>Verizon</option>
+         <option>T-Mobile</option>
+         <option>US Cellular</option>
+         <option>Sprint</option>
+       </select>
 
     </div>
     <div class="col-md-10">
       <!--Body content-->
 
       <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp | filter:{carrier:carrier}"
             class="thumbnail phone-listing">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
