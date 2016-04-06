@@ -7,8 +7,10 @@ services:
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
 before_script:
-  - docker build -t $DOCKER_USERNAME/angular-phonecat:$TRAVIS_BRANCH .
-  - docker run -d -p 127.0.0.1:8000:8000 $DOCKER_USERNAME/angular-phonecat:$TRAVIS_BRANCH
+  - export PR=https://api.github.com/repos/$TRAVIS_REPO_SLUG/pulls/$TRAVIS_PULL_REQUEST
+  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo `curl -s $PR | jq -r .head.ref`; fi)
+  - docker build -t $DOCKER_USERNAME/angular-phonecat:$BRANCH .
+  - docker run -d -p 127.0.0.1:8000:8000 $DOCKER_USERNAME/angular-phonecat:$BRANCH
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install
@@ -20,7 +22,7 @@ script:
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL
-  - docker push $DOCKER_USERNAME/angular-phonecat:$TRAVIS_BRANCH
+  - docker push $DOCKER_USERNAME/angular-phonecat:$BRANCH
 
 notifications:
   slack:
