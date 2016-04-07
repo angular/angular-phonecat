@@ -32,7 +32,7 @@
     "tag": "2.1.4",
     "commit": "7751e69b615c6eca6f783a81e292a55725af6b85"
   },
-  "_source": "git://github.com/jquery/jquery-dist.git",
+  "_source": "https://github.com/jquery/jquery-dist.git",
   "_target": "~2.1.1",
   "_originalSource": "jquery"
 }
