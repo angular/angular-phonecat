@@ -1,0 +1,12 @@
+lb:
+  image: 'dockercloud/haproxy:latest'
+  links:
+    - web
+  ports:
+    - '80:80'
+  roles:
+    - global
+web:
+  image: 'tktk8924/angular-phonecat:agile-demo-master'
+  autoredeploy: true
+  target_num_containers: 2

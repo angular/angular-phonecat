@@ -1,0 +1,7 @@
+app:
+  build: .
+  command: nodemon -L
+  volumes:
+    - .:/app
+  ports:
+    - "8000:8000"

@@ -62,6 +62,17 @@ describe('PhoneCat App', function() {
     });
 
 
+    it('should filter the phone list via the drop down select box', function() {
+
+       var phoneList = element.all(by.repeater('phone in phones'));
+       expect(phoneList.count()).toBe(20);
+
+       element(by.model('carrier')).element(by.css('option:nth-child(2)')).click();
+
+       expect(phoneList.count()).toBe(2);
+     });
+
+
     it('should render phone specific links', function() {
       var query = element(by.model('query'));
       query.sendKeys('nexus');
