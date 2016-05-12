@@ -7,6 +7,6 @@ lb:
   roles:
     - global
 web:
-  image: 'tktk8924/angular-phonecat:cic-seminar-demo'
+  image: 'tktk8924/angular-phonecat:agile-demo-master'
   autoredeploy: true
   target_num_containers: 2
