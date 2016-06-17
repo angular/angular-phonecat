@@ -4,7 +4,8 @@
 # This script is useful only for committers to the upstream github repo.
 ######
 
-for tag in `git tag`; do
+# List tags starting with `step-` to avoid deleting tags for older branches (e.g. 1.4-step-*).
+for tag in `git tag --list step-*`; do
   git tag -d $tag
 done
 
