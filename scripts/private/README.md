@@ -27,6 +27,14 @@ gh-pages branch on GitHub.
 git push origin gh-pages
 ```
 
+### Auto-updating Demo Pages from CI
+
+There is a Jenkins job that runs periodically and executes `jenkins.sh`.
+
+- **jenkins.sh**: This script will set the Node.js version to 4.x (using `nvm`), will run all the
+  tests (using `test-all.sh`) and update the demo pages (using `update-gh-pages.sh`).
+  (You shouldn't need to run this script manually.)
+
 ## Pushing to GitHub
 
 Each step in the tutorial is one commit in the git repository. Each step is also identified by a git 
