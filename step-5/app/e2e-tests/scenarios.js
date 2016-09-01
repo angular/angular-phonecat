@@ -18,6 +18,10 @@ describe('PhoneCat Application', function() {
       query.clear();
       query.sendKeys('motorola');
       expect(phoneList.count()).toBe(2);
+	  
+	  query.clear();
+      query.sendKeys('tablet');
+      expect(phoneList.count()).toBe(2);
     });
 
   });
