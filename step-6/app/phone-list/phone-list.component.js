@@ -22,6 +22,6 @@ angular.
         }
       ];
 
-      this.orderProp = 'age';
+      
     }
   });
