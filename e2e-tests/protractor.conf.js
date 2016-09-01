@@ -8,7 +8,8 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'chrome'
+    chromeOnly:true
+	directConnect: true
   },
 
   baseUrl: 'http://localhost:8000/',

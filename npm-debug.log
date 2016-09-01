@@ -1,0 +1,44 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'protractor' ]
+2 info using npm@2.15.8
+3 info using node@v4.4.7
+4 verbose run-script [ 'preprotractor', 'protractor', 'postprotractor' ]
+5 info preprotractor angular-phonecat@0.0.0
+6 verbose unsafe-perm in lifecycle true
+7 info protractor angular-phonecat@0.0.0
+8 verbose unsafe-perm in lifecycle true
+9 info angular-phonecat@0.0.0 Failed to exec protractor script
+10 verbose stack Error: angular-phonecat@0.0.0 protractor: `protractor e2e-tests/protractor.conf.js`
+10 verbose stack Exit status 1
+10 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:217:16)
+10 verbose stack     at emitTwo (events.js:87:13)
+10 verbose stack     at EventEmitter.emit (events.js:172:7)
+10 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
+10 verbose stack     at emitTwo (events.js:87:13)
+10 verbose stack     at ChildProcess.emit (events.js:172:7)
+10 verbose stack     at maybeClose (internal/child_process.js:827:16)
+10 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+11 verbose pkgid angular-phonecat@0.0.0
+12 verbose cwd C:\angular-phonecat
+13 error Windows_NT 6.1.7601
+14 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "protractor"
+15 error node v4.4.7
+16 error npm  v2.15.8
+17 error code ELIFECYCLE
+18 error angular-phonecat@0.0.0 protractor: `protractor e2e-tests/protractor.conf.js`
+18 error Exit status 1
+19 error Failed at the angular-phonecat@0.0.0 protractor script 'protractor e2e-tests/protractor.conf.js'.
+19 error This is most likely a problem with the angular-phonecat package,
+19 error not with npm itself.
+19 error Tell the author that this fails on your system:
+19 error     protractor e2e-tests/protractor.conf.js
+19 error You can get information on how to open an issue for this project with:
+19 error     npm bugs angular-phonecat
+19 error Or if that isn't available, you can get their info via:
+19 error
+19 error     npm owner ls angular-phonecat
+19 error There is likely additional logging output above.
+20 verbose exit [ 1, true ]
