@@ -13,10 +13,9 @@
         <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query">
           <span>{{phone.name}}</span>
           <p>{{phone.snippet}}</p>
-		  <p>{{$ctrl.query}}</p>
-        </li>
+		  </li>
       </ul>
-
+	<p>{{$ctrl.query}}</p>
     </div>
   </div>
 </div>
