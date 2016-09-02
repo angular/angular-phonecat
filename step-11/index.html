@@ -9,6 +9,8 @@
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
+    <script src="core/core.module.js"></script>
+    <script src="core/checkmark/checkmark.filter.js"></script>
     <script src="phone-list/phone-list.module.js"></script>
     <script src="phone-list/phone-list.component.js"></script>
     <script src="phone-detail/phone-detail.module.js"></script>
@@ -17,11 +19,6 @@
   <body>
 
     <div ng-view></div>
-	<input ng-model="userInput" /> Uppercased: {{userInput | uppercase}}
-	<p>{{'lower cap string' | uppercase}}</p>
-	<p>{{{foo: 'bar', baz: 42} | json}}</p>
-	<p>{{1459461289000 | date}}</p>
-	<p>{{1459461289000 | date:'MM/dd/yyyy @ h:mma'}}</p>
 
   </body>
 </html>
