@@ -29,6 +29,11 @@ describe('PhoneCat Application', function() {
       query.sendKeys('motorola');
       expect(phoneList.count()).toBe(8);
     });
+	
+	it('should display 4 thumbnails', function(){
+      var imageList = element.all(by.repeater('img in $ctrl.phone.images'));
+      expect(imageList.count()).toBe(4);
+    });
 
     it('should be possible to control phone order via the drop-down menu', function() {
       var queryField = element(by.model('$ctrl.query'));
