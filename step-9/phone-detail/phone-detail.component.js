@@ -4,9 +4,7 @@
 angular.
   module('phoneDetail').
   component('phoneDetail', {
-	  when('/phones/:phoneId', {
-		template: '{{$ctrl.phoneId}} <phone-detail></phone-detail>'
-    //template: 'TBD: Detail view for <span>{{$ctrl.phoneId}}</span>',
+	 template: 'TBD: Detail view for <span>{{$ctrl.phoneId}}</span>',
     controller: ['$routeParams',
       function PhoneDetailController($routeParams) {
         this.phoneId = $routeParams.phoneId;
