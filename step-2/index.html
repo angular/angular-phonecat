@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Phone Gallery</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="PhoneListController">
+	<p>Total number of phones: {{phones.length}}</p>
+	<p>Hello, {{name}}!</p>
+    <ul>
+      <li ng-repeat="phone in phones">
+		<span>{{phone.name}}</span>
+        <p>{{phone.snippet}}</p>
+		
+      </li>
+    </ul>
+	<table>
+    <tr><th>Row number</th></tr>
+    <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i}}</td></tr>
+	</table>
+
+	<table>
+    <tr><th>Row number</th></tr>
+    <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i+1}}</td></tr>
+	</table>
+	<br>
+	
+<!--i used one more ng repeat for naming the columns --> 
+  <table>
+    <tr>
+        <th ng-repeat="i in [0,1,2,3,4,5,6,7]"> Col:{{i+1}}</th> 
+    </tr>
+    <tr ng-repeat="i in [0,1,2,3,4,5,6,7]">
+        <td ng-repeat="j in [0,1,2,3,4,5,6,7]">[{{i}},{{j}}]</td>
+    </tr>
+  </table>
+	
+  </body>
+</html>
