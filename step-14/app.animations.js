@@ -30,12 +30,12 @@ angular.
       if (className !== 'selected') return;
 
       element.css({
-        position: 'absolute',
+        position: '',
         top: 100,
         left: 0
       }).animate({
-        top: 100
-      }, 300, done);
+        top: 0
+      }, done);
 
       return function animateOutEnd(wasCanceled) {
         if (wasCanceled) element.stop();
