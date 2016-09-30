@@ -1,14 +1,14 @@
 describe('PhoneCat Application', function() {
   it('should redirect `index.html` to `index.html#!/phones', function() {
     cy
-      .visit("app/index.html")
+      .visit("/index.html")
       .hash().should("eq", "#!/phones")
   });
 
   describe('View: Phone list', function() {
     beforeEach(function() {
       cy
-        .visit('app/index.html#!/phones')
+        .visit('/index.html#!/phones')
         .ng("model", "$ctrl.query").as("q")
     });
 
@@ -59,7 +59,7 @@ describe('PhoneCat Application', function() {
 
   describe('View: Phone detail', function() {
     beforeEach(function() {
-      cy.visit('app/index.html#!/phones/nexus-s');
+      cy.visit('/index.html#!/phones/nexus-s');
     });
 
     it('should display `nexus-s` page', function() {
