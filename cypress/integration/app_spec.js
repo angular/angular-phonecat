@@ -3,14 +3,14 @@ describe('PhoneCat Application', function() {
     cy
       .visit("/index.html")
       .hash().should("eq", "#!/phones")
-  });
+  })
 
   describe('View: Phone list', function() {
     beforeEach(function() {
       cy
         .visit('/index.html#!/phones')
         .ng("model", "$ctrl.query").as("q")
-    });
+    })
 
     it('should filter the phone list as a user types into the search box', function() {
       cy
@@ -19,7 +19,7 @@ describe('PhoneCat Application', function() {
         .get("ul.phones li").should("have.length", 1)
         .get("@q").clear().type("motorola")
         .get("ul.phones li").should("have.length", 8)
-    });
+    })
 
     it('should be possible to control phone order via the drop-down menu', function() {
       function getNames($names) {
@@ -45,7 +45,7 @@ describe('PhoneCat Application', function() {
             "Motorola XOOM™ with Wi-Fi"
           ]
         })
-    });
+    })
 
     it('should render phone specific links', function() {
       cy
@@ -54,21 +54,21 @@ describe('PhoneCat Application', function() {
           .should("have.length", 1) // block until the animation is complete
           .find("a").first().click()
         .hash().should("match", /phones\/nexus-s/)
-    });
-  });
+    })
+  })
 
   describe('View: Phone detail', function() {
     beforeEach(function() {
-      cy.visit('/index.html#!/phones/nexus-s');
-    });
+      cy.visit('/index.html#!/phones/nexus-s')
+    })
 
     it('should display `nexus-s` page', function() {
       cy.contains("h1", "Nexus S")
-    });
+    })
 
     it('should display the first phone image as the main phone image', function() {
       cy.get("img.phone.selected").should("have.attr", "src").and("match", /img\/phones\/nexus-s.0.jpg/)
-    });
+    })
 
     it('should swap the main image when clicking on a thumbnail imag', function() {
       cy
@@ -76,6 +76,6 @@ describe('PhoneCat Application', function() {
         .get("img.phone.selected").should("have.attr", "src").and("match", /img\/phones\/nexus-s.2.jpg/)
         .get(".phone-thumbs li:nth-child(1) img").click()
         .get("img.phone.selected").should("have.attr", "src").and("match", /img\/phones\/nexus-s.0.jpg/)
-    });
-  });
-});
+    })
+  })
+})
