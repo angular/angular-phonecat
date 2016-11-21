@@ -21,7 +21,7 @@ The full tutorial can be found at https://docs.angularjs.org/tutorial.
 
 ### Node.js and Tools
 
-- Get [Node.js][node-download].
+- Get [Node.js][node].
 - Install the tool dependencies: `npm install`
 
 
@@ -190,7 +190,7 @@ it whenever you like.
 
 - Run `npm start`.
 - Navigate your browser to [http://localhost:8000/](http://localhost:8000/) to see the application 
-- running.
+  running.
 
 ### Unit Testing
 
@@ -215,6 +215,13 @@ _Running the Application during Development_ section, above.
 - Protractor will execute the e2e test scripts against the web application itself. The project is
   set up to run the tests on Chrome directly. If you want to run against other browsers, you must 
   modify the configuration at `e2e-tests/protractor-conf.js`.
+
+**Note:**
+Under the hood, Protractor uses the [Selenium Standalone Server][selenium], which in turn requires 
+the [Java Development Kit (JDK)][jdk] to be installed on your local machine. Check this by running 
+`java -version` from the command line.
+
+If JDK is not already installed, you can download it [here][jdk-download].
 
 
 ## Application Directory Layout
@@ -260,10 +267,13 @@ For more information on AngularJS, please check out https://angularjs.org/.
 
 [angular-seed]: https://github.com/angular/angular-seed
 [bower]: http://bower.io/
-[git-home]: https://git-scm.com
-[git-setup]: https://help.github.com/articles/set-up-git/
-[google-phone-gallery]: http://web.archive.org/web/20131215082038/http://www.android.com/devices/
+[git-home]: https://git-scm.com/
+[git-setup]: https://help.github.com/articles/set-up-git
+[google-phone-gallery]: http://web.archive.org/web/20131215082038/http://www.android.com/devices
 [jasmine]: https://jasmine.github.io/
-[karma]: https://karma-runner.github.io
-[node-download]: https://nodejs.org/en/download/
+[jdk]: https://wikipedia.org/wiki/Java_Development_Kit
+[jdk-download]: http://www.oracle.com/technetwork/java/javase/downloads
+[karma]: https://karma-runner.github.io/
+[node]: https://nodejs.org/
 [protractor]: http://www.protractortest.org/
+[selenium]: http://docs.seleniumhq.org/
