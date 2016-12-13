@@ -1,5 +1,6 @@
 <div class="phone-images">
   <img ng-src="{{img}}" class="phone"
+      alt=""
       ng-class="{selected: img === $ctrl.mainImageUrl}"
       ng-repeat="img in $ctrl.phone.images" />
 </div>
@@ -8,22 +9,24 @@
 
 <p>{{$ctrl.phone.description}}</p>
 
+<p class="sr-only">Click on each image to see the enlarge version.</p>
+
 <ul class="phone-thumbs">
   <li ng-repeat="img in $ctrl.phone.images">
-    <img ng-src="{{img}}" ng-click="$ctrl.setImage(img)" />
+    <button type="button" aria-label="view enlarge version of the image" ng-click="$ctrl.setImage(img)"><img ng-src="{{img}}" alt="" /></button>
   </li>
 </ul>
 
 <ul class="specs">
   <li>
-    <span>Availability and Networks</span>
+    <h2>Availability and Networks</h2>
     <dl>
       <dt>Availability</dt>
       <dd ng-repeat="availability in $ctrl.phone.availability">{{availability}}</dd>
     </dl>
   </li>
   <li>
-    <span>Battery</span>
+    <h2>Battery</h2>
     <dl>
       <dt>Type</dt>
       <dd>{{$ctrl.phone.battery.type}}</dd>
@@ -34,7 +37,7 @@
     </dl>
   </li>
   <li>
-    <span>Storage and Memory</span>
+    <h2>Storage and Memory</h2>
     <dl>
       <dt>RAM</dt>
       <dd>{{$ctrl.phone.storage.ram}}</dd>
@@ -43,7 +46,7 @@
     </dl>
   </li>
   <li>
-    <span>Connectivity</span>
+    <h2>Connectivity</h2>
     <dl>
       <dt>Network Support</dt>
       <dd>{{$ctrl.phone.connectivity.cell}}</dd>
@@ -58,7 +61,7 @@
     </dl>
   </li>
   <li>
-    <span>Android</span>
+    <h2>Android</h2>
     <dl>
       <dt>OS Version</dt>
       <dd>{{$ctrl.phone.android.os}}</dd>
@@ -67,7 +70,7 @@
     </dl>
   </li>
   <li>
-    <span>Size and Weight</span>
+    <h2>Size and Weight</h2>
     <dl>
       <dt>Dimensions</dt>
       <dd ng-repeat="dim in $ctrl.phone.sizeAndWeight.dimensions">{{dim}}</dd>
@@ -76,7 +79,7 @@
     </dl>
   </li>
   <li>
-    <span>Display</span>
+    <h2>Display</h2>
     <dl>
       <dt>Screen size</dt>
       <dd>{{$ctrl.phone.display.screenSize}}</dd>
@@ -87,7 +90,7 @@
     </dl>
   </li>
   <li>
-    <span>Hardware</span>
+    <h2>Hardware</h2>
     <dl>
       <dt>CPU</dt>
       <dd>{{$ctrl.phone.hardware.cpu}}</dd>
@@ -102,7 +105,7 @@
     </dl>
   </li>
   <li>
-    <span>Camera</span>
+    <h2>Camera</h2>
     <dl>
       <dt>Primary</dt>
       <dd>{{$ctrl.phone.camera.primary}}</dd>
@@ -111,7 +114,7 @@
     </dl>
   </li>
   <li>
-    <span>Additional Features</span>
+    <h2>Additional Features</h2>
     <dd>{{$ctrl.phone.additionalFeatures}}</dd>
   </li>
 </ul>

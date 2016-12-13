@@ -17,6 +17,16 @@ exports.config = {
 
   jasmineNodeOpts: {
     defaultTimeoutInterval: 30000
-  }
+  },
+  
+  chromeOnly: true,
+  directConnect: true,
+  
+  plugins: [{
+    chromeA11YDevTools: {
+      treatWarningsAsFailures: true
+    },
+    package: 'protractor-accessibility-plugin'
+  }]
 
 };
