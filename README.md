@@ -165,6 +165,18 @@ git diff step-?..step-?
   - CSS transition animations.
   - CSS keyframe animations.
   - JavaScript-based animations.
+  
+### step-15 _Accessibility (a11y)_
+
+- Add labels to the search and order fields.
+- Add accessibility plugin for Protractor.
+  - Add missing alt attributes in the phone detail.
+- Add aria live regions to inform the user about results after searching and filtering elements.
+-  Improve access via keyboard:
+  - Navigate between the images in a phone detail.
+  - Add headings elements.
+- Add information about checkmarks in the phone detail specs.
+
 
 
 ## Development with `angular-phonecat`
@@ -276,4 +288,4 @@ For more information on AngularJS, please check out https://angularjs.org/.
 [karma]: https://karma-runner.github.io/
 [node]: https://nodejs.org/
 [protractor]: http://www.protractortest.org/
-[selenium]: http://docs.seleniumhq.org/
+[protractor-accessibility-plugin]: https://github.com/angular/protractor-accessibility-plugin

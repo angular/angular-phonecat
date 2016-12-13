@@ -17,24 +17,31 @@ describe('PhoneCat Application', function() {
     });
 
     it('should filter the phone list as a user types into the search box', function() {
-      var phoneList = element.all(by.repeater('phone in $ctrl.phones'));
+      var phoneList = element.all(by.repeater('phone in filtered'));
       var query = element(by.model('$ctrl.query'));
 
       expect(phoneList.count()).toBe(20);
 
       query.sendKeys('nexus');
-      expect(phoneList.count()).toBe(1);
-
+      
+      browser.sleep(1000).then(function(){
+        expect(phoneList.count()).toBe(1);  
+      });
+     
       query.clear();
       query.sendKeys('motorola');
-      expect(phoneList.count()).toBe(8);
+
+      browser.sleep(1000).then(function(){
+        expect(phoneList.count()).toBe(8);  
+      });
+      
     });
 
     it('should be possible to control phone order via the drop-down menu', function() {
       var queryField = element(by.model('$ctrl.query'));
       var orderSelect = element(by.model('$ctrl.orderProp'));
       var nameOption = orderSelect.element(by.css('option[value="name"]'));
-      var phoneNameColumn = element.all(by.repeater('phone in $ctrl.phones').column('phone.name'));
+      var phoneNameColumn = element.all(by.repeater('phone in filtered').column('phone.name'));
 
       function getNames() {
         return phoneNameColumn.map(function(elem) {
@@ -43,26 +50,33 @@ describe('PhoneCat Application', function() {
       }
 
       queryField.sendKeys('tablet');   // Let's narrow the dataset to make the assertions shorter
+      
+      browser.sleep(1000).then(function(){
+        
+        expect(getNames()).toEqual([
+          'Motorola XOOM\u2122 with Wi-Fi',
+          'MOTOROLA XOOM\u2122'
+        ]);
 
-      expect(getNames()).toEqual([
-        'Motorola XOOM\u2122 with Wi-Fi',
-        'MOTOROLA XOOM\u2122'
-      ]);
+        nameOption.click();
 
-      nameOption.click();
-
-      expect(getNames()).toEqual([
-        'MOTOROLA XOOM\u2122',
-        'Motorola XOOM\u2122 with Wi-Fi'
-      ]);
+        expect(getNames()).toEqual([
+          'MOTOROLA XOOM\u2122',
+          'Motorola XOOM\u2122 with Wi-Fi'
+        ]);
+      
+      });
     });
 
     it('should render phone specific links', function() {
       var query = element(by.model('$ctrl.query'));
       query.sendKeys('nexus');
-
-      element.all(by.css('.phones li a')).first().click();
-      expect(browser.getLocationAbsUrl()).toBe('/phones/nexus-s');
+      
+      browser.sleep(1000).then(function(){
+        element.all(by.css('.phones li a')).first().click();
+        expect(browser.getLocationAbsUrl()).toBe('/phones/nexus-s');  
+      });
+      
     });
 
   });

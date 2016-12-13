@@ -3,25 +3,29 @@
     <div class="col-md-2">
       <!--Sidebar content-->
 
-      <p>
-        Search:
-        <input ng-model="$ctrl.query" />
-      </p>
-
-      <p>
-        Sort by:
-        <select ng-model="$ctrl.orderProp">
+      <div>
+        <label for="search">Search:</label> 
+        <input id="search" ng-model="$ctrl.query" ng-model-options="{ debounce: 300 }">
+      </div>
+      
+      <div class="aria-status" aria-live="assertive" aria-atomic="true"></div>
+            
+      <div>
+        <label for="order">Sort by:</label>
+        <select inform-order id="order" ng-model="$ctrl.orderProp">
           <option value="name">Alphabetical</option>
           <option value="age">Newest</option>
         </select>
-      </p>
+      </div>
+      
+      <div class="aria-status-sort" aria-live="assertive" aria-atomic="true"></div>
 
     </div>
     <div class="col-md-10">
       <!--Body content-->
 
-      <ul class="phones">
-        <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp"
+      <ul result-list class="phones">
+        <li ng-repeat="phone in filtered = ($ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp)"
             class="thumbnail phone-list-item">
           <a href="#!/phones/{{phone.id}}" class="thumb">
             <img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}" />

@@ -7,6 +7,9 @@ h1 {
   margin-top: 0;
 }
 
+.aria-status { margin-bottom: 10px; }
+.aria-status-order{ margin-bottom: 5px; }
+
 /* View: Phone list */
 .phones {
   list-style: none;
@@ -70,6 +73,19 @@ h1 {
   margin: 1em;
 }
 
+.phone-thumbs img:focus {
+  border:2px solid black;
+}
+
+.phone-thumbs img:hover {
+  cursor: pointer;
+}
+
+.phone-thumbs button {
+  background: none;
+  border: 0;
+ }
+
 .specs {
   clear: both;
   list-style: none;
@@ -90,4 +106,17 @@ h1 {
 .specs > li > span {
   font-size: 1.2em;
   font-weight: bold;
+}
+
+ul.specs h2 { font-size:1.5em }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
