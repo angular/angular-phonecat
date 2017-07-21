@@ -14,7 +14,7 @@ install:
   ## which gives us access to the
   ## `cypress` command used below
   - npm install -g cypress-cli
-  
+
 
 before_script:
   ## runs the 'start' script which
@@ -29,7 +29,7 @@ before_script:
   ## we use the '&' ampersand which tells
   ## travis to run this process in the background
   ## else it would block execution and hang travis
-  - npm start &
+  - npm start -- --silent &
 
 script:
   ## now run cypress headlessly
