@@ -14,6 +14,7 @@ install:
   ## which gives us access to the
   ## `cypress` command used below
   - npm install -g cypress-cli
+  
 
 before_script:
   ## runs the 'start' script which
