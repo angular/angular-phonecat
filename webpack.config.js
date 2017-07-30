@@ -22,13 +22,14 @@ module.exports = {
     module: {
         rules: [
             {
-              test: /\.ts$/,
-              loaders: [
-                {
-                    loader: 'awesome-typescript-loader',
-                    options: { configFileName: helpers.root('app', 'tsconfig.json') }
-                }, 'angular2-template-loader'
-              ]
+                test: /\.ts$/,
+                exclude: [/\.(spec)\.ts$/],
+                loaders: [
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: { configFileName: helpers.root('app', 'tsconfig.json') }
+                    }, 'angular2-template-loader'
+                ]
             },
             {
                 test: /\.js$/,
@@ -39,7 +40,8 @@ module.exports = {
                 test: /\.html$/,
                 exclude: /node_modules/,
                 loader: "html-loader"
-            }
+            },
+            { test: /\.html$/, loader: 'ng-cache-loader?prefix=[dir]/[dir]' }
         ]
     },
     plugins: [
