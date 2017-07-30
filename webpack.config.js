@@ -14,7 +14,7 @@ module.exports = {
         inline: true,
         historyApiFallback: true,
         stats: 'minimal',
-        port: 8080
+        port: 8081
     },
     resolve: {
         extensions: ['.ts', '.js']

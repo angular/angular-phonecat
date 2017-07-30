@@ -1,8 +1,10 @@
 import * as $ from "jquery";
 import * as angular from 'angular';
-import * as angular_animate from 'angular-animate';
+import * as ngAnimate from 'angular-animate';
 import * as angular_resource from 'angular-resource';
 import * as angular_route from 'angular-route';
+
+require('./phones/phones.json');
 
 
 import './app.module.ajs.ts';
