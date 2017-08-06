@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 describe('Phone', function() {
   var $httpBackend;
@@ -40,4 +40,4 @@ describe('Phone', function() {
     expect(phones).toEqual(phonesData);
   });
 
-});
+});*/
