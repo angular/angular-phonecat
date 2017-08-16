@@ -14,17 +14,15 @@ The steps below will take you all the way through Cypress. It is assumed you hav
 
 **If you get stuck, here is more help:**
 
-* [Gitter Channel](https://gitter.im/cypress-io/cypress)
-* [Cypress Docs](https://on.cypress.io)
-* [Cypress CLI Tool Docs](https://github.com/cypress-io/cypress-cli)
+* [Cypress Support](https://on.cypress.io/support)
 
 ### 1. Install Cypress
 
-[Follow these instructions to install Cypress.](https://on.cypress.io/guides/installing-and-running#section-installing)
+[Follow these instructions to install Cypress.](https://on.cypress.io/installing-cypress)
 
 ### 2. Fork this repo
 
-If you want to experiment with running this project in Continous Integration, you'll need to [fork](https://github.com/cypress-io/cypress-example-phonecat#fork-destination-box) it first.
+If you want to experiment with running this project in Continuous Integration, you'll need to [fork](https://github.com/cypress-io/cypress-example-phonecat#fork-destination-box) it first.
 
 After forking this project in `Github`, run these commands:
 
@@ -50,8 +48,8 @@ You should see the Phonecat app up and running. We are now ready to run Cypress 
 
 ### 3. Add the project to Cypress
 
-[Follow these instructions to add the project to Cypress.](https://on.cypress.io/guides/installing-and-running#section-adding-projects)
+[Follow these instructions to add the project to Cypress.](https://on.cypress.io/writing-your-first-test)
 
 ### 4. Run in Continuous Integration
 
-[Follow these instructions to run the tests in CI.](https://on.cypress.io/guides/continuous-integration#section-running-in-ci)
+[Follow these instructions to run the tests in CI.](https://on.cypress.io/continuous-integration)
