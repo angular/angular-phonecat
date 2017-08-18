@@ -42,7 +42,7 @@ import './core/checkmark/checkmark.filter.ts';
 import './core/phone/phone.module.ts';
 //import './core/phone/phone.service.ts';
 import './phone-list/phone-list.module.ts';
-import './phone-list/phone-list.component.ts';
+//import './phone-list/phone-list.component.ts';
 import './phone-detail/phone-detail.module.ts';
 import './phone-detail/phone-detail.component.ts';
 
