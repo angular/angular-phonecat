@@ -3,7 +3,7 @@
 angular.
   module('phonecatApp').
   config(['$locationProvider' ,'$routeProvider',
-    function config($locationProvider, $routeProvider) {
+    function config($locationProvider: angular.ILocationProvider, $routeProvider: angular.route.IRouteProvider) {
       $locationProvider.hashPrefix('!');
 
       $routeProvider.
@@ -13,6 +13,8 @@ angular.
         when('/phones/:phoneId', {
           template: '<phone-detail></phone-detail>'
         }).
-        otherwise('/phones');
+        otherwise({
+          template: '<phone-list></phone-list>'
+        });
     }
   ]);

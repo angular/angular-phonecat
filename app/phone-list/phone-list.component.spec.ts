@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 describe('phoneList', function() {
 
@@ -32,4 +32,4 @@ describe('phoneList', function() {
 
   });
 
-});
+});*/

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "types": [
+      // add node as an option
+      "node",
+      "jasmine"
+    ],
+    // typeRoots option has been previously configured
+    "typeRoots": [
+      // add path to @types
+      "../node_modules/@types"
+    ],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [ "es2015", "dom" ],
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    //temp fix until RxJs 6 comes out
+    "noStrictGenericChecks": true,
+    "exclude": [
+      "node_modules",
+      "dist",
+      "**/*.spec.ts"
+    ]
+  }
+}

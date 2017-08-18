@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 describe('checkmark', function() {
 
@@ -11,4 +11,4 @@ describe('checkmark', function() {
     })
   );
 
-});
+});*/
