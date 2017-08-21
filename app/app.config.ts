@@ -17,4 +17,4 @@ class Config {
 
 angular.
   module('phonecatApp').
-  config(['$locationProvider' ,'$routeProvider', ($locationProvider, $routeProvider) => new Config($locationProvider, $routeProvider)]);
+  config(['$locationProvider' ,'$routeProvider', ($locationProvider: ng.ILocationProvider, $routeProvider: ng.route.IRouteProvider) => new Config($locationProvider, $routeProvider)]);

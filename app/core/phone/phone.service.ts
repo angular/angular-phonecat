@@ -1,7 +1,7 @@
 'use strict';
 
 interface IPhoneService {
-  getPhones();
+  getPhones(): ng.resource.IResourceClass<any>;
 }
 
 class PhoneService implements IPhoneService {
@@ -19,4 +19,4 @@ class PhoneService implements IPhoneService {
   }
 }
 
-angular.module('core.phone').factory('Phone', ['$resource', ($resource) => new PhoneService($resource).getPhones()]);
+angular.module('core.phone').factory('Phone', ['$resource', ($resource: ng.resource.IResourceService) => new PhoneService($resource).getPhones()]);

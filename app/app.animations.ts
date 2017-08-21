@@ -17,7 +17,7 @@ class PhoneAnimationFactory {
         top: 0
       }, done);
 
-      return function animateInEnd(wasCanceled) {
+      return function animateInEnd(wasCanceled: any) {
         if (wasCanceled) element.stop();
       };
   }
@@ -33,7 +33,7 @@ class PhoneAnimationFactory {
         top: -500
       }, done);
 
-      return function animateOutEnd(wasCanceled) {
+      return function animateOutEnd(wasCanceled: any) {
         if (wasCanceled) element.stop();
       };
     }
