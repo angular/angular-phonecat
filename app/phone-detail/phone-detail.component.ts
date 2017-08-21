@@ -7,10 +7,10 @@ interface IPhoneDetailController {
 
 class PhoneDetailController implements IPhoneDetailController {
   public mainImageUrl: string;
-  public phone: any;
+  public phone: IPhoneService;
 
-  constructor(public $routeParams: ng.route.IRouteParamsService, public Phone: any) {
-    Phone.get({phoneId: $routeParams.phoneId}, (phone: any) => {
+  constructor(public $routeParams: ng.route.IRouteParamsService, public Phone: IPhoneResource) {
+    Phone.get({phoneId: $routeParams.phoneId}, (phone: IPhoneService) => {
           this.phone = phone;
           this.setImage(phone.images[0]);
         });
@@ -24,5 +24,5 @@ class PhoneDetailController implements IPhoneDetailController {
 angular.module('phoneDetail')
   .component('phoneDetail', {
     templateUrl: 'phone-detail/phone-detail.template.html',
-    controller: ['$routeParams', 'Phone', ($routeParams, Phone) => new PhoneDetailController($routeParams, Phone)]
+    controller: ['$routeParams', 'Phone', ($routeParams: ng.route.IRouteParamsService, Phone: IPhoneResource) => new PhoneDetailController($routeParams, Phone)]
   });

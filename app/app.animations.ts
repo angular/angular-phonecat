@@ -1,14 +1,12 @@
 'use strict';
 
-class PhoneAnimationFactory {
+class PhoneAnimationFactory implements ng.animate.IAnimateCallbackObject {
   
-  constructor() {
-    
-  }
+  constructor() {}
 
-  addClass(element: any, className: any, done: any) {
+  addClass(element: JQuery, className: string, done: Function, options: ng.animate.IAnimationOptions) {
     if (className !== 'selected') return;
-      element.css({
+      (<any>element).css({
         display: 'block',
         position: 'absolute',
         top: 500,
@@ -17,15 +15,17 @@ class PhoneAnimationFactory {
         top: 0
       }, done);
 
-      return function animateInEnd(wasCanceled: any) {
-        if (wasCanceled) element.stop();
+      return function animateInEnd(wasCanceled: boolean) {
+        if (wasCanceled) 
+          (<any>element).stop();
       };
   }
 
-  removeClass(element: any, className: any, done: any) {
-      if (className !== 'selected') return;
+  removeClass(element: JQuery, className: string, done: Function, options: ng.animate.IAnimationOptions) {
+      if (className !== 'selected') 
+        return;
 
-      element.css({
+      (<any>element).css({
         position: 'absolute',
         top: 0,
         left: 0
@@ -33,8 +33,9 @@ class PhoneAnimationFactory {
         top: -500
       }, done);
 
-      return function animateOutEnd(wasCanceled: any) {
-        if (wasCanceled) element.stop();
+      return function animateOutEnd(wasCanceled: boolean) {
+        if (wasCanceled) 
+          (<any>element).stop();
       };
     }
 

@@ -1,15 +1,15 @@
 'use strict';
 
 interface IPhoneListController {
-  phones: any;
+  phones: Array<IPhoneService>;
   orderProp: string;
 }
 
 class PhoneListController implements IPhoneListController {
-  public phones: any;
+  public phones: Array<IPhoneService>;
   public orderProp: string;
 
-  constructor(public Phone: any) {
+  constructor(public Phone: IPhoneResource) {
     this.phones = Phone.query();
     this.orderProp = 'age';
   }
@@ -20,5 +20,5 @@ angular.
   module('phoneList').
   component('phoneList', {
     templateUrl: 'phone-list/phone-list.template.html',
-    controller: ['Phone', (Phone) => new PhoneListController(Phone)]
+    controller: ['Phone', (Phone: IPhoneResource) => new PhoneListController(Phone)]
   });

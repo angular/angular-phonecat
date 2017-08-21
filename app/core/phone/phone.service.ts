@@ -1,10 +1,84 @@
 'use strict';
 
-interface IPhoneService {
-  getPhones(): ng.resource.IResourceClass<any>;
+interface IBattery {
+  type: string;
+  talkTime: string;
+  standbyTaime: string;
 }
 
+interface IStorage {
+  ram: string;
+  flash: string;
+}
+
+interface IConnectivity {
+  cell: string;
+  wifi: string;
+  bluetooth: string;
+  infrared: boolean;
+  gps: boolean;
+}
+
+interface IAndroid {
+  os: string;
+  ui: string;
+}
+
+interface ISizeAndWeight {
+  dimensions: string;
+  weight: string;
+}
+
+interface IDisplay {
+  screenSize: string;
+  screenResolution: string;
+  touchScreen: boolean;
+}
+
+interface IHardware {
+  cpu: string;
+  usb: string;
+  audioJack: string;
+  fmRadio: boolean;
+  accelerometer: boolean;
+}
+
+interface ICamera {
+  primary: string;
+  features: Array<string>;
+}
+
+interface IPhoneService {
+  images: Array<string>;
+  availability: string;
+  battery: IBattery;
+  storage: IStorage;
+  connectivity: IConnectivity;
+  android: IAndroid;
+  sizeAndWeight: ISizeAndWeight;
+  display: IDisplay;
+  hardware: IHardware;
+  camera: ICamera;
+  additionalFeatures: string;
+
+  getPhones(): ng.resource.IResourceClass<IPhoneService>;
+}
+
+type IPhoneResource = ng.resource.IResourceClass<IPhoneService>;
+
 class PhoneService implements IPhoneService {
+  public images: Array<string>;
+  public availability: string;
+  public battery: IBattery;
+  public storage: IStorage;
+  public connectivity: IConnectivity;
+  public android: IAndroid;
+  public sizeAndWeight: ISizeAndWeight;
+  public display: IDisplay;
+  public hardware: IHardware;
+  public camera: ICamera;
+  public additionalFeatures: string;
+
   constructor(public $resource: ng.resource.IResourceService) {
   }
 

@@ -3,7 +3,7 @@
 angular.
   module('core').
   filter('checkmark', function() {
-    return function(input: any) {
+    return function(input: boolean): string {
       return input ? '\u2713' : '\u2718';
     };
   });
