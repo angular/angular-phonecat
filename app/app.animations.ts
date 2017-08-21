@@ -1,16 +1,13 @@
 'use strict';
 
-angular.
-  module('phonecatApp').
-  animation('.phone', function phoneAnimationFactory() {
-    return {
-      addClass: animateIn,
-      removeClass: animateOut
-    };
+class PhoneAnimationFactory {
+  
+  constructor() {
+    
+  }
 
-    function animateIn(element, className, done) {
-      if (className !== 'selected') return;
-
+  addClass(element: any, className: any, done: any) {
+    if (className !== 'selected') return;
       element.css({
         display: 'block',
         position: 'absolute',
@@ -23,9 +20,9 @@ angular.
       return function animateInEnd(wasCanceled) {
         if (wasCanceled) element.stop();
       };
-    }
+  }
 
-    function animateOut(element, className, done) {
+  removeClass(element: any, className: any, done: any) {
       if (className !== 'selected') return;
 
       element.css({
@@ -40,4 +37,7 @@ angular.
         if (wasCanceled) element.stop();
       };
     }
-  });
+
+}
+
+angular.module('phonecatApp').animation('.phone', () => new PhoneAnimationFactory());
