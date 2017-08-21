@@ -1,17 +1,17 @@
-'use strict';
+import * as angular from 'angular';
 
-interface IBattery {
+export interface IBattery {
   type: string;
   talkTime: string;
   standbyTaime: string;
 }
 
-interface IStorage {
+export interface IStorage {
   ram: string;
   flash: string;
 }
 
-interface IConnectivity {
+export interface IConnectivity {
   cell: string;
   wifi: string;
   bluetooth: string;
@@ -19,23 +19,23 @@ interface IConnectivity {
   gps: boolean;
 }
 
-interface IAndroid {
+export interface IAndroid {
   os: string;
   ui: string;
 }
 
-interface ISizeAndWeight {
+export interface ISizeAndWeight {
   dimensions: string;
   weight: string;
 }
 
-interface IDisplay {
+export interface IDisplay {
   screenSize: string;
   screenResolution: string;
   touchScreen: boolean;
 }
 
-interface IHardware {
+export interface IHardware {
   cpu: string;
   usb: string;
   audioJack: string;
@@ -43,12 +43,12 @@ interface IHardware {
   accelerometer: boolean;
 }
 
-interface ICamera {
+export interface ICamera {
   primary: string;
   features: Array<string>;
 }
 
-interface IPhoneService {
+export interface IPhoneService {
   images: Array<string>;
   availability: string;
   battery: IBattery;
@@ -64,9 +64,9 @@ interface IPhoneService {
   getPhones(): ng.resource.IResourceClass<IPhoneService>;
 }
 
-type IPhoneResource = ng.resource.IResourceClass<IPhoneService>;
+export type IPhoneResource = ng.resource.IResourceClass<IPhoneService>;
 
-class PhoneService implements IPhoneService {
+export class PhoneService implements IPhoneService {
   public images: Array<string>;
   public availability: string;
   public battery: IBattery;

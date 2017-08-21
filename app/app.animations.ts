@@ -1,6 +1,6 @@
-'use strict';
+import * as angular from 'angular';
 
-class PhoneAnimationFactory implements ng.animate.IAnimateCallbackObject {
+export class PhoneAnimationFactory implements ng.animate.IAnimateCallbackObject {
   
   constructor() {}
 

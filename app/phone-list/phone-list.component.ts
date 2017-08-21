@@ -1,11 +1,12 @@
-'use strict';
+import * as angular from 'angular';
+import { IPhoneService, IPhoneResource } from '../core/phone/phone.service';
 
-interface IPhoneListController {
+export interface IPhoneListController {
   phones: Array<IPhoneService>;
   orderProp: string;
 }
 
-class PhoneListController implements IPhoneListController {
+export class PhoneListController implements IPhoneListController {
   public phones: Array<IPhoneService>;
   public orderProp: string;
 

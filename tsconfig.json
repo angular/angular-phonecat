@@ -54,7 +54,6 @@
     "app/**/*"
   ],
   "exclude": [
-    "dist/**/*",
-    "app/**/*.spec.ts"
+    "dist/**/*"
   ]
 }

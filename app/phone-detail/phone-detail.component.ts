@@ -1,11 +1,12 @@
-'use strict';
+import * as angular from 'angular';
+import { IPhoneService, IPhoneResource } from '../core/phone/phone.service';
 
-interface IPhoneDetailController {
+export interface IPhoneDetailController {
   mainImageUrl: string;
   setImage: (imageUrl: string) => void;
 }
 
-class PhoneDetailController implements IPhoneDetailController {
+export class PhoneDetailController implements IPhoneDetailController {
   public mainImageUrl: string;
   public phone: IPhoneService;
 
