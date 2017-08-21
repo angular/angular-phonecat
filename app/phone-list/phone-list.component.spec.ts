@@ -1,15 +1,13 @@
-'use strict';
-
 describe('phoneList', function() {
 
   // Load the module that contains the `phoneList` component before each test
-  beforeEach(module('phoneList'));
+  beforeEach((<any>module)('phoneList'));
 
   // Test the controller
   describe('PhoneListController', function() {
-    var $httpBackend, ctrl;
+    var $httpBackend: any, ctrl: any;
 
-    beforeEach(inject(function($componentController, _$httpBackend_) {
+    beforeEach(inject(function($componentController: any, _$httpBackend_: any) {
       $httpBackend = _$httpBackend_;
       $httpBackend.expectGET('phones/phones.json')
                   .respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);

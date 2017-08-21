@@ -1,4 +1,4 @@
-'use strict';
+import * as angular from 'angular';
 
 // Define the `phonecatApp` module
 angular.module('phonecatApp', [

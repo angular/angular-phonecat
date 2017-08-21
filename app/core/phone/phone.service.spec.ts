@@ -1,8 +1,6 @@
-'use strict';
-
 describe('Phone', function() {
-  var $httpBackend;
-  var Phone;
+  var $httpBackend: any;
+  var Phone: any;
   var phonesData = [
     {name: 'Phone X'},
     {name: 'Phone Y'},
@@ -15,10 +13,10 @@ describe('Phone', function() {
   });
 
   // Load the module that contains the `Phone` service before each test
-  beforeEach(module('core.phone'));
+  beforeEach((<any>module)('core.phone'));
 
   // Instantiate the service and "train" `$httpBackend` before each test
-  beforeEach(inject(function(_$httpBackend_, _Phone_) {
+  beforeEach(inject(function(_$httpBackend_: any, _Phone_: any) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('phones/phones.json').respond(phonesData);
 
