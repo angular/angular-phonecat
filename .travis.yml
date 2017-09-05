@@ -10,12 +10,6 @@ node_js:
 install:
   - npm install
 
-  ## install the Cypress CLI Tools
-  ## which gives us access to the
-  ## `cypress` command used below
-  - npm install -g cypress-cli
-
-
 before_script:
   ## runs the 'start' script which
   ## boots our local app server on port 8888
@@ -38,7 +32,7 @@ script:
   ## CYPRESS_RECORD_KEY environment
   ## variable by default and apply
   ## this to the run.
-  - cypress run --record
+  - npm run cypress:run
 
   ## alternatively we could specify
   ## a specific record key to use
