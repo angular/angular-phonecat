@@ -189,7 +189,7 @@ it whenever you like.
 ### Running the Application during Development
 
 - Run `npm start`.
-- Navigate your browser to [http://localhost:8000/](http://localhost:8000/) to see the application 
+- Navigate your browser to [http://localhost:8000/](http://localhost:8000/) to see the application
   running.
 
 ### Unit Testing
@@ -213,12 +213,12 @@ _Running the Application during Development_ section, above.
 - Serve the application with: `npm start`
 - In a separate terminal/command line window run the e2e tests: `npm run protractor`.
 - Protractor will execute the e2e test scripts against the web application itself. The project is
-  set up to run the tests on Chrome directly. If you want to run against other browsers, you must 
+  set up to run the tests on Chrome directly. If you want to run against other browsers, you must
   modify the configuration at `e2e-tests/protractor-conf.js`.
 
 **Note:**
-Under the hood, Protractor uses the [Selenium Standalone Server][selenium], which in turn requires 
-the [Java Development Kit (JDK)][jdk] to be installed on your local machine. Check this by running 
+Under the hood, Protractor uses the [Selenium Standalone Server][selenium], which in turn requires
+the [Java Development Kit (JDK)][jdk] to be installed on your local machine. Check this by running
 `java -version` from the command line.
 
 If JDK is not already installed, you can download it [here][jdk-download].
@@ -257,6 +257,7 @@ scripts/                 --> handy scripts
 bower.json               --> Bower specific metadata, including client-side dependencies
 karma.conf.js            --> config file for running unit tests with Karma
 package.json             --> Node.js specific metadata, including development tools dependencies
+package-lock.json        --> Npm specific metadata, including versions of installed development tools dependencies
 ```
 
 
