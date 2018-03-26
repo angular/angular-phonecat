@@ -14,10 +14,10 @@ and run the unit/e2e tests for all the steps.
 ## Demo Pages on GitHub
 
 We use GitHub to host a live demo of each step. This is stored in the gh-pages branch of the git
-repository. The folder structure of this branch is different to the main master branch. Each step is 
+repository. The folder structure of this branch is different to the main master branch. Each step is
 copied to its own folder.
 
-- **update-gh-pages.sh**: Run this script to copy changes to the tutorial steps and bower 
+- **update-gh-pages.sh**: Run this script to copy changes to the tutorial steps and bower
   dependencies over to the gh-pages branch and (if all tests pass) push to the remote gh-pages
   branch on GitHub.
 
@@ -25,13 +25,13 @@ copied to its own folder.
 
 There is a Jenkins job that runs periodically and executes `jenkins.sh`.
 
-- **jenkins.sh**: This script will set the Node.js version to 4.x (using `nvm`), will run all the
+- **jenkins.sh**: This script will set Node.js to an appropriate version (using `nvm`), will run all
   the tests and update the demo pages (using `update-gh-pages.sh`).
   (You shouldn't need to run this script manually.)
 
 ## Pushing to GitHub
 
-Each step in the tutorial is one commit in the git repository. Each step is also identified by a git 
+Each step in the tutorial is one commit in the git repository. Each step is also identified by a git
 tag. Any changes to a step requires the commits to be rebased and retagged.
 
 Since it is likely that rebasing and retagging the commits will cause the local git repository to

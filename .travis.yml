@@ -3,7 +3,8 @@ dist: trusty
 
 language: node_js
 node_js:
-  - '4.4'
+  - 6  # Because `protractor@5.4.1` requires 6.9+.
+  - 10
 
 before_script:
   - export DISPLAY=:99.0
