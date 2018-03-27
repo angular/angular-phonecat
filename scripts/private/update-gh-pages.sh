@@ -6,12 +6,12 @@
 #
 # The tutorial step changes are computed by checking out each step into a snapshot folder and then
 # overwriting the step folders in gh-pages with these new ones.
-# If there are any changes they will be committed
+# If there are any changes they will be committed.
 #
 # The dependency changes are computed by running "bower update" then committing any changed files
 # inside the bower_components folder onto the gh-pages branch.
 #
-# You should review these commits and push them to origin/gh-pages if valid.
+# Finally, the new commits are pushed to origin/gh-pages.
 
 # Exit on error and print each command as it is run
 set -ex

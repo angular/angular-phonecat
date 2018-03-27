@@ -18,21 +18,15 @@ repository. The folder structure of this branch is different to the main master 
 copied to its own folder.
 
 - **update-gh-pages.sh**: Run this script to copy changes to the tutorial steps and bower 
-  dependencies over to the gh-pages branch.
-
-Once you have updated the local gh-pages branch you can review the changes and push to the remote
-gh-pages branch on GitHub.
-
-```
-git push origin gh-pages
-```
+  dependencies over to the gh-pages branch and (if all tests pass) push to the remote gh-pages
+  branch on GitHub.
 
 ### Auto-updating Demo Pages from CI
 
 There is a Jenkins job that runs periodically and executes `jenkins.sh`.
 
 - **jenkins.sh**: This script will set the Node.js version to 4.x (using `nvm`), will run all the
-  tests (using `test-all.sh`) and update the demo pages (using `update-gh-pages.sh`).
+  the tests and update the demo pages (using `update-gh-pages.sh`).
   (You shouldn't need to run this script manually.)
 
 ## Pushing to GitHub

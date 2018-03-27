@@ -18,7 +18,7 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 npm install
 
 # Ensure that the chromeDriver is installed
-npm run update-webdriver
+node_modules/.bin/webdriver-manager update --gecko false --standalone false
 
 # Start up the web server
 node_modules/.bin/http-server ./app -a localhost -p 8000 -c-1 --silent &
