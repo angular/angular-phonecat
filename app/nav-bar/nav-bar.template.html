@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
           <li ng-class="{'active' : isActiveTab('home')}" ng-click="navBarClick('home')"><a href="#/home">Home <span class="sr-only">(current)</span></a></li>
-          <li ng-class="{'active' : isActiveTab('brackets')}" ng-click="navBarClick('brackets')"><a href="#/brackets">Your Brackets</a></li>
+          <li ng-class="{'active' : isActiveTab('brackets')}" ng-click="navBarClick('brackets')"><a href="#/brackets">Brackets</a></li>
           <li ng-class="{'active' : isActiveTab('search')}" ng-click="navBarClick('search')"><a href="#/search">Search</a></li>
       </ul>
 
@@ -25,7 +25,7 @@
                 <button type="submit" class="btn btn-primary" ng-click="signOut()">Sign Out</button>
             </div>
             <div ng-show="!loggedIn">
-                <button type="submit" class="btn btn-primary" ng-click="signIn()">Sign In</button>
+                <a href="#/signIn" class="btn btn-primary">Sign In!</a>
             </div>
         </form>
     </div>

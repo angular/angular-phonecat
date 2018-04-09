@@ -20,6 +20,14 @@ mainApp.config(function($routeProvider) {
 			templateUrl: 'pages/profile.html',
 			controller: 'MainController'
 		})
+        .when('/signIn', {
+			templateUrl: 'pages/signIn.html',
+			controller: 'MainController'
+		})
+        .when('/signUp', {
+			templateUrl: 'pages/signUp.html',
+			controller: 'MainController'
+		})
 		.otherwise({
 			redirectTo: '/home'
 		});
@@ -30,6 +38,9 @@ mainApp.factory("Auth", ["$firebaseAuth", function($firebaseAuth) {
 ]);
 
 mainApp.controller('MainController', ["$scope", "Auth", function mainController($scope, Auth) {
+    $scope.showSuccessAlert = false;
+    $scope.successTextAlert = "";
+    
     $scope.auth = Auth;
     
     $scope.auth.$onAuthStateChanged(function(firebaseUser) {
@@ -38,9 +49,28 @@ mainApp.controller('MainController', ["$scope", "Auth", function mainController(
     
     $scope.switchBool = function (value) {
         $scope[value] = !$scope[value];
+    };
+    
+    $scope.createAccount = function() {
+        firebase.auth().createUserWithEmailAndPassword($scope.newEmail, $scope.newPass).catch(function(error) {
+            alert(error.code + ": " + error.message);
+            //$scope.showSuccessAlert = true;
+            //$scope.successTextAlert = "Success";
+        });
+        
+        //var user = firebase.auth().currentUser;
+
+        //if (user) {
+//          $scope.user = user;
+  //      }
+    };
+    
+    $scope.login = function() {
+        firebase.auth().signInWithEmailAndPassword($scope.loginEmail, $scope.loginPass).catch(function(error) {
+            alert(error.code + ": " + error.message);
+        });
     }
 }]);
-
     /*
     var ref = firebase.database().ref().child("messages");
     $scope.messages = $firebaseArray(ref);
