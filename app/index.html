@@ -1,34 +1,84 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Google Phone Gallery</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="app.animations.css" />
-
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="app.module.js"></script>
-    <script src="app.config.js"></script>
-    <script src="app.animations.js"></script>
-    <script src="core/core.module.js"></script>
-    <script src="core/checkmark/checkmark.filter.js"></script>
-    <script src="core/phone/phone.module.js"></script>
-    <script src="core/phone/phone.service.js"></script>
-    <script src="phone-list/phone-list.module.js"></script>
-    <script src="phone-list/phone-list.component.js"></script>
-    <script src="phone-detail/phone-detail.module.js"></script>
-    <script src="phone-detail/phone-detail.component.js"></script>
+        <meta charset="utf-8">
+        <title>brackCRACK</title>
+      
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap/less/"
+        <link rel="stylesheet" href="app.css" />
+        <link type="text/css" rel="stylesheet" href="bower_components/firebaseui/dist/firebaseui.css" />
+        <link rel="stylesheet" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css
+      
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+      
+        <script src="app.js"></script>
+        <script src="nav-bar/nav-bar.component.js"></script>
+      
+        <script src="bower_components/firebase/firebase.js"></script>
+        <script src="bower_components/firebase/firebase-app.js"></script>
+        <script src="bower_components/firebase/firebase-auth.js"></script>
+        <script src="bower_components/firebase/firebase-database.js"></script>
+        <script src="bower_components/firebase/firebase-firestore.js"></script>
+        <script src="bower_components/firebase/firebase-messaging.js"></script>
+        <script src="bower_components/firebase/firebase-functions.js"></script>
+        <script src="bower_components/angular-tel-input/src/angular-tel-input.js"></script>
+      
+        
+      
+        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+      
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyAewQ7eajHC99uRZb4uMNtINnRvF9q8Th8",
+            authDomain: "brackcrackapp.firebaseapp.com",
+            databaseURL: "https://brackcrackapp.firebaseio.com",
+            projectId: "brackcrackapp",
+            storageBucket: "brackcrackapp.appspot.com",
+            messagingSenderId: "692935332328"
+          };
+          firebase.initializeApp(config);
+        </script>
   </head>
-  <body>
+  <body ng-app="brackCrackApp">
+      
+      <div style="margin-bottom:50px">
+          <nav-bar ></nav-bar>
+      </div>
+      
+      <div ng-controller="MainController">  
+          <div class="alert alert-success" ng-show="showSuccessAlert" role="alert">
+              <button type="button" class="close" ng-click="switchBool('showSuccessAlert')">×</button>
+              <strong>Success!</strong> {{successTextAlert}}
+          </div>
 
-    <div class="view-container">
-      <div ng-view class="view-frame"></div>
-    </div>
+          <div class="alert alert-info" ng-show="showInfoAlert" role="alert">
+              <button type="button" class="close" ng-click="switchBool('showInfoAlert')">×</button>     
+              <strong>FYI!</strong> {{infoTextAlert}}
+          </div>
 
+          <div class="alert alert-danger" ng-show="showErrorAlert" role="alert">
+              <button type="button" class="close" ng-click="switchBool('showErrorAlert')">×</button>     
+              <strong>Error!</strong> {{errorTextAlert}}
+          </div>
+          
+          <div ng-hide="user" class="alert alert-info" role="alert">
+              <p><strong>Welcome to Brack Crack!</strong> Please sign in to be able to fill out brackets and get started</p>
+              <button class="btn-google" ng-click="auth.$signInWithPopup('google')">Sign In Using Google</button>
+              <button class="btn-facebook" ng-click="auth.$signInWithPopup('facebook')">Sign In Using Facebook</button>
+              
+          </div>
+          
+          <ng-view></ng-view>
+      </div>
+      
+      <nav class="hidden-sm hidden-xs navbar navbar-inverse navbar-fixed-bottom" style="text-align:center">
+          <h4 style="color:white";>Copyright 2017 Deez Nutz</h4>
+      </nav>
   </body>
 </html>

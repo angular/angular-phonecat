@@ -1,0 +1,34 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-bold"></i><i class="glyphicon glyphicon-copyright-mark"></i></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <li ng-class="{'active' : isActiveTab('home')}" ng-click="navBarClick('home')"><a href="#/home">Home <span class="sr-only">(current)</span></a></li>
+          <li ng-class="{'active' : isActiveTab('brackets')}" ng-click="navBarClick('brackets')"><a href="#/brackets">Your Brackets</a></li>
+          <li ng-class="{'active' : isActiveTab('search')}" ng-click="navBarClick('search')"><a href="#/search">Search</a></li>
+      </ul>
+
+        <form class="navbar-form navbar-right">
+            <div ng-show="loggedIn">
+                Signed in as <a ng-click="navBarClick('profile')" href="#/profile">{{user.displayName}}</a>!
+                <button type="submit" class="btn btn-primary" ng-click="signOut()">Sign Out</button>
+            </div>
+            <div ng-show="!loggedIn">
+                <button type="submit" class="btn btn-primary" ng-click="signIn()">Sign In</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</nav>
+
