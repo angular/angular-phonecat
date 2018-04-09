@@ -5,10 +5,10 @@
         <title>brackCRACK</title>
       
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="bower_components/bootstrap/less/"
         <link rel="stylesheet" href="app.css" />
-        <link type="text/css" rel="stylesheet" href="bower_components/firebaseui/dist/firebaseui.css" />
-        <link rel="stylesheet" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css
+        <!--<link type="text/css" rel="stylesheet" href="bower_components/firebaseui/dist/firebaseui.css" />-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
       
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
@@ -28,9 +28,9 @@
         <script src="bower_components/firebase/firebase-functions.js"></script>
         <script src="bower_components/angular-tel-input/src/angular-tel-input.js"></script>
       
-        
-      
         <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+      
+        <!--<script src="bower_components/firebaseui/dist/firebaseui.js"></script>-->
       
         <script>
           // Initialize Firebase
@@ -67,11 +67,17 @@
               <strong>Error!</strong> {{errorTextAlert}}
           </div>
           
-          <div ng-hide="user" class="alert alert-info" role="alert">
-              <p><strong>Welcome to Brack Crack!</strong> Please sign in to be able to fill out brackets and get started</p>
-              <button class="btn-google" ng-click="auth.$signInWithPopup('google')">Sign In Using Google</button>
-              <button class="btn-facebook" ng-click="auth.$signInWithPopup('facebook')">Sign In Using Facebook</button>
+          <div ng-show="!user" class="alert alert-info" role="alert">
+              <p><strong><h3>Welcome to Brack Crack!</h3></strong><br/> Please sign in to be able to fill out brackets and get started</p>
+              <a class="btn btn-md btn-block btn-social btn-google"  style="max-width:300px" ng-click="auth.$signInWithPopup('google')">
+                  <span class="fa fa-google"></span> Sign in with Google
+              </a>
+              <a class="btn btn-block btn-social btn-facebook" style="max-width:300px" ng-click="auth.$signInWithPopup('facebook')">
+                  <span class="fa fa-facebook"></span> Sign in with Facebook
+              </a>
               
+              <input type="text">Email</input>
+          <input type="password">Password</input>
           </div>
           
           <ng-view></ng-view>
