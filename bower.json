@@ -13,8 +13,10 @@
     "angular-route": "1.5.x",
     "bootstrap": "3.3.x",
     "jquery": "2.2.x",
-    "firebase": "^3.6.*",
-    "firebaseui": "^2.7.0",
-    "angular-tel-input": "^1.0.0"
+    "firebase": "^3.6.x",
+    "angular-tel-input": "^1.0.0",
+    "popper.js": "^1.14.3",
+    "angularfire": "^2.3.0",
+    "jquery-bracket": "^0.11.1"
   }
 }

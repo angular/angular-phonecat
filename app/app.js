@@ -2,15 +2,16 @@
 
 var mainApp = angular.module('brackCrackApp', ['ngRoute', 'firebase']);
 
-mainApp.config(function($routeProvider) {
+mainApp.config(function($routeProvider, $locationProvider) {
+    $locationProvider.hashPrefix('');
+    
 	$routeProvider
 		.when('/home', {
 			templateUrl: 'pages/home.html',
 			controller: 'MainController'
 		})
 		.when('/brackets', {
-			templateUrl: 'pages/brackets.html',
-			controller: 'MainController'
+			template: '<bracket userId=123></bracket>'
 		})
         .when('/search', {
 			templateUrl: 'pages/search.html',
@@ -29,7 +30,7 @@ mainApp.config(function($routeProvider) {
 			controller: 'MainController'
 		})
 		.otherwise({
-			redirectTo: '/home'
+			redirectTo: 'home'
 		});
 });
 
@@ -57,12 +58,6 @@ mainApp.controller('MainController', ["$scope", "Auth", function mainController(
             //$scope.showSuccessAlert = true;
             //$scope.successTextAlert = "Success";
         });
-        
-        //var user = firebase.auth().currentUser;
-
-        //if (user) {
-//          $scope.user = user;
-  //      }
     };
     
     $scope.login = function() {
