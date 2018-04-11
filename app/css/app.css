@@ -1,18 +1,17 @@
-html *
-{
-   font-family: Arial;
+html * {
+    font-family: Arial;
 }
 
 body {
     padding: 40px;
-    background-image: url("img/background.jpg");
+    background-image: url("background.jpg");
     background-repeat: repeat;
     background-color: floralwhite;
 }
 
 h1 {
-  border-bottom: 1px solid gray;
-  margin-top: 0;
+    border-bottom: 1px solid gray;
+    margin-top: 0;
 }
 
 .navbar.navbar-fixed-top {

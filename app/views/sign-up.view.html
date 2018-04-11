@@ -1,16 +1,17 @@
-<h3>To sign up by email:</h3>
-<form>
-    <div>
+<div ng-controller="SignUpController">
+    <h3>To sign up by email:</h3>
+    <form>
         <div>
-            <input type="text" placeholder="Email:" ng-model="newEmail">
-            <input type="password" placeholder="Password:" ng-model="newPass">
+            <div>
+                <input type="text" placeholder="Email:" ng-model="newEmail">
+                <input type="password" placeholder="Password:" ng-model="newPass">
+            </div>
+            <br/>
+            <button class="btn btn-primary" ng-click="createAccount()">Create Account</button>
         </div>
-        <br/>
-        <button class="btn btn-primary" ng-click="createAccount()">Create Account</button>
-    </div>
-</form>
+    </form>
 
-<!-- 
+    <!-- 
 <h3>To sign up by phone number:</h3>
 <form>
     <div id="signUpStep1" ng-show="signUpState == 'EMAIL'">
@@ -32,3 +33,5 @@
     </div>
 </form>
 -->
+
+</div>
