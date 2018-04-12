@@ -1,6 +1,8 @@
 'use strict';
 
-var brackCrackApp = angular.module('brackCrackApp', ['ngRoute', 'firebase']);
+var brackCrackApp = angular.module('brackCrackApp', ['ngRoute', 'firebase', 'smart-table']);
+
+brackCrackApp.constant('FIREBASE_URL', 'https://brackcrackapp.firebaseio.com');
 
 brackCrackApp.config(function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('');

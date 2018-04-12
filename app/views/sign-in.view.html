@@ -8,7 +8,7 @@
             <input type="password" required placeholder="Password:" ng-model="loginPass">
         </div>
         <br/>
-        <button class="btn btn-primary" ng-click="auth.emailLogin(loginEmail, loginPass)">Login</button>
+        <button class="btn btn-primary" ng-click="emailLogin()">Login</button>
         <button class="btn btn-primary" ng-click="resetPassword()">Reset Password</button>
     </form>
     <br/>
@@ -16,13 +16,13 @@
     <br/>
     <h4>Or sign in using one of our supported social media platforms</h4>
 
-    <a class="btn btn-md btn-block btn-social btn-google" style="max-width:200px" ng-click="auth.$signInWithPopup('google')">
+    <a class="btn btn-md btn-block btn-social btn-google" style="max-width:200px" ng-click="googleLogin()">
   <span class="fa fa-google"></span> Sign in with Google
 </a>
-    <a class="btn btn-block btn-social btn-twitter" style="max-width:200px" ng-click="auth.$signInWithPopup('twitter')">
+    <a class="btn btn-block btn-social btn-twitter" style="max-width:200px" ng-click="twitterLogin()">
   <span class="fa fa-twitter"></span> Sign in with Twitter
 </a>
-    <a class="btn btn-block btn-social btn-facebook" style="max-width:200px" ng-click="auth.$signInWithPopup('facebook')">
+    <a class="btn btn-block btn-social btn-facebook" style="max-width:200px" ng-click="facebookLogin()">
   <span class="fa fa-facebook"></span> Sign in with Facebook
 </a>
 

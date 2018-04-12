@@ -17,6 +17,7 @@ angular.module('brackCrackApp')
         });
 
         auth.broadcastAuthEvent = function () {
+            alert('broadcasting');
             $rootScope.$broadcast('authEvent');
         };
 
@@ -41,7 +42,6 @@ angular.module('brackCrackApp')
         auth.googleLogin = function () {
             var provider = new firebase.auth.GoogleAuthProvider();
             provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-            firebase.auth().useDeviceLanguage();
             firebase.auth().signInWithPopup(provider).catch(function (error) {
                 alert(error.code + ": " + error.message);
             });

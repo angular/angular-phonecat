@@ -17,6 +17,8 @@
     "angular-tel-input": "^1.0.0",
     "popper.js": "^1.14.3",
     "angularfire": "^2.3.0",
-    "jquery-bracket": "^0.11.1"
+    "jquery-bracket": "^0.11.1",
+    "angular-smart-table": "^2.1.11",
+    "smart-table-sticky-header": "st-sticky-header#^1.0.1"
   }
 }
