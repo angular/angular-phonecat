@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('brackCrackApp')
-    .factory('DataService', function ($firebase, FIREBASE_URL) {
+    .factory('DataService', function ($firebase, FIREBASE_URL, FBAuth) {
         return {
             getBracketList: function (uid) {
-                alert('loading list for: ' + uid);
-                return $firebase(new Firebase(FIREBASE_URL + '/' + key));
+                return $firebase(new Firebase(FIREBASE_URL + '/' + uid));
             },
             getFullBracketList: function () {
                 return $firebase(new Firebase(FIREBASE_URL));

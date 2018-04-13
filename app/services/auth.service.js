@@ -1,45 +1,46 @@
 'use strict';
 
-angular.module('brackCrackApp')
-    .factory('Auth', ['$firebaseAuth', '$rootScope', function ($firebaseAuth, $rootScope) {
-        var auth = {};
+CHECK THIS OUT
+
+https: //angularfirebase.com/lessons/angular-firebase-authentication-tutorial-oauth/
+
+
+    angular.module('brackCrackApp')
+    .factory('BCAuthService', function ($firebaseAuth, $rootScope, Session) {
+        var authService = {};
+
+        authService.broadcastAuthEvent = function () {
+            $rootScope.$broadcast('authEvent', Session.user);
+        };
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                auth.user = user;
-                auth.loggedIn = true;
-                auth.broadcastAuthEvent();
+                $rootScope.$broadcast('authEvent', Session.create(user.uid, user));
             } else {
-                auth.user = {};
-                auth.loggedIn = false;
-                auth.broadcastAuthEvent();
+                Session.destroy();
+                authService.broadcastAuthEvent();
             }
         });
 
-        auth.broadcastAuthEvent = function () {
-            alert('broadcasting');
-            $rootScope.$broadcast('authEvent');
-        };
-
-        auth.createAccount = function (email, password) {
+        authService.createAccount = function (email, password) {
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
                 alert(error.code + ": " + error.message);
             });
         }
 
-        auth.emailLogin = function (email, password) {
+        authService.emailLogin = function (email, password) {
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
                 alert(error.code + ": " + error.message);
             });
         }
 
-        auth.facebookLogin = function () {
+        authService.facebookLogin = function () {
             firebase.auth().$signInWithPopup('facebook').catch(function (error) {
                 alert(error.code + ": " + error.message);
             });
         };
 
-        auth.googleLogin = function () {
+        authService.googleLogin = function () {
             var provider = new firebase.auth.GoogleAuthProvider();
             provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
             firebase.auth().signInWithPopup(provider).catch(function (error) {
@@ -47,17 +48,17 @@ angular.module('brackCrackApp')
             });
         };
 
-        auth.twitterLogin = function () {
+        authService.twitterLogin = function () {
             firebase.auth().$signInWithPopup('twitter').catch(function (error) {
                 alert(error.code + ": " + error.message);
             });
         };
 
-        auth.signOut = function () {
+        authService.signOut = function () {
             firebase.auth().signOut().catch(function (error) {
                 alert(error.code + ": " + error.message);
             });
         };
 
-        return auth;
-    }]);
+        return authService;
+    });

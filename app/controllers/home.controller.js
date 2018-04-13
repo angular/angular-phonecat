@@ -1,12 +1,6 @@
 'use strict';
 
 angular.module('brackCrackApp')
-    .controller('HomeController', ["$scope", "Auth", function ($scope, Auth) {
-        $scope.user = Auth.user;
-        $scope.loggedIn = Auth.loggedIn;
+    .controller('HomeController', function ($scope) {
 
-        $scope.$on('authEvent', function () {
-            $scope.user = Auth.user;
-            $scope.loggedIn = Auth.loggedIn;
-        });
-    }]);
+    });

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="brackCrackApp">
 
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>brackCRACK</title>
+
+    <link type=”image/x-icon” href=”/favicon.ico”>
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -12,7 +14,6 @@
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
@@ -22,6 +23,7 @@
 
     <script src="app.js"></script>
 
+    <script src="services/session.service.js"></script>
     <script src="services/auth.service.js"></script>
     <script src="services/data.service.js"></script>
 
@@ -58,29 +60,61 @@
     </script>
 </head>
 
-<body ng-app="brackCrackApp">
+<body ng-controller="MainController">
     <div style="margin-bottom:50px">
-        <nav-bar></nav-bar>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                    <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-bold"></i><i class="glyphicon glyphicon-copyright-mark"></i></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{'active' : isActiveTab('home')}" ng-click="navBarClick('home')"><a href="#/home">Home <span class="sr-only">(current)</span></a></li>
+                        <li ng-class="{'active' : isActiveTab('brackets')}" ng-click="navBarClick('brackets')"><a href="#/brackets">Your Brackets</a></li>
+                        <li ng-class="{'active' : isActiveTab('search')}" ng-click="navBarClick('search')"><a href="#/search">Search Brackets</a></li>
+                    </ul>
+
+                    <div class="navbar-form navbar-right">
+                        <div ng-show="loggedIn">Welcome, <a ng-click="navBarClick('profile')" href="#/profile">{{currentUser.uid}}</a></div>
+                        <a href="#/signIn" ng-show="!loggedIn" class="btn btn-primary">Sign In!</a>
+                    </div>
+                    <!--<form class="navbar-form navbar-right">
+                        <div ng-show="currentUser != null">
+                            Welcome, <a ng-click="navBarClick('profile')" href="#/profile">{{currentUser.uid}}</a>!
+                            <button type="submit" class="btn btn-primary" ng-click="signOut()">Sign Out</button>
+                        </div>
+                        <div ng-show="currentUser == null">
+                            <a href="#/signIn" class="btn btn-primary">Sign In!</a>
+                        </div>
+                    </form>-->
+                </div>
+            </div>
+        </nav>
     </div>
 
-    <div ng-controller="MainController">
-        <div class="alert alert-success" ng-show="showSuccessAlert" role="alert">
-            <button type="button" class="close" ng-click="switchBool('showSuccessAlert')">×</button>
-            <strong>Success!</strong> {{successTextAlert}}
-        </div>
-
-        <div class="alert alert-info" ng-show="showInfoAlert" role="alert">
-            <button type="button" class="close" ng-click="switchBool('showInfoAlert')">×</button>
-            <strong>FYI!</strong> {{infoTextAlert}}
-        </div>
-
-        <div class="alert alert-danger" ng-show="showErrorAlert" role="alert">
-            <button type="button" class="close" ng-click="switchBool('showErrorAlert')">×</button>
-            <strong>Error!</strong> {{errorTextAlert}}
-        </div>
-
-        <ng-view></ng-view>
+    <div class="alert alert-success" ng-show="showSuccessAlert" role="alert">
+        <button type="button" class="close" ng-click="switchBool('showSuccessAlert')">×</button>
+        <strong>Success!</strong> {{successTextAlert}}
     </div>
+
+    <div class="alert alert-info" ng-show="showInfoAlert" role="alert">
+        <button type="button" class="close" ng-click="switchBool('showInfoAlert')">×</button>
+        <strong>FYI!</strong> {{infoTextAlert}}
+    </div>
+
+    <div class="alert alert-danger" ng-show="showErrorAlert" role="alert">
+        <button type="button" class="close" ng-click="switchBool('showErrorAlert')">×</button>
+        <strong>Error!</strong> {{errorTextAlert}}
+    </div>
+
+    <ng-view></ng-view>
 
     <nav class="hidden-sm hidden-xs navbar navbar-inverse navbar-fixed-bottom" style="text-align:center">
         <h4 style="color:white" ;>Copyright 2017 Deez Nutz</h4>

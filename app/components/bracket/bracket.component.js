@@ -4,15 +4,7 @@ angular.
 module('brackCrackApp').
 component('bracket', {
     templateUrl: 'components/bracket/bracket.template.html',
-    controller: function BracketController($scope, Auth) {
-        $scope.user = Auth.user;
-        $scope.loggedIn = Auth.loggedIn;
-
-        $scope.$on('authEvent', function () {
-            $scope.user = Auth.user;
-            $scope.loggedIn = Auth.loggedIn;
-        });
-
+    controller: function BracketController($scope) {
         $scope.rounds = [
             //-- round 1
             [
@@ -225,9 +217,9 @@ component('bracket', {
 
         $scope.titles = ['round 1', 'round 2', 'round 3', 'round 4', 'round 5'];
 
-        $(".brackets").brackets({
+        /*$(".brackets").brackets({
             titles: $scope.titles,
             rounds: $scope.rounds
-        });
+        });*/
     }
 });

@@ -1,20 +1,8 @@
 'use strict';
 
 angular.module('brackCrackApp')
-    .controller('BracketListController', ["$scope", "$filter", "Auth", function ($scope, $filter, Auth) {
-        $scope.user = Auth.user;
-        $scope.loggedIn = Auth.loggedIn;
-
-        $scope.$on('authEvent', function () {
-            $scope.user = Auth.user;
-            $scope.loggedIn = Auth.loggedIn;
-        });
-
+    .controller('BracketListController', ["$scope", "$filter", function ($scope, $filter) {
         $scope.bracketList = [];
-
-        if ($scope.loggedIn) {
-            //$scope.bracketList = DataService($scope.user.uid);
-        }
 
         $scope.actionClicked = false;
 
@@ -53,5 +41,4 @@ angular.module('brackCrackApp')
             $scope.actionClicked = true;
             alert('delete bracket: ' + bracketId);
         }
-
-            }]);
+}]);
