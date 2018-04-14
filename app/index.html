@@ -1,34 +1,76 @@
-<!doctype html>
-<html lang="en" ng-app="phonecatApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Google Phone Gallery</title>
+<!DOCTYPE html>
+<html lang="en" ng-app="brackCrackApp">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>brackCRACK</title>
+
+    <link type=”image/x-icon” href=”/favicon.ico”>
+
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="app.animations.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/pacmanLoad.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="app.module.js"></script>
-    <script src="app.config.js"></script>
-    <script src="app.animations.js"></script>
-    <script src="core/core.module.js"></script>
-    <script src="core/checkmark/checkmark.filter.js"></script>
-    <script src="core/phone/phone.module.js"></script>
-    <script src="core/phone/phone.service.js"></script>
-    <script src="phone-list/phone-list.module.js"></script>
-    <script src="phone-list/phone-list.component.js"></script>
-    <script src="phone-detail/phone-detail.module.js"></script>
-    <script src="phone-detail/phone-detail.component.js"></script>
-  </head>
-  <body>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
-    <div class="view-container">
-      <div ng-view class="view-frame"></div>
+    <script src="js/brackets.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="services/data.service.js"></script>
+
+    <script src="components/bracket/bracket.component.js"></script>
+
+    <script src="controllers/bracket-list.controller.js"></script>
+    <script src="controllers/home.controller.js"></script>
+    <script src="controllers/main.controller.js"></script>
+    <script src="controllers/profile.controller.js"></script>
+    <script src="controllers/search.controller.js"></script>
+    <script src="controllers/sign-in.controller.js"></script>
+    <script src="controllers/sign-up.controller.js"></script>
+
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/firebase/firebase-app.js"></script>
+    <script src="bower_components/firebase/firebase-auth.js"></script>
+    <script src="bower_components/firebase/firebase-database.js"></script>
+    <script src="bower_components/firebase/firebase-messaging.js"></script>
+    <script src="bower_components/angular-tel-input/src/angular-tel-input.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAewQ7eajHC99uRZb4uMNtINnRvF9q8Th8",
+            authDomain: "brackcrackapp.firebaseapp.com",
+            databaseURL: "https://brackcrackapp.firebaseio.com",
+            projectId: "brackcrackapp",
+            storageBucket: "brackcrackapp.appspot.com",
+            messagingSenderId: "692935332328"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+</head>
+
+<body ng-controller="MainController">
+    <div ng-show="!doneLoading">
+        <div ng-include src="'partials/landing-page.partial.html'"></div>
     </div>
+    <div ng-show="doneLoading">
+        <div ng-include src="'partials/nav-bar.partial.html'"></div>
 
-  </body>
+        <div ng-include src="'partials/alerts.partial.html'"></div>
+
+        <ng-view></ng-view>
+
+        <div ng-include src="'partials/footer.partial.html'"></div>
+    </div>
+</body>
+
 </html>

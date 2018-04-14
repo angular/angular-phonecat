@@ -1,0 +1,43 @@
+<div ng-controller="BracketListController" ng-show="doneLoading">
+    <div ng-show="!currentUser">
+        <h4><a href="#/signIn" class="btn btn-primary">Sign in</a> to keep track of your own brackets!</h4>
+    </div>
+
+    <table ng-show="currentUser" st-table="displayBracketList" st-safe-src="bracketList" class="table table-striped">
+        <thead>
+            <tr>
+                <th st-sort="id">ID</th>
+                <th st-sort="name" st-skip-natural="true">Name</th>
+                <th class="hidden-xs">Desc</th>
+                <th st-sort="category">Category</th>
+                <th st-sort="format" class="hidden-xs">Format</th>
+                <th st-sort="createdBy" class="hidden-xs">Created By</th>
+                <th st-sort="createdOn" class="hidden-xs">Created On</th>
+                <th st-sort="public" class="hidden-xs">Public</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="9">
+                    <input st-search placeholder="global search" class="input-sm form-control" type="search" />
+                </th>
+            </tr>
+            <tr st-select-row="bracket" st-select-mode="single" ng-repeat="bracket in displayBracketList" ng-click="openBracket(bracket)">
+                <td>{{bracket.id}}</td>
+                <td>{{bracket.name}}</td>
+                <td class="hidden-xs">{{bracket.desc}}</td>
+                <td>{{bracket.category}}</td>
+                <td class="hidden-xs">{{bracket.format}}</td>
+                <td class="hidden-xs">{{bracket.createdBy}}</td>
+                <td class="hidden-xs">{{bracket.createdOn | date}}</td>
+                <td class="hidden-xs">{{bracket.public}}</td>
+                <td>
+                    <a ng-click="shareBracket(bracket.id)"><i class="glyphicon glyphicon-share" title="Share"></i></a>
+                    <a ng-click="printBracket(bracket.id)"><i class="glyphicon glyphicon-print" title="Print"></i></a>
+                    <a ng-click="deleteBracket(bracket.id)"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,17 @@
+<div id="myProfile" ng-controller="ProfileController">
+    <div class="card">
+        <img src="{{currentUser.photoURL}}" alt="photo" style="width:100%">
+        <h1>{{currentUser.displayName}}</h1>
+        <p class="title"><a href="#/bracketList">Bracket Counter: </a></p>
+        <p><strong>ID:</strong> {{currentUser.uid}}
+        </p>
+        <p><strong>Email:</strong> {{currentUser.email}}</p>
+
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <p><button>Edit Profile</button><button ng-click="signOut()">Sign Out</button></p>
+        <p></p>
+    </div>
+</div>

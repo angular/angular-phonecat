@@ -1,0 +1,29 @@
+<div ng-controller="SignInController">
+    <p><strong><h4>Welcome to Brack Crack!</h4></strong></p>
+    <br/>
+    <h4>Already have a BrackCrack account?</h4>
+    <form>
+        <div>
+            <input type="text" required placeholder="Email:" ng-model="loginEmail">
+            <input type="password" required placeholder="Password:" ng-model="loginPass">
+        </div>
+        <br/>
+        <button class="btn btn-primary" ng-click="emailLogin()">Login</button>
+        <button class="btn btn-primary" ng-click="resetPassword()">Reset Password</button>
+    </form>
+    <br/>
+    <h4>First time here? Create an account by clicking <a href="#/signUp">here!</a></h4>
+    <br/>
+    <h4>Or sign in using one of our supported social media platforms</h4>
+
+    <a class="btn btn-md btn-block btn-social btn-google" style="max-width:200px" ng-click="googleLogin()">
+  <span class="fa fa-google"></span> Sign in with Google
+</a>
+    <a class="btn btn-block btn-social btn-twitter" style="max-width:200px" ng-click="twitterLogin()">
+  <span class="fa fa-twitter"></span> Sign in with Twitter
+</a>
+    <a class="btn btn-block btn-social btn-facebook" style="max-width:200px" ng-click="facebookLogin()">
+  <span class="fa fa-facebook"></span> Sign in with Facebook
+</a>
+
+</div>

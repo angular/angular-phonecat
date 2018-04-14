@@ -1,0 +1,37 @@
+<div ng-controller="SignUpController">
+    <h3>To sign up by email:</h3>
+    <form>
+        <div>
+            <div>
+                <input type="text" placeholder="Email:" ng-model="newEmail">
+                <input type="password" placeholder="Password:" ng-model="newPass">
+            </div>
+            <br/>
+            <button class="btn btn-primary" ng-click="createAccount()">Create Account</button>
+        </div>
+    </form>
+
+    <!-- 
+<h3>To sign up by phone number:</h3>
+<form>
+    <div id="signUpStep1" ng-show="signUpState == 'EMAIL'">
+        <p>Enter in your phone number to receive a code, which will then be used to create your account.</p>
+        
+        <tel-input placeholder="Enter your mobile number" is-required="true" number="$ctrl.user.mobile"></tel-input>
+        <button id="sign-in-button" class="button icon btn-next" ng-disabled="mobile.number.$invalid"  ng-click="$ctrl.onSignInSubmit(user.mobile)">
+            Send SMS <i class="glyphicon glyphicon-phone"></i>
+        </button>
+    </div>
+    <div id="signUpStep2" ng-show="signUpState == 'CONFIRM'">
+        <p>SMS sent to {{$ctrl.user.mobile}}, when you get the code, enter it below and select confirm</p>
+        
+        <input type="text" ng-model="user.confirmCode" />
+        <button id="confirm-button" class="button icon btn-next" ng-click="$ctrl.confirmCode()">Confirm Code</button>
+    </div>
+    <div id="signUpStep3" ng-show="signUpState == 'FINAL'">
+        <div>Done, confirmation code: {{$ctrl.confirmation}}</div>
+    </div>
+</form>
+-->
+
+</div>

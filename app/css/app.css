@@ -1,0 +1,101 @@
+html * {
+    font-family: Arial;
+}
+
+body {
+    padding: 40px;
+    background-image: url("background.jpg");
+    background-repeat: repeat;
+    background-color: floralwhite;
+}
+
+h1 {
+    border-bottom: 1px solid gray;
+    margin-top: 0;
+}
+
+.navbar.navbar-fixed-top {
+    border-bottom: 5px black solid;
+}
+
+.navbar.navbar-fixed-bottom {
+    border-top: 5px black solid;
+}
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+.st-selected {
+    background: #216eff !important;
+    color: white !important;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.dialog {
+    z-index: 999999;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: calc(100%);
+    height: auto!important;
+    background: black;
+    color: white;
+}
+
+.dialog[ng-cloak] {
+    display: none;
+}
+
+.dialog .content {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.card {
+    background-color: lightgray;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+#myProfile.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+#myProfile.a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+#myProfile.button:hover,
+#myProfile.a:hover {
+    opacity: 0.7;
+}

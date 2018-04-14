@@ -6,12 +6,16 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "1.5.x",
-    "angular-animate": "1.5.x",
+    "angular": "1.6.x",
     "angular-mocks": "1.5.x",
     "angular-resource": "1.5.x",
     "angular-route": "1.5.x",
     "bootstrap": "3.3.x",
-    "jquery": "2.2.x"
+    "jquery": "2.2.x",
+    "firebase": "^3.6.x",
+    "angular-tel-input": "^1.0.0",
+    "angularfire": "^2.3.0",
+    "jquery-bracket": "^0.11.1",
+    "angular-smart-table": "^2.1.11"
   }
 }
