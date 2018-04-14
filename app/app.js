@@ -2,6 +2,16 @@
 
 var brackCrackApp = angular.module('brackCrackApp', ['ngRoute', 'firebase', 'smart-table']);
 
+brackCrackApp.directive('fullscreenDialog', function () {
+    return {
+        controller: 'MainController',
+        restrict: 'E',
+        replace: true,
+        transclude: true,
+        template: '<div class="dialog-container"><ng-transclude></ng-transclude></div>'
+    }
+});
+
 brackCrackApp.constant('FIREBASE_URL', 'https://brackcrackapp.firebaseio.com');
 
 brackCrackApp.config(function ($routeProvider, $locationProvider) {
@@ -31,6 +41,10 @@ brackCrackApp.config(function ($routeProvider, $locationProvider) {
         .when('/signUp', {
             templateUrl: 'views/sign-up.view.html',
             controller: 'SignUpController'
+        })
+        .when('/loading', {
+            templateUrl: 'views/loading.view.html',
+            controller: 'MainController'
         })
         .otherwise({
             redirectTo: '/home'

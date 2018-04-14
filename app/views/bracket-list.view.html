@@ -1,9 +1,9 @@
-<div ng-controller="BracketListController">
-    <div ng-show="!currentUser.displayName">
+<div ng-controller="BracketListController" ng-show="doneLoading">
+    <div ng-show="!currentUser">
         <h4><a href="#/signIn" class="btn btn-primary">Sign in</a> to keep track of your own brackets!</h4>
     </div>
 
-    <table ng-show="currentUser.displayName" st-table="displayBracketList" st-safe-src="bracketList" class="table table-striped">
+    <table ng-show="currentUser" st-table="displayBracketList" st-safe-src="bracketList" class="table table-striped">
         <thead>
             <tr>
                 <th st-sort="id">ID</th>

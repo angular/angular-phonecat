@@ -1,9 +1,0 @@
-<form class="navbar-form navbar-right">
-    <div ng-if="currentUser.uid">
-        Welcome, <a ng-click="navBarClick('profile')" href="#/profile">{{currentUser.uid}}</a>!
-        <button type="submit" class="btn btn-primary" ng-click="signOut()">Sign Out</button>
-    </div>
-    <div ng-if="!currentUser.uid">
-        <a href="#/signIn" class="btn btn-primary">Sign In!</a>
-    </div>
-</form>

@@ -1,0 +1,14 @@
+<div class="alert alert-success" ng-show="successVisible" role="alert">
+    <button type="button" class="close" ng-click="switchBool('successVisible')">×</button>
+    <strong>Success!</strong> {{successMessage}}
+</div>
+
+<div class="alert alert-info" ng-show="infoVisible" role="alert">
+    <button type="button" class="close" ng-click="switchBool('infoVisible')">×</button>
+    <strong>FYI!</strong> {{infoText}}
+</div>
+
+<div class="alert alert-danger" ng-show="errorVisible" role="alert">
+    <button type="button" class="close" ng-click="switchBool('errorVisible')">×</button>
+    <strong>Error!</strong> {{errorText}}
+</div>
