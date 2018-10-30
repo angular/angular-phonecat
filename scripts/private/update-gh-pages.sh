@@ -1,17 +1,17 @@
 #!/bin/bash
 
 #
-# This script will update the gh-pages branch with any changes that have been made to the steps
+# This script will update the `gh-pages` branch with any changes that have been made to the steps
 # and to the dependencies.
 #
 # The tutorial step changes are computed by checking out each step into a snapshot folder and then
-# overwriting the step folders in gh-pages with these new ones.
+# overwriting the step folders in `gh-pages` with these new ones.
 # If there are any changes they will be committed.
 #
-# The dependency changes are computed by running "bower update" then committing any changed files
-# inside the bower_components folder onto the gh-pages branch.
+# The dependency changes are computed by running "npm install" then committing any changed files
+# inside the `app/lib/` folder onto the `gh-pages` branch.
 #
-# Finally, the new commits are pushed to origin/gh-pages.
+# Finally, the new commits are pushed to `origin/gh-pages`.
 
 # Exit on error and print each command as it is run
 set -ex
@@ -25,11 +25,8 @@ cd $ROOT_DIR
 # Make sure we are on master
 git checkout -f master
 
-# Ensure that all the tool dependencies are there
+# Ensure that all the dependencies are there
 npm install
-
-# Update the bower dependencies
-node_modules/.bin/bower update
 
 # Run all the tests on each step
 scripts/private/test-all.sh
@@ -47,7 +44,7 @@ do
   cp -r app $SNAP_DIR/step-$i/
 done
 
-# Move the snapshot step folders into the gh-pages branch
+# Move the snapshot step folders into the `gh-pages` branch
 git checkout -f gh-pages
 rm -rf step-*
 mv $SNAP_DIR/* .
