@@ -173,18 +173,21 @@ The following docs describe how you can test and develop this application furthe
 
 ### Installing Dependencies
 
-The application relies upon various Node.js tools, such as [Bower][bower], [Karma][karma] and
-[Protractor][protractor]. You can install these by running:
+The application relies upon various JS libraries, such as AngularJS and jQuery, and Node.js tools,
+such as [Karma][karma] and [Protractor][protractor]. You can install these by running:
 
 ```
 npm install
 ```
 
-This will also run Bower, which will download the Angular files needed for the current step of the
-tutorial.
+This will also download the AngularJS files needed for the current step of the tutorial and copy
+them to `app/lib`.
 
 Most of the scripts described below will run this automatically but it doesn't do any harm to run
 it whenever you like.
+
+*Note copying the AngularJS files from `node_modules` to `app/lib` makes it easier to serve the
+files by a web server.*
 
 ### Running the Application during Development
 
@@ -228,7 +231,7 @@ If JDK is not already installed, you can download it [here][jdk-download].
 
 ```
 app/                     --> all the source code of the app (along with unit tests)
-  bower_components/...   --> 3rd party JS/CSS libraries, including Angular and jQuery
+  lib/...                --> 3rd party JS/CSS libraries, including AngularJS and jQuery (copied over from `node_modules/`)
   core/                  --> all the source code of the core module (stuff used throughout the app)
     checkmark/...        --> files for the `checkmark` filter, including JS source code, specs
     phone/...            --> files for the `core.phone` submodule, including JS source code, specs
@@ -248,18 +251,16 @@ e2e-tests/               --> config and source files for e2e tests
   protractor.conf.js     --> config file for running e2e tests with Protractor
   scenarios.js           --> e2e specs
 
-node_modules/...         --> development tools (fetched using `npm`)
+node_modules/...         --> 3rd party libraries and development tools (fetched using `npm`)
 
 scripts/                 --> handy scripts
   private/...            --> private scripts used by the AngularJS Team to maintain this repo
   update-repo.sh         --> script for pulling down the latest version of this repo (!!! DELETES ALL CHANGES YOU HAVE MADE !!!)
 
-bower.json               --> Bower specific metadata, including client-side dependencies
 karma.conf.js            --> config file for running unit tests with Karma
 package.json             --> Node.js specific metadata, including development tools dependencies
 package-lock.json        --> Npm specific metadata, including versions of installed development tools dependencies
 ```
-
 
 ## Contact
 
@@ -267,7 +268,6 @@ For more information on AngularJS, please check out https://angularjs.org/.
 
 
 [angular-seed]: https://github.com/angular/angular-seed
-[bower]: http://bower.io/
 [git-home]: https://git-scm.com/
 [git-setup]: https://help.github.com/articles/set-up-git
 [google-phone-gallery]: http://web.archive.org/web/20131215082038/http://www.android.com/devices

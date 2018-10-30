@@ -5,11 +5,11 @@ module.exports = function(config) {
     basePath: './app',
 
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'lib/angular/angular.js',
+      '../node_modules/angular-mocks/angular-mocks.js',
       '**/*.module.js',
       '*!(.module|.spec).js',
-      '!(bower_components)/**/*!(.module|.spec).js',
+      '!(lib)/**/*!(.module|.spec).js',
       '**/*.spec.js'
     ],
 

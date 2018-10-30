@@ -5,8 +5,13 @@
   "description": "A tutorial application for AngularJS",
   "repository": "https://github.com/angular/angular-phonecat",
   "license": "MIT",
+  "dependencies": {
+    "angular": "1.7.x",
+    "bootstrap": "3.3.x"
+  },
   "devDependencies": {
-    "bower": "^1.8.4",
+    "angular-mocks": "1.7.x",
+    "cpx": "^1.5.0",
     "http-server": "^0.11.1",
     "jasmine-core": "^3.3.0",
     "karma": "^3.1.1",
@@ -16,7 +21,8 @@
     "protractor": "^5.4.1"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "npm run copy-libs",
+    "copy-libs": "cpx \"node_modules/{angular,angular-*,bootstrap,jquery}/**/*\" app/lib -C",
     "prestart": "npm install",
     "start": "http-server ./app -a localhost -p 8000 -c-1",
     "pretest": "npm install",
