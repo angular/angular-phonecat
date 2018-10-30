@@ -13,6 +13,7 @@ ROOT_DIR=`dirname $0`/../..
 
 cd $ROOT_DIR
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
+COMMIT=$(git rev-parse HEAD)
 
 # Ensure that all the dependencies are there
 npm install
@@ -28,7 +29,14 @@ WEBSERVER_PID=$!
 # (Steps 0 and 1 do not have tests)
 for i in $(seq 2 14)
 do
-  git checkout -f step-$i
+  if [[ $TRAVIS ]] && [[ "$TRAVIS_REPO_SLUG" == "angular/angular-phonecat" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    # On non-PR builds on CI, use the `step-*` tags.
+    git checkout -f step-$i
+  else
+    # Locally and on PR builds on CI, use the last commits.
+    # (Assumes that the last commits are the `step-*` commits.)
+    git checkout -f $COMMIT~$((14 - $i))
+  fi
 
   node_modules/.bin/karma start karma.conf.js --single-run
   node_modules/.bin/protractor e2e-tests/protractor.conf.js --directConnect
