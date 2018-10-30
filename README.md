@@ -31,7 +31,7 @@ The full tutorial can be found at https://docs.angularjs.org/tutorial.
 - There is no dynamic backend (no application server) for this application. Instead we fake the
   application server by fetching static JSON files.
 - Read the _Development_ section at the end to familiarize yourself with running and developing
-  an Angular application.
+  an AngularJS application.
 
 
 ## Commits / Tutorial Outline
@@ -59,7 +59,7 @@ git diff step-?..step-?
 - Add a stylesheet file ('app/app.css').
 - Add a static list with two phones.
 
-### step-2 _Angular Templates_
+### step-2 _AngularJS Templates_
 
 - Convert the static phone list to dynamic by:
   - Creating a `PhoneListController` controller.
@@ -239,7 +239,7 @@ app/                     --> all the source code of the app (along with unit tes
   phones/...             --> static JSON files with phone data (used to fake a backend API)
   app.animations.css     --> hooks for running CSS animations with `ngAnimate`
   app.animations.js      --> hooks for running JS animations with `ngAnimate`
-  app.config.js          --> app-wide configuration of Angular services
+  app.config.js          --> app-wide configuration of AngularJS services
   app.css                --> default stylesheet
   app.module.js          --> the main app module
   index.html             --> app layout file (the main HTML template file of the app)
@@ -251,7 +251,7 @@ e2e-tests/               --> config and source files for e2e tests
 node_modules/...         --> development tools (fetched using `npm`)
 
 scripts/                 --> handy scripts
-  private/...            --> private scripts used by the Angular Team to maintain this repo
+  private/...            --> private scripts used by the AngularJS Team to maintain this repo
   update-repo.sh         --> script for pulling down the latest version of this repo (!!! DELETES ALL CHANGES YOU HAVE MADE !!!)
 
 bower.json               --> Bower specific metadata, including client-side dependencies
