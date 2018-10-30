@@ -38,6 +38,6 @@ do
     git checkout -f $COMMIT~$((14 - $i))
   fi
 
-  node_modules/.bin/karma start karma.conf.js --single-run
-  node_modules/.bin/protractor e2e-tests/protractor.conf.js --directConnect
+  node_modules/.bin/karma start karma.conf.js --single-run --browsers ChromeHeadless,FirefoxHeadless
+  node_modules/.bin/protractor e2e-tests/protractor.conf.js --directConnect --capabilities.chromeOptions.args headless
 done
