@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      "angular-resource@1.7.5",
+      "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat"
+    ]
+  ],
+  "_from": "angular-resource@1.7.5",
+  "_id": "angular-resource@1.7.5",
+  "_inBundle": false,
+  "_integrity": "sha512-zlCKVNa2nnZNb4Lz3YFPKhsYG+v+t4STEsjkWRbii6PfwSrtH9R/zGpCOkBNFnq3naeZMMmd5aIIgHi5a7k9jA==",
+  "_location": "/angular-resource",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "angular-resource@1.7.5",
+    "name": "angular-resource",
+    "escapedName": "angular-resource",
+    "rawSpec": "1.7.5",
+    "saveSpec": null,
+    "fetchSpec": "1.7.5"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-resource/-/angular-resource-1.7.5.tgz",
+  "_spec": "1.7.5",
+  "_where": "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat",
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "description": "AngularJS module for interacting with RESTful server-side data sources",
+  "homepage": "http://angularjs.org",
+  "jspm": {
+    "shim": {
+      "angular-resource": {
+        "deps": [
+          "angular"
+        ]
+      }
+    }
+  },
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "rest",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular-resource",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.7.5"
+}

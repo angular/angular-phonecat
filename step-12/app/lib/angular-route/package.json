@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      "angular-route@1.7.5",
+      "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat"
+    ]
+  ],
+  "_from": "angular-route@1.7.5",
+  "_id": "angular-route@1.7.5",
+  "_inBundle": false,
+  "_integrity": "sha512-7KfyEVVOWTI+jTY/j5rUNCIHGRyeCOx7YqZI/Ci3IbDK7GIsy6xH+hS5ai0Xi0sLjzDZ0PUDO4gBn+K0dVtlOg==",
+  "_location": "/angular-route",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "angular-route@1.7.5",
+    "name": "angular-route",
+    "escapedName": "angular-route",
+    "rawSpec": "1.7.5",
+    "saveSpec": null,
+    "fetchSpec": "1.7.5"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-route/-/angular-route-1.7.5.tgz",
+  "_spec": "1.7.5",
+  "_where": "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat",
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "description": "AngularJS router module",
+  "homepage": "http://angularjs.org",
+  "jspm": {
+    "shim": {
+      "angular-route": {
+        "deps": [
+          "angular"
+        ]
+      }
+    }
+  },
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "router",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular-route",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.7.5"
+}
