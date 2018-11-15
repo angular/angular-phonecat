@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      "angular@1.7.5",
+      "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat"
+    ]
+  ],
+  "_from": "angular@1.7.5",
+  "_id": "angular@1.7.5",
+  "_inBundle": false,
+  "_integrity": "sha512-760183yxtGzni740IBTieNuWLtPNAoMqvmC0Z62UoU0I3nqk+VJuO3JbQAXOyvo3Oy/ZsdNQwrSTh/B0OQZjNw==",
+  "_location": "/angular",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "angular@1.7.5",
+    "name": "angular",
+    "escapedName": "angular",
+    "rawSpec": "1.7.5",
+    "saveSpec": null,
+    "fetchSpec": "1.7.5"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular/-/angular-1.7.5.tgz",
+  "_spec": "1.7.5",
+  "_where": "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat",
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "description": "HTML enhanced for web apps",
+  "homepage": "http://angularjs.org",
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.7.5"
+}

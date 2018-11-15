@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      "angular-animate@1.7.5",
+      "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat"
+    ]
+  ],
+  "_from": "angular-animate@1.7.5",
+  "_id": "angular-animate@1.7.5",
+  "_inBundle": false,
+  "_integrity": "sha512-kU/fHIGf2a4a3bH7E1tzALTHk+QfoUSCK9fEcMFisd6ZWvNDwPzXWAilItqOC3EDiAXPmGHaNc9/aXiD9xrAxQ==",
+  "_location": "/angular-animate",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "angular-animate@1.7.5",
+    "name": "angular-animate",
+    "escapedName": "angular-animate",
+    "rawSpec": "1.7.5",
+    "saveSpec": null,
+    "fetchSpec": "1.7.5"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.7.5.tgz",
+  "_spec": "1.7.5",
+  "_where": "C:\\Users\\gkalpak\\Files\\Dev\\AngularJS\\upstream_angular-phonecat",
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "description": "AngularJS module for animations",
+  "homepage": "http://angularjs.org",
+  "jspm": {
+    "shim": {
+      "angular-animate": {
+        "deps": [
+          "angular"
+        ]
+      }
+    }
+  },
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "animation",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular-animate",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.7.5"
+}
