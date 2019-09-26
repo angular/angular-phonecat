@@ -1,0 +1,16 @@
+.container-fluid
+ .row
+  .col-md-2
+    p Search: 
+      input('ng-model'="$ctrl.query")
+    p Sort by:
+      select('ng-model'="$ctrl.orderProp")
+        option(value="name") Alphabetical
+        option(value="age") Newest
+  .col-md-10
+    ul.phones
+      li.thumbnail.phone-list-item('ng-repeat'="phone in $ctrl.phones | filter: $ctrl.query | orderBy: $ctrl.orderProp")
+        a.thumb(href="#!/phones/{{phone.id}}")
+          img('ng-src'="{{phone.imageUrl}}", alt="{{phone.name}}")
+        a(href="#!/phones/{{phone.id}}") {{phone.name}}
+        p {{phone.snippet}}

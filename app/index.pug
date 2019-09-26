@@ -1,0 +1,29 @@
+doctype html
+html('ng-app'="phonecatApp")
+  head
+    meta(charset="utf-8")
+    title Google Phone Gallery
+    link(rel="stylesheet", href="lib/bootstrap/dist/css/bootstrap.css")
+    link(rel="stylesheet", href="app.css")
+    link(rel="stylesheet", href="app.animations.css")
+
+    script(src="lib/jquery/dist/jquery.js")
+    script(src="lib/angular/angular.js")
+    script(src="lib/angular-animate/angular-animate.js")
+    script(src="lib/angular-resource/angular-resource.js")
+    script(src="lib/angular-route/angular-route.js")
+    script(src="app.module.js")
+    script(src="app.config.js")
+    script(src="app.animations.js")
+    script(src="core/core.module.js")
+    script(src="core/checkmark/checkmark.filter.js")
+    script(src="core/phone/phone.module.js")
+    script(src="core/phone/phone.service.js")
+    script(src="phone-list/phone-list.module.js")
+    script(src="phone-list/phone-list.component.js")
+    script(src="phone-detail/phone-detail.module.js")
+    script(src="phone-detail/phone-detail.component.js")
+  body
+    .view-container
+      .view-frame('ng-view')
+      
