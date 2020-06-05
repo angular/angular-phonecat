@@ -1,6 +1,6 @@
 /**
- * @license AngularJS v1.7.5
- * (c) 2010-2018 Google, Inc. http://angularjs.org
+ * @license AngularJS v1.8.0
+ * (c) 2010-2020 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window) {'use strict';
@@ -37,7 +37,7 @@ var minErrConfig = {
  *   non-positive or non-numeric value, removes the max depth limit.
  *   Default: 5
  *
- * * `urlErrorParamsEnabled`  **{Boolean}** - Specifies wether the generated error url will
+ * * `urlErrorParamsEnabled`  **{Boolean}** - Specifies whether the generated error url will
  *   contain the parameters of the thrown error. Disabling the parameters can be useful if the
  *   generated error url is very long.
  *
@@ -87,7 +87,7 @@ function isValidObjectMaxDepth(maxDepth) {
  * Since data will be parsed statically during a build step, some restrictions
  * are applied with respect to how minErr instances are created and called.
  * Instances should have names of the form namespaceMinErr for a minErr created
- * using minErr('namespace') . Error codes, namespaces and template strings
+ * using minErr('namespace'). Error codes, namespaces and template strings
  * should all be static strings, not variables or general expressions.
  *
  * @param {string} module The namespace to use for the new minErr instance.
@@ -99,7 +99,7 @@ function isValidObjectMaxDepth(maxDepth) {
 function minErr(module, ErrorConstructor) {
   ErrorConstructor = ErrorConstructor || Error;
 
-  var url = 'https://errors.angularjs.org/1.7.5/';
+  var url = 'https://errors.angularjs.org/1.8.0/';
   var regex = url.replace('.', '\\.') + '[\\s\\S]*';
   var errRegExp = new RegExp(regex, 'g');
 
@@ -232,6 +232,7 @@ function minErr(module, ErrorConstructor) {
   hasOwnProperty,
   createMap,
   stringify,
+  UNSAFE_restoreLegacyJqLiteXHTMLReplacement,
 
   NODE_TYPE_ELEMENT,
   NODE_TYPE_ATTRIBUTE,
@@ -481,8 +482,10 @@ function baseExtend(dst, objs, deep) {
         } else if (isElement(src)) {
           dst[key] = src.clone();
         } else {
-          if (!isObject(dst[key])) dst[key] = isArray(src) ? [] : {};
-          baseExtend(dst[key], [src], true);
+          if (key !== '__proto__') {
+            if (!isObject(dst[key])) dst[key] = isArray(src) ? [] : {};
+            baseExtend(dst[key], [src], true);
+          }
         }
       } else {
         dst[key] = src;
@@ -535,8 +538,8 @@ function extend(dst) {
 * sinceVersion="1.6.5"
 * This function is deprecated, but will not be removed in the 1.x lifecycle.
 * There are edge cases (see {@link angular.merge#known-issues known issues}) that are not
-* supported by this function. We suggest
-* using [lodash's merge()](https://lodash.com/docs/4.17.4#merge) instead.
+* supported by this function. We suggest using another, similar library for all-purpose merging,
+* such as [lodash's merge()](https://lodash.com/docs/4.17.4#merge).
 *
 * @knownIssue
 * This is a list of (known) object types that are not handled correctly by this function:
@@ -544,6 +547,8 @@ function extend(dst) {
 * - [`MediaStream`](https://developer.mozilla.org/docs/Web/API/MediaStream)
 * - [`CanvasGradient`](https://developer.mozilla.org/docs/Web/API/CanvasGradient)
 * - AngularJS {@link $rootScope.Scope scopes};
+*
+* `angular.merge` also does not support merging objects with circular references.
 *
 * @param {Object} dst Destination object.
 * @param {...Object} src Source object(s).
@@ -922,7 +927,9 @@ function arrayRemove(array, value) {
  * @kind function
  *
  * @description
- * Creates a deep copy of `source`, which should be an object or an array.
+ * Creates a deep copy of `source`, which should be an object or an array. This functions is used
+ * internally, mostly in the change-detection code. It is not intended as an all-purpose copy
+ * function, and has several limitations (see below).
  *
  * * If no destination is supplied, a copy of the object or array is created.
  * * If a destination is provided, all of its elements (for arrays) or properties (for objects)
@@ -936,6 +943,25 @@ function arrayRemove(array, value) {
  *   Only enumerable properties are taken into account. Non-enumerable properties (both on `source`
  *   and on `destination`) will be ignored.
  * </div>
+ *
+ * <div class="alert alert-warning">
+ *   `angular.copy` does not check if destination and source are of the same type. It's the
+ *   developer's responsibility to make sure they are compatible.
+ * </div>
+ *
+ * @knownIssue
+ * This is a non-exhaustive list of object types / features that are not handled correctly by
+ * `angular.copy`. Note that since this functions is used by the change detection code, this
+ * means binding or watching objects of these types (or that include these types) might not work
+ * correctly.
+ * - [`File`](https://developer.mozilla.org/docs/Web/API/File)
+ * - [`Map`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map)
+ * - [`ImageData`](https://developer.mozilla.org/docs/Web/API/ImageData)
+ * - [`MediaStream`](https://developer.mozilla.org/docs/Web/API/MediaStream)
+ * - [`Set`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)
+ * - [`WeakMap`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+ * - [`getter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)/
+ *   [`setter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
  *
  * @param {*} source The source that will be used to make a copy. Can be any type, including
  *     primitives, `null`, and `undefined`.
@@ -1835,13 +1861,8 @@ function angularInit(element, bootstrap) {
   });
   if (appElement) {
     if (!isAutoBootstrapAllowed) {
-      try {
-        window.console.error('AngularJS: disabling automatic bootstrap. <script> protocol indicates ' +
+      window.console.error('AngularJS: disabling automatic bootstrap. <script> protocol indicates ' +
           'an extension, document.location.href does not match.');
-      } catch (e) {
-        // Support: Safari 11 w/ Webdriver
-        // The console.error will throw and make the test fail
-      }
       return;
     }
     config.strictDi = getNgAttribute(appElement, 'strict-di') !== null;
@@ -2066,6 +2087,26 @@ function bindJQuery() {
 
   // Prevent double-proxying.
   bindJQueryFired = true;
+}
+
+/**
+ * @ngdoc function
+ * @name angular.UNSAFE_restoreLegacyJqLiteXHTMLReplacement
+ * @module ng
+ * @kind function
+ *
+ * @description
+ * Restores the pre-1.8 behavior of jqLite that turns XHTML-like strings like
+ * `<div /><span />` to `<div></div><span></span>` instead of `<div><span></span></div>`.
+ * The new behavior is a security fix. Thus, if you need to call this function, please try to adjust
+ * your code for this change and remove your use of this function as soon as possible.
+
+ * Note that this only patches jqLite. If you use jQuery 3.5.0 or newer, please read the
+ * [jQuery 3.5 upgrade guide](https://jquery.com/upgrade-guide/3.5/) for more details
+ * about the workarounds.
+ */
+function UNSAFE_restoreLegacyJqLiteXHTMLReplacement() {
+  JQLite.legacyXHTMLReplacement = true;
 }
 
 /**
@@ -2675,7 +2716,7 @@ function toDebugString(obj, maxDepth) {
 
   htmlAnchorDirective,
   inputDirective,
-  inputDirective,
+  hiddenInputBrowserCacheDirective,
   formDirective,
   scriptDirective,
   selectDirective,
@@ -2787,11 +2828,11 @@ function toDebugString(obj, maxDepth) {
 var version = {
   // These placeholder strings will be replaced by grunt's `build` task.
   // They need to be double- or single-quoted.
-  full: '1.7.5',
+  full: '1.8.0',
   major: 1,
-  minor: 7,
-  dot: 5,
-  codeName: 'anti-prettification'
+  minor: 8,
+  dot: 0,
+  codeName: 'nested-vaccination'
 };
 
 
@@ -2824,6 +2865,7 @@ function publishExternalAPI(angular) {
     'callbacks': {$$counter: 0},
     'getTestability': getTestability,
     'reloadWithDebugInfo': reloadWithDebugInfo,
+    'UNSAFE_restoreLegacyJqLiteXHTMLReplacement': UNSAFE_restoreLegacyJqLiteXHTMLReplacement,
     '$$minErr': minErr,
     '$$csp': csp,
     '$$encodeUriSegment': encodeUriSegment,
@@ -2889,7 +2931,8 @@ function publishExternalAPI(angular) {
             ngModelOptions: ngModelOptionsDirective
         }).
         directive({
-          ngInclude: ngIncludeFillContentDirective
+          ngInclude: ngIncludeFillContentDirective,
+          input: hiddenInputBrowserCacheDirective
         }).
         directive(ngAttributeAliasDirectives).
         directive(ngEventDirectives);
@@ -2940,7 +2983,7 @@ function publishExternalAPI(angular) {
       });
     }
   ])
-  .info({ angularVersion: '1.7.5' });
+  .info({ angularVersion: '1.8.0' });
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -3033,6 +3076,16 @@ function publishExternalAPI(angular) {
  * - [`val()`](http://api.jquery.com/val/)
  * - [`wrap()`](http://api.jquery.com/wrap/)
  *
+ * jqLite also provides a method restoring pre-1.8 insecure treatment of XHTML-like tags.
+ * This legacy behavior turns input like `<div /><span />` to `<div></div><span></span>`
+ * instead of `<div><span></span></div>` like version 1.8 & newer do. To restore it, invoke:
+ * ```js
+ * angular.UNSAFE_restoreLegacyJqLiteXHTMLReplacement();
+ * ```
+ * Note that this only patches jqLite. If you use jQuery 3.5.0 or newer, please read the
+ * [jQuery 3.5 upgrade guide](https://jquery.com/upgrade-guide/3.5/) for more details
+ * about the workarounds.
+ *
  * ## jQuery/jqLite Extras
  * AngularJS also provides the following additional methods and events to both jQuery and jqLite:
  *
@@ -3112,20 +3165,36 @@ var HTML_REGEXP = /<|&#?\w+;/;
 var TAG_NAME_REGEXP = /<([\w:-]+)/;
 var XHTML_TAG_REGEXP = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:-]+)[^>]*)\/>/gi;
 
+// Table parts need to be wrapped with `<table>` or they're
+// stripped to their contents when put in a div.
+// XHTML parsers do not magically insert elements in the
+// same way that tag soup parsers do, so we cannot shorten
+// this by omitting <tbody> or other required elements.
 var wrapMap = {
-  'option': [1, '<select multiple="multiple">', '</select>'],
-
-  'thead': [1, '<table>', '</table>'],
-  'col': [2, '<table><colgroup>', '</colgroup></table>'],
-  'tr': [2, '<table><tbody>', '</tbody></table>'],
-  'td': [3, '<table><tbody><tr>', '</tr></tbody></table>'],
-  '_default': [0, '', '']
+  thead: ['table'],
+  col: ['colgroup', 'table'],
+  tr: ['tbody', 'table'],
+  td: ['tr', 'tbody', 'table']
 };
 
-wrapMap.optgroup = wrapMap.option;
 wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
 wrapMap.th = wrapMap.td;
 
+// Support: IE <10 only
+// IE 9 requires an option wrapper & it needs to have the whole table structure
+// set up in advance; assigning `"<td></td>"` to `tr.innerHTML` doesn't work, etc.
+var wrapMapIE9 = {
+  option: [1, '<select multiple="multiple">', '</select>'],
+  _default: [0, '', '']
+};
+
+for (var key in wrapMap) {
+  var wrapMapValueClosing = wrapMap[key];
+  var wrapMapValue = wrapMapValueClosing.slice().reverse();
+  wrapMapIE9[key] = [wrapMapValue.length, '<' + wrapMapValue.join('><') + '>', '</' + wrapMapValueClosing.join('></') + '>'];
+}
+
+wrapMapIE9.optgroup = wrapMapIE9.option;
 
 function jqLiteIsTextNode(html) {
   return !HTML_REGEXP.test(html);
@@ -3146,7 +3215,7 @@ function jqLiteHasData(node) {
 }
 
 function jqLiteBuildFragment(html, context) {
-  var tmp, tag, wrap,
+  var tmp, tag, wrap, finalHtml,
       fragment = context.createDocumentFragment(),
       nodes = [], i;
 
@@ -3157,13 +3226,30 @@ function jqLiteBuildFragment(html, context) {
     // Convert html into DOM nodes
     tmp = fragment.appendChild(context.createElement('div'));
     tag = (TAG_NAME_REGEXP.exec(html) || ['', ''])[1].toLowerCase();
-    wrap = wrapMap[tag] || wrapMap._default;
-    tmp.innerHTML = wrap[1] + html.replace(XHTML_TAG_REGEXP, '<$1></$2>') + wrap[2];
+    finalHtml = JQLite.legacyXHTMLReplacement ?
+      html.replace(XHTML_TAG_REGEXP, '<$1></$2>') :
+      html;
 
-    // Descend through wrappers to the right content
-    i = wrap[0];
-    while (i--) {
-      tmp = tmp.lastChild;
+    if (msie < 10) {
+      wrap = wrapMapIE9[tag] || wrapMapIE9._default;
+      tmp.innerHTML = wrap[1] + finalHtml + wrap[2];
+
+      // Descend through wrappers to the right content
+      i = wrap[0];
+      while (i--) {
+        tmp = tmp.firstChild;
+      }
+    } else {
+      wrap = wrapMap[tag] || [];
+
+      // Create wrappers & descend into them
+      i = wrap.length;
+      while (--i > -1) {
+        tmp.appendChild(window.document.createElement(wrap[i]));
+        tmp = tmp.firstChild;
+      }
+
+      tmp.innerHTML = finalHtml;
     }
 
     nodes = concat(nodes, tmp.childNodes);
@@ -6591,6 +6677,9 @@ function Browser(window, document, $log, $sniffer, $$taskTrackerFactory) {
     if (url) {
       var sameState = lastHistoryState === state;
 
+      // Normalize the inputted URL
+      url = urlResolve(url).href;
+
       // Don't change anything if previous and current URLs and states match. This also prevents
       // IE<10 from getting into redirect loop when in LocationHashbangInHtml5Url mode.
       // See https://github.com/angular/angular.js/commit/ffb2701
@@ -7438,7 +7527,7 @@ function $TemplateCacheProvider() {
  *
  * This example show how you might use `$doCheck` to trigger changes in your component's inputs even if the
  * actual identity of the component doesn't change. (Be aware that cloning and deep equality checks on large
- * arrays or objects can have a negative impact on your application performance)
+ * arrays or objects can have a negative impact on your application performance.)
  *
  * <example name="doCheckArrayExample" module="do-check-module">
  *   <file name="index.html">
@@ -7761,7 +7850,7 @@ function $TemplateCacheProvider() {
  * would result in the whole app "stalling" until all templates are loaded asynchronously - even in the
  * case when only one deeply nested directive has `templateUrl`.
  *
- * Template loading is asynchronous even if the template has been preloaded into the {@link $templateCache}
+ * Template loading is asynchronous even if the template has been preloaded into the {@link $templateCache}.
  *
  * You can specify `templateUrl` as a string representing the URL or as a function which takes two
  * arguments `tElement` and `tAttrs` (described in the `compile` function api below) and returns
@@ -7822,7 +7911,7 @@ function $TemplateCacheProvider() {
  * own templates or compile functions. Compiling these directives results in an infinite loop and
  * stack overflow errors.
  *
- * This can be avoided by manually using $compile in the postLink function to imperatively compile
+ * This can be avoided by manually using `$compile` in the postLink function to imperatively compile
  * a directive's template instead of relying on automatic template compilation via `template` or
  * `templateUrl` declaration or manual compilation inside the compile function.
  * </div>
@@ -7926,17 +8015,17 @@ function $TemplateCacheProvider() {
  *
  * * `true` - transclude the content (i.e. the child nodes) of the directive's element.
  * * `'element'` - transclude the whole of the directive's element including any directives on this
- *   element that defined at a lower priority than this directive. When used, the `template`
+ *   element that are defined at a lower priority than this directive. When used, the `template`
  *   property is ignored.
  * * **`{...}` (an object hash):** - map elements of the content onto transclusion "slots" in the template.
  *
- * **Mult-slot transclusion** is declared by providing an object for the `transclude` property.
+ * **Multi-slot transclusion** is declared by providing an object for the `transclude` property.
  *
  * This object is a map where the keys are the name of the slot to fill and the value is an element selector
  * used to match the HTML to the slot. The element selector should be in normalized form (e.g. `myElement`)
  * and will match the standard element variants (e.g. `my-element`, `my:element`, `data-my-element`, etc).
  *
- * For further information check out the guide on {@link guide/directive#matching-directives Matching Directives}
+ * For further information check out the guide on {@link guide/directive#matching-directives Matching Directives}.
  *
  * If the element selector is prefixed with a `?` then that slot is optional.
  *
@@ -7961,7 +8050,7 @@ function $TemplateCacheProvider() {
  * </div>
  *
  * If you want to manually control the insertion and removal of the transcluded content in your directive
- * then you must use this transclude function. When you call a transclude function it returns a a jqLite/JQuery
+ * then you must use this transclude function. When you call a transclude function it returns a jqLite/JQuery
  * object that contains the compiled DOM, which is linked to the correct transclusion scope.
  *
  * When you call a transclusion function you can pass in a **clone attach function**. This function accepts
@@ -8046,8 +8135,8 @@ function $TemplateCacheProvider() {
  * The {@link ng.$compile.directive.Attributes Attributes} object - passed as a parameter in the
  * `link()` or `compile()` functions. It has a variety of uses.
  *
- * * *Accessing normalized attribute names:* Directives like 'ngBind' can be expressed in many ways:
- *   'ng:bind', `data-ng-bind`, or 'x-ng-bind'. The attributes object allows for normalized access
+ * * *Accessing normalized attribute names:* Directives like `ngBind` can be expressed in many ways:
+ *   `ng:bind`, `data-ng-bind`, or `x-ng-bind`. The attributes object allows for normalized access
  *   to the attributes.
  *
  * * *Directive inter-communication:* All directives share the same instance of the attributes
@@ -8088,25 +8177,24 @@ function $TemplateCacheProvider() {
    <file name="index.html">
     <script>
       angular.module('compileExample', [], function($compileProvider) {
-        // configure new 'compile' directive by passing a directive
-        // factory function. The factory function injects the '$compile'
+        // Configure new 'compile' directive by passing a directive
+        // factory function. The factory function injects '$compile'.
         $compileProvider.directive('compile', function($compile) {
-          // directive factory creates a link function
+          // The directive factory creates a link function.
           return function(scope, element, attrs) {
             scope.$watch(
               function(scope) {
-                 // watch the 'compile' expression for changes
+                // Watch the 'compile' expression for changes.
                 return scope.$eval(attrs.compile);
               },
               function(value) {
-                // when the 'compile' expression changes
-                // assign it into the current DOM
+                // When the 'compile' expression changes
+                // assign it into the current DOM.
                 element.html(value);
 
-                // compile the new DOM and link it to the current
-                // scope.
-                // NOTE: we only compile .childNodes so that
-                // we don't get into infinite loop compiling ourselves
+                // Compile the new DOM and link it to the current scope.
+                // NOTE: we only compile '.childNodes' so that we
+                // don't get into an infinite loop compiling ourselves.
                 $compile(element.contents())(scope);
               }
             );
@@ -8179,13 +8267,13 @@ function $TemplateCacheProvider() {
  *        }
  *        ```
  *      * `futureParentElement` - defines the parent to which the `cloneAttachFn` will add
- *        the cloned elements; only needed for transcludes that are allowed to contain non html
- *        elements (e.g. SVG elements). See also the directive.controller property.
+ *        the cloned elements; only needed for transcludes that are allowed to contain non HTML
+ *        elements (e.g. SVG elements). See also the `directive.controller` property.
  *
  * Calling the linking function returns the element of the template. It is either the original
  * element passed in, or the clone of the element if the `cloneAttachFn` is provided.
  *
- * After linking the view is not updated until after a call to $digest which typically is done by
+ * After linking the view is not updated until after a call to `$digest`, which typically is done by
  * AngularJS automatically.
  *
  * If you need access to the bound view, there are two ways to do it:
@@ -8193,21 +8281,23 @@ function $TemplateCacheProvider() {
  * - If you are not asking the linking function to clone the template, create the DOM element(s)
  *   before you send them to the compiler and keep this reference around.
  *   ```js
- *     var element = $compile('<p>{{total}}</p>')(scope);
+ *     var element = angular.element('<p>{{total}}</p>');
+ *     $compile(element)(scope);
  *   ```
  *
  * - if on the other hand, you need the element to be cloned, the view reference from the original
  *   example would not point to the clone, but rather to the original template that was cloned. In
- *   this case, you can access the clone via the cloneAttachFn:
+ *   this case, you can access the clone either via the `cloneAttachFn` or the value returned by the
+ *   linking function:
  *   ```js
- *     var templateElement = angular.element('<p>{{total}}</p>'),
- *         scope = ....;
- *
+ *     var templateElement = angular.element('<p>{{total}}</p>');
  *     var clonedElement = $compile(templateElement)(scope, function(clonedElement, scope) {
- *       //attach the clone to DOM document at the right place
+ *       // Attach the clone to DOM document at the right place.
  *     });
  *
- *     //now we have reference to the cloned DOM via `clonedElement`
+ *     // Now we have reference to the cloned DOM via `clonedElement`.
+ *     // NOTE: The `clonedElement` returned by the linking function is the same as the
+ *     //       `clonedElement` passed to `cloneAttachFn`.
  *   ```
  *
  *
@@ -8258,7 +8348,7 @@ function $TemplateCacheProvider() {
  *
  * When the original node and the replace template declare the same directive(s), they will be
  * {@link guide/compiler#double-compilation-and-how-to-avoid-it compiled twice} because the compiler
- * does not deduplicate them. In many cases, this is not noticable, but e.g. {@link ngModel} will
+ * does not deduplicate them. In many cases, this is not noticeable, but e.g. {@link ngModel} will
  * attach `$formatters` and `$parsers` twice.
  *
  * See issue [#2573](https://github.com/angular/angular.js/issues/2573).
@@ -8733,9 +8823,9 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * @description
    * Register a new directive with the compiler.
    *
-   * @param {string|Object} name Name of the directive in camel-case (i.e. <code>ngBind</code> which
-   *    will match as <code>ng-bind</code>), or an object map of directives where the keys are the
-   *    names and the values are the factories.
+   * @param {string|Object} name Name of the directive in camel-case (i.e. `ngBind` which will match
+   *    as `ng-bind`), or an object map of directives where the keys are the names and the values
+   *    are the factories.
    * @param {Function|Array} directiveFactory An injectable directive factory function. See the
    *    {@link guide/directive directive guide} and the {@link $compile compile API} for more info.
    * @returns {ng.$compileProvider} Self for chaining.
@@ -9464,7 +9554,16 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             this.$$element.removeAttr(attrName);
           } else {
             if (SIMPLE_ATTR_NAME.test(attrName)) {
-              this.$$element.attr(attrName, value);
+              // jQuery skips special boolean attrs treatment in XML nodes for
+              // historical reasons and hence AngularJS cannot freely call
+              // `.attr(attrName, false) with such attributes. To avoid issues
+              // in XHTML, call `removeAttr` in such cases instead.
+              // See https://github.com/jquery/jquery/issues/4249
+              if (booleanKey && value === false) {
+                this.$$element.removeAttr(attrName);
+              } else {
+                this.$$element.attr(attrName, value);
+              }
             } else {
               setSpecialAttr(this.$$element[0], attrName, value);
             }
@@ -11061,7 +11160,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             pre: function ngPropPreLinkFn(scope, $element) {
               function applyPropValue() {
                 var propValue = ngPropGetter(scope);
-                $element.prop(propName, sanitizer(propValue));
+                $element[0][propName] = sanitizer(propValue);
               }
 
               applyPropValue();
@@ -13850,7 +13949,7 @@ function $InterpolateProvider() {
 
       // Provide a quick exit and simplified result function for text with no interpolation
       if (!text.length || text.indexOf(startSymbol) === -1) {
-        if (mustHaveExpression && !contextAllowsConcatenation) return;
+        if (mustHaveExpression) return;
 
         var unescapedText = unescapeText(text);
         if (contextAllowsConcatenation) {
@@ -18238,7 +18337,13 @@ function markQStateExceptionHandled(state) {
   state.pur = true;
 }
 function markQExceptionHandled(q) {
-  markQStateExceptionHandled(q.$$state);
+  // Built-in `$q` promises will always have a `$$state` property. This check is to allow
+  // overwriting `$q` with a different promise library (e.g. Bluebird + angular-bluebird-promises).
+  // (Currently, this is the only method that might be called with a promise, even if it is not
+  // created by the built-in `$q`.)
+  if (q.$$state) {
+    markQStateExceptionHandled(q.$$state);
+  }
 }
 
 /** @this */
@@ -21619,6 +21724,12 @@ var urlParsingNode = window.document.createElement('a');
 var originUrl = urlResolve(window.location.href);
 var baseUrlParsingNode;
 
+urlParsingNode.href = 'http://[::1]';
+
+// Support: IE 9-11 only, Edge 16-17 only (fixed in 18 Preview)
+// IE/Edge don't wrap IPv6 addresses' hostnames in square brackets
+// when parsed out of an anchor element.
+var ipv6InBrackets = urlParsingNode.hostname === '[::1]';
 
 /**
  *
@@ -21681,13 +21792,19 @@ function urlResolve(url) {
 
   urlParsingNode.setAttribute('href', href);
 
+  var hostname = urlParsingNode.hostname;
+
+  if (!ipv6InBrackets && hostname.indexOf(':') > -1) {
+    hostname = '[' + hostname + ']';
+  }
+
   return {
     href: urlParsingNode.href,
     protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
     host: urlParsingNode.host,
     search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
     hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
-    hostname: urlParsingNode.hostname,
+    hostname: hostname,
     port: urlParsingNode.port,
     pathname: (urlParsingNode.pathname.charAt(0) === '/')
       ? urlParsingNode.pathname
@@ -24132,7 +24249,6 @@ var htmlAnchorDirective = valueFn({
       </file>
     </example>
  *
- * @element INPUT
  * @param {expression} ngDisabled If the {@link guide/expression expression} is truthy,
  *     then the `disabled` attribute will be set on the element
  */
@@ -24359,7 +24475,7 @@ forEach(ALIASED_ATTR, function(htmlAttr, ngAttr) {
 // ng-src, ng-srcset, ng-href are interpolated
 forEach(['src', 'srcset', 'href'], function(attrName) {
   var normalized = directiveNormalize('ng-' + attrName);
-  ngAttributeAliasDirectives[normalized] = function() {
+  ngAttributeAliasDirectives[normalized] = ['$sce', function($sce) {
     return {
       priority: 99, // it needs to run after the attributes are interpolated
       link: function(scope, element, attr) {
@@ -24372,6 +24488,10 @@ forEach(['src', 'srcset', 'href'], function(attrName) {
           attr.$attr[name] = 'xlink:href';
           propName = null;
         }
+
+        // We need to sanitize the url at least once, in case it is a constant
+        // non-interpolated attribute.
+        attr.$set(normalized, $sce.getTrustedMediaUrl(attr[normalized]));
 
         attr.$observe(normalized, function(value) {
           if (!value) {
@@ -24392,7 +24512,7 @@ forEach(['src', 'srcset', 'href'], function(attrName) {
         });
       }
     };
-  };
+  }];
 });
 
 /* global -nullFormCtrl, -PENDING_CLASS, -SUBMITTED_CLASS
@@ -26030,8 +26150,10 @@ var inputType = {
    *
    * <div class="alert alert-warning">
    * **Note:** `input[email]` uses a regex to validate email addresses that is derived from the regex
-   * used in Chromium. If you need stricter validation (e.g. requiring a top-level domain), you can
-   * use `ng-pattern` or modify the built-in validators (see the {@link guide/forms Forms guide})
+   * used in Chromium, which may not fulfill your app's requirements.
+   * If you need stricter (e.g. requiring a top-level domain), or more relaxed validation
+   * (e.g. allowing IPv6 address literals) you can use `ng-pattern` or
+   * modify the built-in validators (see the {@link guide/forms Forms guide}).
    * </div>
    *
    * @param {string} ngModel Assignable AngularJS expression to data-bind to.
@@ -26618,7 +26740,7 @@ function createDateParser(regexp, mapping) {
 }
 
 function createDateInputType(type, regexp, parseDate, format) {
-  return function dynamicDateInputType(scope, element, attr, ctrl, $sniffer, $browser, $filter) {
+  return function dynamicDateInputType(scope, element, attr, ctrl, $sniffer, $browser, $filter, $parse) {
     badInputChecker(scope, element, attr, ctrl, type);
     baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
 
@@ -26661,24 +26783,34 @@ function createDateInputType(type, regexp, parseDate, format) {
     });
 
     if (isDefined(attr.min) || attr.ngMin) {
-      var minVal;
+      var minVal = attr.min || $parse(attr.ngMin)(scope);
+      var parsedMinVal = parseObservedDateValue(minVal);
+
       ctrl.$validators.min = function(value) {
-        return !isValidDate(value) || isUndefined(minVal) || parseDate(value) >= minVal;
+        return !isValidDate(value) || isUndefined(parsedMinVal) || parseDate(value) >= parsedMinVal;
       };
       attr.$observe('min', function(val) {
-        minVal = parseObservedDateValue(val);
-        ctrl.$validate();
+        if (val !== minVal) {
+          parsedMinVal = parseObservedDateValue(val);
+          minVal = val;
+          ctrl.$validate();
+        }
       });
     }
 
     if (isDefined(attr.max) || attr.ngMax) {
-      var maxVal;
+      var maxVal = attr.max || $parse(attr.ngMax)(scope);
+      var parsedMaxVal = parseObservedDateValue(maxVal);
+
       ctrl.$validators.max = function(value) {
-        return !isValidDate(value) || isUndefined(maxVal) || parseDate(value) <= maxVal;
+        return !isValidDate(value) || isUndefined(parsedMaxVal) || parseDate(value) <= parsedMaxVal;
       };
       attr.$observe('max', function(val) {
-        maxVal = parseObservedDateValue(val);
-        ctrl.$validate();
+        if (val !== maxVal) {
+          parsedMaxVal = parseObservedDateValue(val);
+          maxVal = val;
+          ctrl.$validate();
+        }
       });
     }
 
@@ -26830,50 +26962,68 @@ function isValidForStep(viewValue, stepBase, step) {
   return (value - stepBase) % step === 0;
 }
 
-function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
+function numberInputType(scope, element, attr, ctrl, $sniffer, $browser, $filter, $parse) {
   badInputChecker(scope, element, attr, ctrl, 'number');
   numberFormatterParser(ctrl);
   baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
 
-  var minVal;
-  var maxVal;
+  var parsedMinVal;
 
   if (isDefined(attr.min) || attr.ngMin) {
+    var minVal = attr.min || $parse(attr.ngMin)(scope);
+    parsedMinVal = parseNumberAttrVal(minVal);
+
     ctrl.$validators.min = function(modelValue, viewValue) {
-      return ctrl.$isEmpty(viewValue) || isUndefined(minVal) || viewValue >= minVal;
+      return ctrl.$isEmpty(viewValue) || isUndefined(parsedMinVal) || viewValue >= parsedMinVal;
     };
 
     attr.$observe('min', function(val) {
-      minVal = parseNumberAttrVal(val);
-      // TODO(matsko): implement validateLater to reduce number of validations
-      ctrl.$validate();
+      if (val !== minVal) {
+        parsedMinVal = parseNumberAttrVal(val);
+        minVal = val;
+        // TODO(matsko): implement validateLater to reduce number of validations
+        ctrl.$validate();
+      }
     });
   }
 
   if (isDefined(attr.max) || attr.ngMax) {
+    var maxVal = attr.max || $parse(attr.ngMax)(scope);
+    var parsedMaxVal = parseNumberAttrVal(maxVal);
+
     ctrl.$validators.max = function(modelValue, viewValue) {
-      return ctrl.$isEmpty(viewValue) || isUndefined(maxVal) || viewValue <= maxVal;
+      return ctrl.$isEmpty(viewValue) || isUndefined(parsedMaxVal) || viewValue <= parsedMaxVal;
     };
 
     attr.$observe('max', function(val) {
-      maxVal = parseNumberAttrVal(val);
-      // TODO(matsko): implement validateLater to reduce number of validations
-      ctrl.$validate();
+      if (val !== maxVal) {
+        parsedMaxVal = parseNumberAttrVal(val);
+        maxVal = val;
+        // TODO(matsko): implement validateLater to reduce number of validations
+        ctrl.$validate();
+      }
     });
   }
 
   if (isDefined(attr.step) || attr.ngStep) {
-    var stepVal;
+    var stepVal = attr.step || $parse(attr.ngStep)(scope);
+    var parsedStepVal = parseNumberAttrVal(stepVal);
+
     ctrl.$validators.step = function(modelValue, viewValue) {
-      return ctrl.$isEmpty(viewValue) || isUndefined(stepVal) ||
-             isValidForStep(viewValue, minVal || 0, stepVal);
+      return ctrl.$isEmpty(viewValue) || isUndefined(parsedStepVal) ||
+        isValidForStep(viewValue, parsedMinVal || 0, parsedStepVal);
     };
 
     attr.$observe('step', function(val) {
-      stepVal = parseNumberAttrVal(val);
       // TODO(matsko): implement validateLater to reduce number of validations
-      ctrl.$validate();
+      if (val !== stepVal) {
+        parsedStepVal = parseNumberAttrVal(val);
+        stepVal = val;
+        ctrl.$validate();
+      }
+
     });
+
   }
 }
 
@@ -26903,6 +27053,8 @@ function rangeInputType(scope, element, attr, ctrl, $sniffer, $browser) {
     originalRender;
 
   if (hasMinAttr) {
+    minVal = parseNumberAttrVal(attr.min);
+
     ctrl.$validators.min = supportsRange ?
       // Since all browsers set the input to a valid value, we don't need to check validity
       function noopMinValidator() { return true; } :
@@ -26915,6 +27067,8 @@ function rangeInputType(scope, element, attr, ctrl, $sniffer, $browser) {
   }
 
   if (hasMaxAttr) {
+    maxVal = parseNumberAttrVal(attr.max);
+
     ctrl.$validators.max = supportsRange ?
       // Since all browsers set the input to a valid value, we don't need to check validity
       function noopMaxValidator() { return true; } :
@@ -26927,6 +27081,8 @@ function rangeInputType(scope, element, attr, ctrl, $sniffer, $browser) {
   }
 
   if (hasStepAttr) {
+    stepVal = parseNumberAttrVal(attr.step);
+
     ctrl.$validators.step = supportsRange ?
       function nativeStepValidator() {
         // Currently, only FF implements the spec on step change correctly (i.e. adjusting the
@@ -26948,7 +27104,13 @@ function rangeInputType(scope, element, attr, ctrl, $sniffer, $browser) {
     // attribute value when the input is first rendered, so that the browser can adjust the
     // input value based on the min/max value
     element.attr(htmlAttrName, attr[htmlAttrName]);
-    attr.$observe(htmlAttrName, changeFn);
+    var oldVal = attr[htmlAttrName];
+    attr.$observe(htmlAttrName, function wrappedObserver(val) {
+      if (val !== oldVal) {
+        oldVal = val;
+        changeFn(val);
+      }
+    });
   }
 
   function minChange(val) {
@@ -27002,11 +27164,11 @@ function rangeInputType(scope, element, attr, ctrl, $sniffer, $browser) {
     }
 
     // Some browsers don't adjust the input value correctly, but set the stepMismatch error
-    if (supportsRange && ctrl.$viewValue !== element.val()) {
-      ctrl.$setViewValue(element.val());
-    } else {
+    if (!supportsRange) {
       // TODO(matsko): implement validateLater to reduce number of validations
       ctrl.$validate();
+    } else if (ctrl.$viewValue !== element.val()) {
+      ctrl.$setViewValue(element.val());
     }
   }
 }
@@ -27312,6 +27474,48 @@ var inputDirective = ['$browser', '$sniffer', '$filter', '$parse',
     }
   };
 }];
+
+
+var hiddenInputBrowserCacheDirective = function() {
+  var valueProperty = {
+    configurable: true,
+    enumerable: false,
+    get: function() {
+      return this.getAttribute('value') || '';
+    },
+    set: function(val) {
+      this.setAttribute('value', val);
+    }
+  };
+
+  return {
+    restrict: 'E',
+    priority: 200,
+    compile: function(_, attr) {
+      if (lowercase(attr.type) !== 'hidden') {
+        return;
+      }
+
+      return {
+        pre: function(scope, element, attr, ctrls) {
+          var node = element[0];
+
+          // Support: Edge
+          // Moving the DOM around prevents autofillling
+          if (node.parentNode) {
+            node.parentNode.insertBefore(node, node.nextSibling);
+          }
+
+          // Support: FF, IE
+          // Avoiding direct assignment to .value prevents autofillling
+          if (Object.defineProperty) {
+            Object.defineProperty(node, 'value', valueProperty);
+          }
+        }
+      };
+    }
+  };
+};
 
 
 
@@ -30454,6 +30658,7 @@ NgModelController.prototype = {
    * `$modelValue`, i.e. either the last parsed value or the last value set from the scope.
    */
   $validate: function() {
+
     // ignore $validate before model is initialized
     if (isNumberNaN(this.$modelValue)) {
       return;
@@ -33466,7 +33671,7 @@ var ngRefDirective = ['$parse', function($parse) {
  *     For example: `item in items | filter:x as results` will store the fragment of the repeated items as `results`, but only after
  *     the items have been processed through the filter.
  *
- *     Please note that `as [variable name] is not an operator but rather a part of ngRepeat
+ *     Please note that `as [variable name]` is not an operator but rather a part of ngRepeat
  *     micro-syntax so it can be used only after all filters (and not as operator, inside an expression).
  *
  *     For example: `item in items | filter : x | orderBy : order | limitTo : limit as results track by item.id` .
@@ -33588,6 +33793,13 @@ var ngRepeatDirective = ['$parse', '$animate', '$compile', function($parse, $ani
     return block.clone[block.clone.length - 1];
   };
 
+  var trackByIdArrayFn = function($scope, key, value) {
+    return hashKey(value);
+  };
+
+  var trackByIdObjFn = function($scope, key) {
+    return key;
+  };
 
   return {
     restrict: 'A',
@@ -33627,31 +33839,22 @@ var ngRepeatDirective = ['$parse', '$animate', '$compile', function($parse, $ani
           aliasAs);
       }
 
-      var trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn;
-      var hashFnLocals = {$id: hashKey};
+      var trackByIdExpFn;
 
       if (trackByExp) {
-        trackByExpGetter = $parse(trackByExp);
-      } else {
-        trackByIdArrayFn = function(key, value) {
-          return hashKey(value);
-        };
-        trackByIdObjFn = function(key) {
-          return key;
+        var hashFnLocals = {$id: hashKey};
+        var trackByExpGetter = $parse(trackByExp);
+
+        trackByIdExpFn = function($scope, key, value, index) {
+          // assign key, value, and $index to the locals so that they can be used in hash functions
+          if (keyIdentifier) hashFnLocals[keyIdentifier] = key;
+          hashFnLocals[valueIdentifier] = value;
+          hashFnLocals.$index = index;
+          return trackByExpGetter($scope, hashFnLocals);
         };
       }
 
       return function ngRepeatLink($scope, $element, $attr, ctrl, $transclude) {
-
-        if (trackByExpGetter) {
-          trackByIdExpFn = function(key, value, index) {
-            // assign key, value, and $index to the locals so that they can be used in hash functions
-            if (keyIdentifier) hashFnLocals[keyIdentifier] = key;
-            hashFnLocals[valueIdentifier] = value;
-            hashFnLocals.$index = index;
-            return trackByExpGetter($scope, hashFnLocals);
-          };
-        }
 
         // Store a list of elements from previous run. This is a hash where key is the item from the
         // iterator, and the value is objects with following properties.
@@ -33706,7 +33909,7 @@ var ngRepeatDirective = ['$parse', '$animate', '$compile', function($parse, $ani
           for (index = 0; index < collectionLength; index++) {
             key = (collection === collectionKeys) ? index : collectionKeys[index];
             value = collection[key];
-            trackById = trackByIdFn(key, value, index);
+            trackById = trackByIdFn($scope, key, value, index);
             if (lastBlockMap[trackById]) {
               // found previously seen block
               block = lastBlockMap[trackById];
@@ -33726,6 +33929,12 @@ var ngRepeatDirective = ['$parse', '$animate', '$compile', function($parse, $ani
               nextBlockOrder[index] = {id: trackById, scope: undefined, clone: undefined};
               nextBlockMap[trackById] = true;
             }
+          }
+
+          // Clear the value property from the hashFnLocals object to prevent a reference to the last value
+          // being leaked into the ngRepeatCompile function scope
+          if (hashFnLocals) {
+            hashFnLocals[valueIdentifier] = undefined;
           }
 
           // remove leftover items
@@ -34271,11 +34480,11 @@ var ngHideDirective = ['$animate', function($animate) {
        var colorSpan = element(by.css('span'));
 
        it('should check ng-style', function() {
-         expect(colorSpan.getCssValue('color')).toBe('rgba(0, 0, 0, 1)');
+         expect(colorSpan.getCssValue('color')).toMatch(/rgba\(0, 0, 0, 1\)|rgb\(0, 0, 0\)/);
          element(by.css('input[value=\'set color\']')).click();
-         expect(colorSpan.getCssValue('color')).toBe('rgba(255, 0, 0, 1)');
+         expect(colorSpan.getCssValue('color')).toMatch(/rgba\(255, 0, 0, 1\)|rgb\(255, 0, 0\)/);
          element(by.css('input[value=clear]')).click();
-         expect(colorSpan.getCssValue('color')).toBe('rgba(0, 0, 0, 1)');
+         expect(colorSpan.getCssValue('color')).toMatch(/rgba\(0, 0, 0, 1\)|rgb\(0, 0, 0\)/);
        });
      </file>
    </example>
@@ -34283,7 +34492,7 @@ var ngHideDirective = ['$animate', function($animate) {
 var ngStyleDirective = ngDirective(function(scope, element, attr) {
   scope.$watchCollection(attr.ngStyle, function ngStyleWatchAction(newStyles, oldStyles) {
     if (oldStyles && (newStyles !== oldStyles)) {
-      forEach(oldStyles, function(val, style) { element.css(style, '');});
+      forEach(oldStyles, function(val, style) { element.css(style, ''); });
     }
     if (newStyles) element.css(newStyles);
   });
@@ -35745,24 +35954,35 @@ var optionDirective = ['$interpolate', function($interpolate) {
  *   </file>
  * </example>
  */
-var requiredDirective = function() {
+var requiredDirective = ['$parse', function($parse) {
   return {
     restrict: 'A',
     require: '?ngModel',
     link: function(scope, elm, attr, ctrl) {
       if (!ctrl) return;
-      attr.required = true; // force truthy in case we are on non input element
+      // For boolean attributes like required, presence means true
+      var value = attr.hasOwnProperty('required') || $parse(attr.ngRequired)(scope);
+
+      if (!attr.ngRequired) {
+        // force truthy in case we are on non input element
+        // (input elements do this automatically for boolean attributes like required)
+        attr.required = true;
+      }
 
       ctrl.$validators.required = function(modelValue, viewValue) {
-        return !attr.required || !ctrl.$isEmpty(viewValue);
+        return !value || !ctrl.$isEmpty(viewValue);
       };
 
-      attr.$observe('required', function() {
-        ctrl.$validate();
+      attr.$observe('required', function(newVal) {
+
+        if (value !== newVal) {
+          value = newVal;
+          ctrl.$validate();
+        }
       });
     }
   };
-};
+}];
 
 /**
  * @ngdoc directive
@@ -35845,36 +36065,59 @@ var requiredDirective = function() {
  *   </file>
  * </example>
  */
-var patternDirective = function() {
+var patternDirective = ['$parse', function($parse) {
   return {
     restrict: 'A',
     require: '?ngModel',
-    link: function(scope, elm, attr, ctrl) {
-      if (!ctrl) return;
+    compile: function(tElm, tAttr) {
+      var patternExp;
+      var parseFn;
 
-      var regexp, patternExp = attr.ngPattern || attr.pattern;
-      attr.$observe('pattern', function(regex) {
-        if (isString(regex) && regex.length > 0) {
-          regex = new RegExp('^' + regex + '$');
+      if (tAttr.ngPattern) {
+        patternExp = tAttr.ngPattern;
+
+        // ngPattern might be a scope expression, or an inlined regex, which is not parsable.
+        // We get value of the attribute here, so we can compare the old and the new value
+        // in the observer to avoid unnecessary validations
+        if (tAttr.ngPattern.charAt(0) === '/' && REGEX_STRING_REGEXP.test(tAttr.ngPattern)) {
+          parseFn = function() { return tAttr.ngPattern; };
+        } else {
+          parseFn = $parse(tAttr.ngPattern);
+        }
+      }
+
+      return function(scope, elm, attr, ctrl) {
+        if (!ctrl) return;
+
+        var attrVal = attr.pattern;
+
+        if (attr.ngPattern) {
+          attrVal = parseFn(scope);
+        } else {
+          patternExp = attr.pattern;
         }
 
-        if (regex && !regex.test) {
-          throw minErr('ngPattern')('noregexp',
-            'Expected {0} to be a RegExp but was {1}. Element: {2}', patternExp,
-            regex, startingTag(elm));
-        }
+        var regexp = parsePatternAttr(attrVal, patternExp, elm);
 
-        regexp = regex || undefined;
-        ctrl.$validate();
-      });
+        attr.$observe('pattern', function(newVal) {
+          var oldRegexp = regexp;
 
-      ctrl.$validators.pattern = function(modelValue, viewValue) {
-        // HTML5 pattern constraint validates the input value, so we validate the viewValue
-        return ctrl.$isEmpty(viewValue) || isUndefined(regexp) || regexp.test(viewValue);
+          regexp = parsePatternAttr(newVal, patternExp, elm);
+
+          if ((oldRegexp && oldRegexp.toString()) !== (regexp && regexp.toString())) {
+            ctrl.$validate();
+          }
+        });
+
+        ctrl.$validators.pattern = function(modelValue, viewValue) {
+          // HTML5 pattern constraint validates the input value, so we validate the viewValue
+          return ctrl.$isEmpty(viewValue) || isUndefined(regexp) || regexp.test(viewValue);
+        };
       };
     }
+
   };
-};
+}];
 
 /**
  * @ngdoc directive
@@ -35947,25 +36190,29 @@ var patternDirective = function() {
  *   </file>
  * </example>
  */
-var maxlengthDirective = function() {
+var maxlengthDirective = ['$parse', function($parse) {
   return {
     restrict: 'A',
     require: '?ngModel',
     link: function(scope, elm, attr, ctrl) {
       if (!ctrl) return;
 
-      var maxlength = -1;
+      var maxlength = attr.maxlength || $parse(attr.ngMaxlength)(scope);
+      var maxlengthParsed = parseLength(maxlength);
+
       attr.$observe('maxlength', function(value) {
-        var intVal = toInt(value);
-        maxlength = isNumberNaN(intVal) ? -1 : intVal;
-        ctrl.$validate();
+        if (maxlength !== value) {
+          maxlengthParsed = parseLength(value);
+          maxlength = value;
+          ctrl.$validate();
+        }
       });
       ctrl.$validators.maxlength = function(modelValue, viewValue) {
-        return (maxlength < 0) || ctrl.$isEmpty(viewValue) || (viewValue.length <= maxlength);
+        return (maxlengthParsed < 0) || ctrl.$isEmpty(viewValue) || (viewValue.length <= maxlengthParsed);
       };
     }
   };
-};
+}];
 
 /**
  * @ngdoc directive
@@ -36036,24 +36283,52 @@ var maxlengthDirective = function() {
  *   </file>
  * </example>
  */
-var minlengthDirective = function() {
+var minlengthDirective = ['$parse', function($parse) {
   return {
     restrict: 'A',
     require: '?ngModel',
     link: function(scope, elm, attr, ctrl) {
       if (!ctrl) return;
 
-      var minlength = 0;
+      var minlength = attr.minlength || $parse(attr.ngMinlength)(scope);
+      var minlengthParsed = parseLength(minlength) || -1;
+
       attr.$observe('minlength', function(value) {
-        minlength = toInt(value) || 0;
-        ctrl.$validate();
+        if (minlength !== value) {
+          minlengthParsed = parseLength(value) || -1;
+          minlength = value;
+          ctrl.$validate();
+        }
+
       });
       ctrl.$validators.minlength = function(modelValue, viewValue) {
-        return ctrl.$isEmpty(viewValue) || viewValue.length >= minlength;
+        return ctrl.$isEmpty(viewValue) || viewValue.length >= minlengthParsed;
       };
     }
   };
-};
+}];
+
+
+function parsePatternAttr(regex, patternExp, elm) {
+  if (!regex) return undefined;
+
+  if (isString(regex)) {
+    regex = new RegExp('^' + regex + '$');
+  }
+
+  if (!regex.test) {
+    throw minErr('ngPattern')('noregexp',
+      'Expected {0} to be a RegExp but was {1}. Element: {2}', patternExp,
+      regex, startingTag(elm));
+  }
+
+  return regex;
+}
+
+function parseLength(val) {
+  var intVal = toInt(val);
+  return isNumberNaN(intVal) ? -1 : intVal;
+}
 
 if (window.angular.bootstrap) {
   // AngularJS is already loaded, so we can return here...
@@ -36218,4 +36493,4 @@ $provide.value("$locale", {
 
 })(window);
 
-!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
+!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend(window.angular.element('<style>').text('@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}'));

@@ -1,6 +1,6 @@
 /**
- * @license AngularJS v1.7.5
- * (c) 2010-2018 Google, Inc. http://angularjs.org
+ * @license AngularJS v1.8.0
+ * (c) 2010-2020 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window, angular) {
@@ -951,7 +951,7 @@ angular.mock.TzDate.prototype = Date.prototype;
  * You need to require the `ngAnimateMock` module in your test suite for instance `beforeEach(module('ngAnimateMock'))`
  */
 angular.mock.animate = angular.module('ngAnimateMock', ['ng'])
-  .info({ angularVersion: '1.7.5' })
+  .info({ angularVersion: '1.8.0' })
 
   .config(['$provide', function($provide) {
 
@@ -1673,12 +1673,12 @@ function createHttpBackendMock($rootScope, $timeout, $delegate, $browser) {
 
   /**
    * @ngdoc method
-   * @name  $httpBackend#matchLatestDefinition
+   * @name  $httpBackend#matchLatestDefinitionEnabled
    * @description
    * This method can be used to change which mocked responses `$httpBackend` returns, when defining
    * them with {@link ngMock.$httpBackend#when $httpBackend.when()} (and shortcut methods).
    * By default, `$httpBackend` returns the first definition that matches. When setting
-   * `$http.matchLatestDefinition(true)`, it will use the last response that matches, i.e. the
+   * `$http.matchLatestDefinitionEnabled(true)`, it will use the last response that matches, i.e. the
    * one that was added last.
    *
    * ```js
@@ -1686,7 +1686,7 @@ function createHttpBackendMock($rootScope, $timeout, $delegate, $browser) {
    * hb.when('GET', '/url1').respond(201, 'another', {});
    * hb('GET', '/url1'); // receives "content"
    *
-   * $http.matchLatestDefinition(true)
+   * $http.matchLatestDefinitionEnabled(true)
    * hb('GET', '/url1'); // receives "another"
    *
    * hb.when('GET', '/url1').respond(201, 'onemore', {});
@@ -1695,7 +1695,7 @@ function createHttpBackendMock($rootScope, $timeout, $delegate, $browser) {
    *
    * This is useful if a you have a default response that is overriden inside specific tests.
    *
-   * Note that different from config methods on providers, `matchLatestDefinition()` can be changed
+   * Note that different from config methods on providers, `matchLatestDefinitionEnabled()` can be changed
    * even when the application is already running.
    *
    * @param  {Boolean=} value value to set, either `true` or `false`. Default is `false`.
@@ -1704,7 +1704,7 @@ function createHttpBackendMock($rootScope, $timeout, $delegate, $browser) {
    *                                as a getter
    */
   $httpBackend.matchLatestDefinitionEnabled = function(value) {
-    if (isDefined(value)) {
+    if (angular.isDefined(value)) {
       matchLatestDefinition = value;
       return this;
     } else {
@@ -2669,7 +2669,7 @@ angular.module('ngMock', ['ng']).provider({
   $provide.decorator('$rootScope', angular.mock.$RootScopeDecorator);
   $provide.decorator('$controller', createControllerDecorator($compileProvider));
   $provide.decorator('$httpBackend', angular.mock.$httpBackendDecorator);
-}]).info({ angularVersion: '1.7.5' });
+}]).info({ angularVersion: '1.8.0' });
 
 /**
  * @ngdoc module
@@ -2684,7 +2684,7 @@ angular.module('ngMock', ['ng']).provider({
  */
 angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
   $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
-}]).info({ angularVersion: '1.7.5' });
+}]).info({ angularVersion: '1.8.0' });
 
 /**
  * @ngdoc service
@@ -2973,13 +2973,13 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  */
 /**
  * @ngdoc method
- * @name  $httpBackend#matchLatestDefinition
+ * @name  $httpBackend#matchLatestDefinitionEnabled
  * @module ngMockE2E
  * @description
  * This method can be used to change which mocked responses `$httpBackend` returns, when defining
  * them with {@link ngMock.$httpBackend#when $httpBackend.when()} (and shortcut methods).
  * By default, `$httpBackend` returns the first definition that matches. When setting
- * `$http.matchLatestDefinition(true)`, it will use the last response that matches, i.e. the
+ * `$http.matchLatestDefinitionEnabled(true)`, it will use the last response that matches, i.e. the
  * one that was added last.
  *
  * ```js
@@ -2987,7 +2987,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  * hb.when('GET', '/url1').respond(201, 'another', {});
  * hb('GET', '/url1'); // receives "content"
  *
- * $http.matchLatestDefinition(true)
+ * $http.matchLatestDefinitionEnabled(true)
  * hb('GET', '/url1'); // receives "another"
  *
  * hb.when('GET', '/url1').respond(201, 'onemore', {});
@@ -2996,7 +2996,7 @@ angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
  *
  * This is useful if a you have a default response that is overriden inside specific tests.
  *
- * Note that different from config methods on providers, `matchLatestDefinition()` can be changed
+ * Note that different from config methods on providers, `matchLatestDefinitionEnabled()` can be changed
  * even when the application is already running.
  *
  * @param  {Boolean=} value value to set, either `true` or `false`. Default is `false`.
