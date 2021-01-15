@@ -2,6 +2,6 @@
 
 // Define the `phoneDetail` module
 angular.module('phoneDetail', [
-  'ngRoute',
+  'ui.router',
   'core.phone'
 ]);

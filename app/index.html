@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Google Phone Gallery</title>
@@ -11,7 +11,7 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-animate/angular-animate.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="lib/ui-router/angular-ui-router.min.js"></script>
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
     <script src="app.animations.js"></script>
@@ -27,7 +27,8 @@
   <body>
 
     <div class="view-container">
-      <div ng-view class="view-frame"></div>
+      <a ui-sref="phones">Hello</a>
+      <ui-view></ui-view>
     </div>
 
   </body>
