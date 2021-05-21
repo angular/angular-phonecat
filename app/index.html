@@ -1,18 +1,16 @@
-<Doctype html>
+<!DOCTYPE html>
 <html ng-app="phonecatApp">
-<head>
-  ...
-  <script src="lib/angular/angular.js"></script>
-  <script src="app.js"></script>
-</head>
-<body ng-controller="PhoneListController">
-
-  <ul>
-    <li ng-repeat="phone in phones">
-      <span>{{phone.name}}</span>
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
-
-</body>
+  <head>
+    ...
+    <script src="lib/angular/angular.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="PhoneListController">
+    <ul>
+      <li ng-repeat="phone in phones">
+        <span>{{phone.name}}</span>
+        <p>{{phone.snippet}}</p>
+      </li>
+    </ul>
+  </body>
 </html>
