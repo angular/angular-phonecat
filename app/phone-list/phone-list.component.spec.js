@@ -4,10 +4,14 @@ describe('phoneList', function() {
     beforeEach(module('phoneList'));
 
     // Test the controller
-    describe('PhoneListController', function() {
-        var ctrl;
+    describe('controller', function() {
+        var $httpBackend, ctrl;
 
-        beforeEach(inject(function($componentController) {
+        beforeEach(inject(function($componentController, _$httpBackend_) {
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('phones/phones.json')
+                .respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+
             ctrl = $componentController('phoneList');
         }));
 
