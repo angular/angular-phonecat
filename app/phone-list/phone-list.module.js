@@ -1,1 +1,1 @@
-angular.module('phoneList', []);
+angular.module('phonecatApp', []);
